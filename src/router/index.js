@@ -17,18 +17,35 @@ const routes = [
   //   // this generates a separate chunk (about.[hash].js) for this route
   //   // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Stu.vue'),
-  //   children: [
-  //     {
-  //       path: '/stuInfo',
-  //       name: 'stuInfo',
-  //       component: () => import(/* webpackChunkName: "about" */ '../student/router/stuInfo.vue')
-  //     },
-  //     {
-  //       path: '/stuInfo2',
-  //       name: 'stuInfo2',
-  //       component: () => import(/* webpackChunkName: "about" */ '../student/router/stuInfo2.vue')
-  //     }
-  //   ]
+    children: [
+      {
+        path: 'stuInfo',
+        name: 'stuInfo',
+        component: () => import( '../student/router/stuInfo.vue'),
+        children: [
+          {
+            path: 'detail/:id',
+            name: 'detail',
+            component: () => import('../student/router/stuInfo/~detail.id.vue'),
+            props: true
+          },
+          {
+            // path: 'stuInfo/detail/:id',
+            path: 'test',
+            name: 'test',
+            // component: () => import('../student/router/stuInfo/~detail.id.vue')
+            // component: () => import('../student/router/stuInfo/hh.id.vue')
+            component: () => import('../student/router/stuInfo/test.vue')
+            // component: () => import('../student/router/stuInfo2.vue')
+          }
+        ]
+      },
+      {
+        path: 'stuInfo2',
+        name: 'stuInfo2',
+        component: () => import(/* webpackChunkName: "about" */ '../student/router/stuInfo2.vue')
+      }
+    ]
   }
 ]
 

@@ -1,6 +1,8 @@
 <template>
-  <a-card class="stu-card" title="Student Information" :headStyle='headStyle'>
-    <stu-info-view />
+  <a-card class="stu-card" title="Student Information222222222" :headStyle='headStyle'>
+    <h2>
+      hhhhhhhhhhhhhhh
+    </h2>
   </a-card>
 </template>
 
@@ -12,7 +14,6 @@ export default {
     }
   },
   components: {
-    'stu-info-view': () => import('../view/stuInfo-view.vue')
   }
 }
 </script>
