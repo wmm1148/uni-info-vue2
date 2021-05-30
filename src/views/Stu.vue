@@ -31,7 +31,7 @@
         </a-menu>
       </a-layout-sider>
       <a-layout>
-        <router-view></router-view>
+        <router-view />
       </a-layout>
     </a-layout>
   </div>

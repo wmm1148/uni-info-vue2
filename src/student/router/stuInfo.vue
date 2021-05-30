@@ -1,8 +1,13 @@
 <template>
-  <a-card class="stu-card" title="Student Information" :headStyle='headStyle'>
-    <stu-info-view />
-  </a-card>
-</template>
+  <div>
+    <a-card class="stu-card" title="Student Information" :headStyle='headStyle'  v-if="$route.matched.length === 2">
+      <stu-info-view />
+    </a-card>
+    <a-card class="stu-card" title="Detail Information" :headStyle='headStyle' v-else>
+      <router-view />
+    </a-card>
+  </div>
+</template> 
 
 <script>
 export default {

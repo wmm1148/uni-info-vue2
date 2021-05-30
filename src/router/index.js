@@ -46,6 +46,11 @@ const routes = [
         component: () => import(/* webpackChunkName: "about" */ '../student/router/stuInfo2.vue')
       }
     ]
+  },
+  {
+    path: '/teacher',
+    name: 'Teacher',
+    component: () => import( '../views/Teacher.vue'),
   }
 ]
 
