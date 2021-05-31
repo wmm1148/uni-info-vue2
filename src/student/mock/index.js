@@ -150,12 +150,25 @@ Mock.get('/get/student/list', () => {
 
 Mock.get('/get/student/by/:id', id => {
   console.log('id',id);
-  console.log('iiiidddddddddddddddddddd');
   const old = list.find((item) => item.id === id)
   console.log('old',old);
   return {  
     code: 0,
     data: old
+  }
+})
+
+//删除当前是Get方法
+Mock.delete('/remove/student/:id', id => {
+  console.log('mock id', id);
+  const oldIndex = list.findIndex((item) => item.id === id)
+  list.splice(oldIndex, 1)
+  return {
+    code: 0,
+    data: {
+      list,
+      total: list.length
+    }
   }
 })
 
@@ -176,18 +189,6 @@ Mock.post(api.addStudent.url, (stu) => {
 Mock.put(api.updateStudent.url, (stu) => {
   const oldIndex = list.findIndex((item) => item.id === stu.id)
   list.splice(oldIndex, 1, stu)
-  return {
-    code: 0,
-    data: {
-      list,
-      total: list.length
-    }
-  }
-})
-
-Mock.delete(api.removeStudent.url, (stu) => {
-  const oldIndex = list.findIndex((item) => item.id === stu.id)
-  list.splice(oldIndex, 1)
   return {
     code: 0,
     data: {

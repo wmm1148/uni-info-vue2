@@ -30,14 +30,15 @@ const routes = [
             props: true
           },
           {
-            // path: 'stuInfo/detail/:id',
-            path: 'test',
-            name: 'test',
-            // component: () => import('../student/router/stuInfo/~detail.id.vue')
-            // component: () => import('../student/router/stuInfo/hh.id.vue')
-            component: () => import('../student/router/stuInfo/test.vue')
-            // component: () => import('../student/router/stuInfo2.vue')
-          }
+            path: 'add',
+            name: 'add',
+            component: () => import('../student/router/stuInfo/~add.vue')
+          },
+          {
+            path: 'edit/:edit',
+            name: 'edit',
+            component: () => import('../student/router/stuInfo/~edit.id.vue')
+          },
         ]
       },
       {

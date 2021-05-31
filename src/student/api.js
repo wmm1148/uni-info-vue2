@@ -5,7 +5,7 @@ export default {
   // 获取专业列表
   getMajorList: request({
     url: '/get/major/list',
-    type: 'get'
+    method: 'get'
   }),
 
   getStudentList: request({
@@ -13,7 +13,7 @@ export default {
     // url: `/get/student/list`,
     // api该怎么写就怎么写，在mock拦截时处理就行
     url: '/get/student/list',
-    type: 'get'
+    method: 'get'
   }),
 
   // 获取账户信息
@@ -25,19 +25,23 @@ export default {
   // 增加
   addStudent: request({
     url: '/add/student',
-    type: 'post' // 默认就是get请求，可以不写
+    method: 'post' 
   }),
   updateStudent: request({
     url: '/update/student',
-    type: 'put' // 默认就是get请求，可以不写
+    method: 'put' 
   }),
-  removeStudent: request({
-    url: '/remove/student',
-    type: 'delete' // 默认就是get请求，可以不写
-  }),
+  removeStudent: (id) => request({
+    url: `/remove/student/${id}`,
+    method: 'delete' 
+  })(),
   getStudentById: (id) => request ({
     url: `/get/student/by/${id}`,
-    type: 'get' // 默认就是get请求，可以不写
+    method: 'get' 
   })()
+  // getStudentById: request({
+  //   url: '/get/student/by/:id',
+  //   method: 'get' 
+  // })
 
 }

@@ -61,19 +61,7 @@ export default {
 .stu-layout {
   height: 1000px;
 }
-.stu-card {
-  /* display: inline; */
-    background: #feffff;
-    width: 98%;
-    margin: 12px auto;
-    /* height: 100%; */
-    height: auto;
-    text-align: left;
-}
-.ant-card-body {
-  padding: 0 24px 24px 24px;
-}
-.form-layout {
+/* .form-layout {
   margin: 20px;
 }
 .form-item-style {
@@ -81,7 +69,7 @@ export default {
 }
 .ant-col {
   padding: 0 16px 16px 16px;
-}
+} */
 .ant-mune {
   text-align: left;
 }
