@@ -8,84 +8,119 @@ const list = [
     name: '张三',
     age: 20,
     gender: '男',
-    major: '计算机科学与技术'
+    major: '计算机科学与技术',
+    status: 0, //1,在读  2，保留学籍
+    elite: 0,
   },
   {
     id: '02',
     name: '老王',
     age: 25,
     gender: '男',
-    major: '金融学'
+    major: '金融学',
+    status: 0,
+    elite: 0,
+
   },
   {
     id: '03',
     name: '李四',
     age: 22,
     gender: '男',
-    major: '会计学'
+    major: '会计学',
+    status: 1,
+    elite: 0,
+
   },
   {
     id: '04',
     name: '赵六',
     age: 22,
     gender: '男',
-    major: '物流管理'
+    major: '物流管理',
+    status: 1,
+    elite: 0,
+
   },
   {
     id: '05',
     name: '张梅',
     age: 20,
     gender: '女',
-    major: '计算机科学与技术'
+    major: '计算机科学与技术',
+    status: 1,
+    elite: 0,
+
   },
   {
     id: '06',
     name: '老梅',
     age: 25,
     gender: '女',
-    major: '金融学'
+    major: '金融学',
+    status: 0,
+    elite: 1,
+
   },
   {
     id: '07',
     name: '李梅',
     age: 22,
     gender: '女',
-    major: '会计学'
+    major: '会计学',
+    status: 1,
+    elite: 0,
+
   },
   {
     id: '081',
     name: '赵梅2',
     age: 22,
     gender: '女',
-    major: '物流管理'
+    major: '物流管理',
+    status: 1,
+    elite: 0,
+
   },
   {
     id: '08',
     name: '赵梅3',
     age: 22,
     gender: '女',
-    major: '物流管理'
+    major: '物流管理',
+    status: 1,
+    elite: 1,
+
   },
   {
     id: '09',
     name: '赵梅4',
     age: 22,
     gender: '女',
-    major: '物流管理'
+    major: '物流管理',
+    status: 1,
+    elite: 0,
+
   },
   {
     id: '10',
     name: '赵梅5',
     age: 22,
     gender: '女',
-    major: '物流管理'
+    major: '物流管理',
+    status: 1,
+    elite: 1,
+
   },
   {
     id: '11',
     name: '赵梅6',
     age: 22,
     gender: '女',
-    major: '物流管理'
+    major: '物流管理',
+    status: 1,
+    elite: 1,
+
   }
 ]
 
@@ -129,7 +164,6 @@ const accountInfo = {
 // Mock.get(`/get/student/list?page=${page}&limit=${size}`, () => {
 Mock.get('/get/student/list', () => {
   // console.log(page, limit)
-  console.log(2222)
   // const result = list.slice((page - 1) * limit, page * limit)
   // const res = list.find((item) => item.id === (page + size));
   return Promise.resolve({
@@ -158,7 +192,6 @@ Mock.get('/get/student/by/:id', id => {
   }
 })
 
-//删除当前是Get方法
 Mock.delete('/remove/student/:id', id => {
   console.log('mock id', id);
   const oldIndex = list.findIndex((item) => item.id === id)
@@ -207,3 +240,28 @@ Mock.get(api.getMajorList.url, () => ({
   code: 0,
   data: majorList
 }))
+
+//这里写成api.changeStuStatus.url就不行,api那边是函数就不能
+Mock.put('/put/student/changeStatus/:id', (id) => {
+  const dataIndex = list.findIndex((item) => item.id === id)
+  list[dataIndex].status = list[dataIndex].status === 0 ? 1 : 0;
+  return {  
+    code: 0,
+    data: list
+  }
+})
+
+Mock.get('/get/eliteStudent/list', () => {
+  // console.log(page, limit)
+  // const result = list.slice((page - 1) * limit, page * limit)
+  const eliteList = list.filter((item) => item.elite === 1);
+  console.log('eliteList', eliteList);
+  return Promise.resolve({
+    code: 0,
+    data: {
+      list: eliteList,
+      total: list.length
+    }
+  })
+})
+

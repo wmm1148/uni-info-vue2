@@ -9,7 +9,18 @@ Vue.config.productionTip = false
 
 Vue.use(Antd)
 
-new Vue({
-  router,
-  render: h => h(App),
-}).$mount('#app')
+// new Vue({
+//   router,
+//   render: h => h(App),
+// }).$mount('#app')
+
+Vue.nextTick(() => {
+  const app = new Vue({
+    router,
+    name: 'App',
+    render: h => h(App),
+  });
+  setTimeout(() => {
+    app.$mount('#app');
+  }, 200);
+});

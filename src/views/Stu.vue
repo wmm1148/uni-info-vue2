@@ -13,10 +13,10 @@
               <a-menu-item-group key="g1" class="ant-menu-sub">
                 <template slot="title"><span>Basic</span></template>
                 <a-menu-item key="1">
-                  <router-link :to="{ name: 'stuInfo'}">Basic Info1</router-link>
+                  <router-link :to="{ name: 'stuInfo'}">All Students</router-link>
                 </a-menu-item>
                 <a-menu-item key="2">
-                  <router-link :to="{ name: 'stuInfo2'}">Basic Info2</router-link>
+                  <router-link :to="{ name: 'elite'}">Elite Students</router-link>
                 </a-menu-item>
               </a-menu-item-group>
               <a-menu-item-group key="g2" title="Detail" class="ant-menu-sub">
@@ -59,7 +59,7 @@ export default {
 
 <style scoped>
 .stu-layout {
-  height: 1000px;
+  height: 945px;
 }
 /* .form-layout {
   margin: 20px;

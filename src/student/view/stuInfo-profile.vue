@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-card class="stu-card" title="Add/Edit Information" :headStyle='headStyle'>
+    <a-card class="stu-card" title="Detail Information" :headStyle='headStyle'>
       <template #extra>
         <a-icon type="left-square" style="fontSize:1.3em" @click="backClick"/>
       </template>

@@ -42,9 +42,27 @@ const routes = [
         ]
       },
       {
-        path: 'stuInfo2',
-        name: 'stuInfo2',
-        component: () => import(/* webpackChunkName: "about" */ '../student/router/stuInfo2.vue')
+        path: 'elite',
+        name: 'elite',
+        component: () => import(/* webpackChunkName: "about" */ '../student/router/elite.vue'),
+        children: [
+          // {
+          //   path: 'detail/:id',
+          //   name: 'detail',
+          //   component: () => import('../student/router/elite/~detail.id.vue'),
+          //   props: true
+          // },
+          {
+            path: 'add',
+            name: 'elite-add',
+            component: () => import('../student/router/elite/~add.vue')
+          },
+          // {
+          //   path: 'edit/:edit',
+          //   name: 'elite-edit',
+          //   component: () => import('../student/router/elite/~edit.id.vue')
+          // },
+        ]
       }
     ]
   },

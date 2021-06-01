@@ -141,14 +141,13 @@ export default {
     }
   },
   created () {
-    console.log('uuuuuuuuuuuuuu')
     this.fetchStudentList()
     console.log('studentTableColumns', studentTableColumns);
   },
 
   methods: {
     fetchStudentList () {
-      api.getStudentList().then((res) => {
+      api.getEliteStuList().then((res) => {
         console.log('stu res', res)
         // this.pagination.total = res.total;
         this.list = res.list
@@ -217,7 +216,7 @@ export default {
       this.$router.push('/stu/stuInfo/add')
     },
     addClick () {
-      this.$router.push('/stu/stuInfo/add')
+      this.$router.push('/stu/elite/add')
     },
     statusChange (id) {
       api.changeStuStatus(id).then(res => {

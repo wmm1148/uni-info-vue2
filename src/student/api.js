@@ -38,10 +38,18 @@ export default {
   getStudentById: (id) => request ({
     url: `/get/student/by/${id}`,
     method: 'get' 
-  })()
+  })(),
   // getStudentById: request({
   //   url: '/get/student/by/:id',
   //   method: 'get' 
   // })
+  changeStuStatus: (id) => request ({
+    url: `/put/student/changeStatus/${id}`,
+    method: 'put' 
+  })(),
 
+  getEliteStuList: request({
+    url: '/get/eliteStudent/list',
+    method: 'get'
+  }),
 }
