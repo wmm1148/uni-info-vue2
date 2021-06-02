@@ -152,6 +152,7 @@ export default {
         console.log('stu res', res)
         // this.pagination.total = res.total;
         this.list = res.list
+        // window.list = this.list
         // this.$router.push('list');
       }).catch((err) => {
         console.log(err)

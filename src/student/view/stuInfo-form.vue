@@ -26,7 +26,7 @@
 export default {
   data () {
     return {
-      headStyle: { 'font-weight': 'bold' }
+      headStyle: { 'font-weight': 'bold' },
     }
   },
   components: {

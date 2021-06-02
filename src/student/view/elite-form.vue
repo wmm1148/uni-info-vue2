@@ -6,6 +6,7 @@
       </template>
       <a-transfer
       :data-source="mockData"
+      :titles="['Studets', 'Elite']"
       :target-keys="targetKeys"
       :disabled="disabled"
       :show-search="showSearch"
@@ -31,6 +32,7 @@
           :columns="direction === 'left' ? $options.columns : $options.columns"
           :data-source="filteredItems"
           size="small"
+          row-key="id"
           :style="{ pointerEvents: listDisabled ? 'none' : null }"
           :custom-row="
             ({ key, disabled: itemDisabled }) => ({
@@ -119,6 +121,28 @@ export default {
       this.showSearch = showSearch;
     },
     fetchTableList () {
+      //一种是发起两次请求（参数不同），分别获取左表右表
+      //一种是发起一次请求拿到所有数据，前端判断分出左右表————不用再写接口，先尝试这种
+      //无论是哪种都需要再次提交更改后的数据
+      const tableMap = (res) => res.map((item) => ({
+        ...item,
+        key: item.id,
+        title: item.id,
+      }));
+      console.log('fetchTableList');
+      api.getStudentList().then((res) => {
+        this.mockData = tableMap(res.list)
+        console.log('mockData', this.mockData);
+        this.targetKeys =  res.list.filter(item => item.elite === 1).map(item => item.id)
+      }).catch((err) => {
+        console.log(err)
+      })
+
+      // api.getEliteStuList().then((res) => {
+      //       this.leftTableList = res.list;
+      //     }).catch((err) => {
+      //       console.log(err)
+      //     })
       // const leftTableList = [];
       // api.getEliteStuList().then((res) => {
       //   this.leftTableList = res.list;
@@ -128,28 +152,28 @@ export default {
       // const rightTableList = api.getEliteStuList()
       // console.log('leftTableList', leftTableList);
       // this.mockData = [...leftTableList, rightTableList]
-      async () => {
-        console.log('hhhhh');
-        try {
-          await Promise.all([
-            api.getEliteStuList().then((res) => {
-            this.leftTableList = res.list;
-          }).catch((err) => {
-            console.log(err)
-          }),
-            api.getEliteStuList().then((res) => {
-            this.leftTableList = res.list;
-          }).catch((err) => {
-            console.log(err)
-          }),
-          ]);
-          console.log('this.leftTableList', this.leftTableList);
-          this.mockData = [...this.leftTableList, ...this.rightTableList];
-          console.log('mockdata', this.mockData);
-          } finally {
-            console.log('object');
-          }
-      };
+      // async () => {
+      //   console.log('hhhhh');
+      //   try {
+      //     await Promise.all([
+      //       api.getEliteStuList().then((res) => {
+      //       this.leftTableList = res.list;
+      //     }).catch((err) => {
+      //       console.log(err)
+      //     }),
+      //       api.getEliteStuList().then((res) => {
+      //       this.leftTableList = res.list;
+      //     }).catch((err) => {
+      //       console.log(err)
+      //     }),
+      //     ]);
+      //     console.log('this.leftTableList', this.leftTableList);
+      //     this.mockData = [...this.leftTableList, ...this.rightTableList];
+      //     console.log('mockdata', this.mockData);
+      //     } finally {
+      //       console.log('object');
+      //     }
+      // };
     },
     getRowSelection({ disabled, selectedKeys, itemSelectAll, itemSelect }) {
       return {
