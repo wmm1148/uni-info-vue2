@@ -48,7 +48,7 @@
               </a-select>
             </a-form-model-item>
           </a-col>
-          <a-col :span="formItemSpan" class="form-btn-group" :offset="4">
+          <a-col :span="8" class="form-btn-group">
             <a-form-model-item>
               <!-- <div class="btn-group"> -->
                 <a-button class="btn" type="primary" @click="searchHandle">search</a-button>
@@ -73,13 +73,19 @@
           </template>
           <template slot-scope="text, record">
             <router-link v-if="col.dataIndex === 'name'" :to="{ name: 'detail', params: {id: record.id}}" >{{ text }}</router-link>
-            <a-switch v-else-if="col.dataIndex === 'status'"
+            <!-- <a-switch v-else-if="col.dataIndex === 'status'"
             @click="statusChange(record.id)"
             :checked="text === 1"
             >
             <a-icon slot="checkedChildren" type="user" />
             <a-icon slot="unCheckedChildren" type="user-delete" />
-            </a-switch>
+            </a-switch> -->
+            <a-tooltip v-else-if="col.dataIndex === 'status'">
+              <template #title>
+                {{ text }}
+              </template>
+              {{ text }}
+            </a-tooltip>
             <a-tooltip v-else>
               <template #title>
                 {{ text }}
@@ -133,11 +139,6 @@ export default {
       ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
-      // layout: 'horizontal',
-        // 姓名: '',
-        // 年龄: '',
-        // 性别: '',
-        // 班级: '',
     }
   },
   created () {
@@ -213,7 +214,7 @@ export default {
       this.$router.push('/stu/stuInfo/')
     },
     editclick () {
-      this.$router.push('/stu/stuInfo/add')
+      // this.$router.push('/stu/stuInfo/add')
     },
     addClick () {
       this.$router.push('/stu/elite/add')
@@ -281,7 +282,7 @@ export default {
   justify-content: center;
 }
 .btn { /* css不是可以嵌套吗*/
-    margin: 0 8px;
+  margin-left: 8px;
   }
   .flex-action {
     width: 100%;

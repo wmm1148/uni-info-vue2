@@ -48,7 +48,7 @@
               </a-select>
             </a-form-model-item>
           </a-col>
-          <a-col :span="formItemSpan" class="form-btn-group" :offset="4">
+          <a-col :span="8" class="form-btn-group">
             <a-form-model-item>
               <!-- <div class="btn-group"> -->
                 <a-button class="btn" type="primary" @click="searchHandle">search</a-button>
@@ -282,8 +282,8 @@ export default {
   display:flex; 
   justify-content: center;
 }
-.btn { /* css不是可以嵌套吗*/
-    margin: 0 8px;
+.btn {
+    margin-left: 8px;
   }
   .flex-action {
     width: 100%;
