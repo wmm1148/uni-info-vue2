@@ -12,19 +12,16 @@
               <span slot="title"><a-icon type="idcard" /><span>Student Information</span></span>
               <a-menu-item-group key="g1" class="ant-menu-sub">
                 <template slot="title"><span>Basic</span></template>
-                <a-menu-item key="1">
+                <a-menu-item key="0101">
                   <router-link :to="{ name: 'stuInfo'}">All Students</router-link>
                 </a-menu-item>
-                <a-menu-item key="2">
+                <a-menu-item key="0102">
                   <router-link :to="{ name: 'elite'}">Elite Students</router-link>
                 </a-menu-item>
               </a-menu-item-group>
-              <a-menu-item-group key="g2" title="Detail" class="ant-menu-sub">
-                <a-menu-item key="3">
-                  Detail Info1
-                </a-menu-item>
-                <a-menu-item key="4">
-                  Detail Info1
+              <a-menu-item-group key="g2" title="Others" class="ant-menu-sub">
+                <a-menu-item key="0201">
+                  <router-link :to="{ name: 'view'}">View Component</router-link>
                 </a-menu-item>
               </a-menu-item-group>
             </a-sub-menu>

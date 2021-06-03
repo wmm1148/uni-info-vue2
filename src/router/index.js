@@ -63,6 +63,11 @@ const routes = [
           //   component: () => import('../student/router/elite/~edit.id.vue')
           // },
         ]
+      },
+      {
+        path: 'view',
+        name: 'view',
+        component: () => import('../student/router/viewer.vue'),
       }
     ]
   },
