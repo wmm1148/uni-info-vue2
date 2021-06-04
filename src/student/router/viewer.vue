@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card class="stu-card" title="View Component" :headStyle='headStyle'>
-      <view-cpn :status.sync="status">
+      <view-cpn :status.sync="status" @refresh="loadingClick">
         <h1>ahhhhhhhhhhhh</h1>
       </view-cpn>
       <a-radio-group class="radio-group" v-if="status === 'init'">
@@ -34,17 +34,43 @@
       return {
         headStyle: { 'font-weight': 'bold' },
         status: 'init',
+        // refresh: false
       }
   },
     components: {
       'view-cpn': () => import('/components/display/view-cpn.vue')
+    },
+    // watch: {
+    //   status (newVal, oldVal) {
+    //     if(newVal === 'loading' && (oldVal === 'error')) {
+    //       setTimeout(() => {
+    //     this.status = 'empty'
+    //   }, 2000)
+    //     }
+    //     else if (newVal === 'loading' && (oldVal === 'empty')){
+    //       {
+    //       setTimeout(() => {
+    //       this.status = 'view'
+    //     }, 2000)
+    //     }
+    //     }
+    //   }
+    // },
+    watch: {
+      // refresh (newnn) {
+      //   console.log('new', newnn);
+      // }
     },
     methods: {
       initClick () {
       this.status = 'init'
       },
       loadingClick () {
-      this.status = 'loading'
+        console.log('hhhhh');
+        this.status = 'loading'
+      // setTimeout(() => {
+      //   this.status = 'error'
+      // }, 2000)
       },
       emptyClick () {
       this.status = 'empty'
@@ -55,6 +81,9 @@
       viewClick () {
       this.status = 'view'
       },
+      refresh (refresh) {
+        console.log('aiheihei', refresh);
+      }
     },
     created () {
       window.status = this.status;

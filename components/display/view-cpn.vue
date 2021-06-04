@@ -6,13 +6,6 @@
           <a-skeleton active :paragraph="{ rows: 4 }" />
         <!-- </div> -->
       </slot>
-      <!-- <a-button 
-        slot="indicator" 
-        @click="cancel" 
-        size="large" 
-        style="font-size: 12px" 
-        class="spinBtn" 
-        type="primary">Cancel</a-button> -->
     </a-spin>
     <a-spin tip="Loading..." :spinning="extraSpinning" v-else class="statusLayout">
       <a-skeleton active :paragraph="{ rows: 4 }" v-if="val === 'init'" />
@@ -31,13 +24,6 @@
           </a-button>
         </template>
       </a-result>
-      <!-- <a-button 
-      slot="indicator" 
-      @click="cancel" 
-      size="large" 
-      style="font-size: 12px" 
-      class="spinBtn" 
-      type="primary">Cancel</a-button> -->
     </a-spin>
   </div>
 </template>
@@ -51,6 +37,7 @@
         extraSpinning: false,
         val: 'init',
         isView: false,
+        refresh: false
       }
     },
     props: {
@@ -74,6 +61,7 @@
           }
         }
         else if (newVal === 'view') {
+          this.$emit('update:refresh', true)
           this.isView = true
           this.val = newVal
           this.viewSpinning = false
