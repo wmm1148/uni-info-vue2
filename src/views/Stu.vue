@@ -3,7 +3,8 @@
     <a-layout class="stu-layout">
       <a-layout-sider width="240" style="background: #fff">
         <a-menu
-          :default-selected-keys="['1']"
+          :default-selected-keys="['0101']"
+          :selectedKeys="selectedKeys"
           mode="inline"
           :open-keys.sync="openKeys"
           @click="handleClick"
@@ -12,15 +13,15 @@
               <span slot="title"><a-icon type="idcard" /><span>Student Information</span></span>
               <a-menu-item-group key="g1" class="ant-menu-sub">
                 <template slot="title"><span>Basic</span></template>
-                <a-menu-item key="0101">
+                <a-menu-item key="stuInfo">
                   <router-link :to="{ name: 'stuInfo'}">All Students</router-link>
                 </a-menu-item>
-                <a-menu-item key="0102">
+                <a-menu-item key="elite">
                   <router-link :to="{ name: 'elite'}">Elite Students</router-link>
                 </a-menu-item>
               </a-menu-item-group>
               <a-menu-item-group key="g2" title="Others" class="ant-menu-sub">
-                <a-menu-item key="0201">
+                <a-menu-item key="view">
                   <router-link :to="{ name: 'view'}">View Component</router-link>
                 </a-menu-item>
               </a-menu-item-group>
@@ -39,11 +40,17 @@ export default {
   data () {
     return {
       openKeys: ['sub1'],
+      selectedKeys: [],
     }
+  },
+  created () {
+    this.selectedKeys = [this.$route.name];
+    // console.log('selectedKeys', this.selectedKeys);
   },
   methods: {
     handleClick(e) {
       console.log('click', e);
+      this.selectedKeys = [e.key]
     },
     titleClick(e) {
       console.log('titleClick', e);

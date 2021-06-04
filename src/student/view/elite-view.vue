@@ -71,8 +71,8 @@
           <template #title>
             {{ col.title }}
           </template>
-          <template slot-scope="text, record">
-            <router-link v-if="col.dataIndex === 'name'" :to="{ name: 'detail', params: {id: record.id}}" >{{ text }}</router-link>
+          <template slot-scope="text">
+            <!-- <router-link v-if="col.dataIndex === 'name'" :to="{ name: 'detail', params: {id: record.id}}" >{{ text }}</router-link> -->
             <!-- <a-switch v-else-if="col.dataIndex === 'status'"
             @click="statusChange(record.id)"
             :checked="text === 1"
@@ -80,7 +80,7 @@
             <a-icon slot="checkedChildren" type="user" />
             <a-icon slot="unCheckedChildren" type="user-delete" />
             </a-switch> -->
-            <a-tooltip v-else-if="col.dataIndex === 'status'">
+            <a-tooltip v-if="col.dataIndex === 'status'">
               <template #title>
                 {{ text }}
               </template>

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link :to="{ name: 'stuInfo'}">Student</router-link> |
+      <router-link to="/Home">Home</router-link> |
+      <router-link :to="{ name: 'Student'}">Student</router-link> |
       <router-link :to="{ name: 'Teacher'}">Teacher</router-link>
     </div>
     <router-view />
@@ -35,9 +35,12 @@ export default {
     font-weight: bold;
     color: #b7c0bf;
 
-    &.router-link-exact-active {
+    &.active {
       color: #17c7e6;
     }
+    // &.router-link-exact-active {
+    //   color: #17c7e6;
+    // }
   }
 }
 </style>

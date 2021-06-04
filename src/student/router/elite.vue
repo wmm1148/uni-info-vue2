@@ -1,8 +1,7 @@
 <template>
   <div>
-    <elite-view  v-if="$route.matched.length === 2"/>
+    <elite-view v-if="$route.matched.length === 2"/>
     <router-view v-else />
-    <!-- <h1 v-else>uuuuuuuuuuuuuuu</h1> -->
   </div>
 </template> 
 
