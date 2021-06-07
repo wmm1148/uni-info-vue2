@@ -9,8 +9,9 @@ const list = [
     age: 20,
     gender: '男',
     major: '计算机科学与技术',
-    status: 0, //1,在读  2，保留学籍
+    status: 0, //1,在读  0，非在读
     elite: 0,
+    remark: 'hh'
   },
   {
     id: '02',
@@ -20,7 +21,7 @@ const list = [
     major: '金融学',
     status: 0,
     elite: 0,
-
+    remark: 'hhh优秀h'
   },
   {
     id: '03',
@@ -30,6 +31,7 @@ const list = [
     major: '会计学',
     status: 1,
     elite: 0,
+    remark: 'hhh优秀h'
 
   },
   {
@@ -40,6 +42,7 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 0,
+    remark: 'hhh优秀h'
 
   },
   {
@@ -50,6 +53,7 @@ const list = [
     major: '计算机科学与技术',
     status: 1,
     elite: 0,
+    remark: 'hhh优秀h'
 
   },
   {
@@ -60,6 +64,7 @@ const list = [
     major: '金融学',
     status: 0,
     elite: 1,
+    remark: 'hh'
 
   },
   {
@@ -70,6 +75,7 @@ const list = [
     major: '会计学',
     status: 1,
     elite: 0,
+    remark: 'hh'
 
   },
   {
@@ -80,6 +86,7 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 0,
+    remark: 'hh优秀'
 
   },
   {
@@ -90,6 +97,7 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 1,
+    remark: 'hhhh优秀'
 
   },
   {
@@ -100,6 +108,7 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 0,
+    remark: 'hhh优秀h'
 
   },
   {
@@ -110,6 +119,7 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 1,
+    remark: 'hhh优秀h'
 
   },
   {
@@ -120,6 +130,7 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 1,
+    remark: 'hh'
 
   }
 ]
@@ -219,7 +230,7 @@ Mock.post(api.addStudent.url, (stu) => {
   }
 })
 
-Mock.put(api.updateStudent.url, (stu) => {
+Mock.put('/update/student', (stu) => {
   const oldIndex = list.findIndex((item) => item.id === stu.id)
   list.splice(oldIndex, 1, stu)
   return {
@@ -255,7 +266,6 @@ Mock.get('/get/eliteStudent/list', () => {
   // console.log(page, limit)
   // const result = list.slice((page - 1) * limit, page * limit)
   const eliteList = list.filter((item) => item.elite === 1);
-  console.log('eliteList', eliteList);
   return Promise.resolve({
     code: 0,
     data: {

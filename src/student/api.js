@@ -27,10 +27,11 @@ export default {
     url: '/add/student',
     method: 'post' 
   }),
-  updateStudent: request({
+  updateStudent: (stu) => request({
     url: '/update/student',
-    method: 'put' 
-  }),
+    method: 'put',
+    data: stu
+  })(),
   removeStudent: (id) => request({
     url: `/remove/student/${id}`,
     method: 'delete' 

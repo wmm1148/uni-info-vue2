@@ -55,5 +55,50 @@ const eliteTableColumns = [
   //   },
   // }
 ]
+const name = {
+  dataIndex: 'name',
+  title: 'Name',
+  // scopedSlots: {
+  //   customRender: 'name',
+  // },
+};
+const age = {
+  dataIndex: 'age',
+  title: 'Age',
+  scopedSlots: {
+    customRender: 'age',
+  },
+  width:300,
+};
+const gender = {
+  dataIndex: 'gender',
+  title: 'Gender',
+  // scopedSlots: {
+  //   customRender: 'gender',
+  // },
+};
+const remark = {
+  dataIndex: 'remark',
+  title: 'Remark',
+  // scopedSlots: {
+  //   customRender: 'remark',
+  // },
+};
+const major = {
+  dataIndex: 'major',
+  title: 'Major',
+  // scopedSlots: {
+  //   customRender: 'major',
+  // },
+};
+const status = {
+  dataIndex: 'status',
+  title: 'Status',
+  // scopedSlots: {
+  //   customRender: 'status',
+  // },
+};
 
 export { studentTableColumns, eliteTableColumns };
+
+export const eliteStuColumns = [ name, gender, major, status, age, remark ];

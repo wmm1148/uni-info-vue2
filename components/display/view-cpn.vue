@@ -1,5 +1,14 @@
 <template>
   <div class="statusLayout">
+    <!-- <slot name="init">
+      <h1>inittttttttttttttttttttttttttt</h1>
+    </slot>
+    <slot name="loading">
+      <h1>loadingggggggggg</h1>
+    </slot>
+    <slot name="error">
+      <h1>errorrrrrrrrrrrrrrrrrr</h1>
+    </slot> -->
     <a-spin tip="Loading..." :spinning="viewSpinning" v-if="isView">
       <slot>
         <!-- <div class="spin-content"> -->
@@ -25,6 +34,7 @@
         </template>
       </a-result>
     </a-spin>
+    <slot></slot>
   </div>
 </template>
 

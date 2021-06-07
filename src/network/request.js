@@ -6,7 +6,7 @@ import axios from 'axios'
 export function request (config) {
   // 1.创建axios实例
   const instance = axios
-  // // 2.axios拦截器
+  // 2.axios拦截器
   // instance.interceptors.request.use(config => {
   //   console.log('config: ', config);
     
@@ -17,13 +17,13 @@ export function request (config) {
   // })
   // instance.interceptors.response.use(res => {
     
-  // // 也可以设置取消函数 防止重复请求
-  // // 相同请求不得在600毫秒内重复发送，反之继续执行
-  // // setTimeout(() => {
-  // //   requestList.delete(response.config.url)
-  // // }, 600)
+  // 也可以设置取消函数 防止重复请求
+  // 相同请求不得在600毫秒内重复发送，反之继续执行
+  // setTimeout(() => {
+  //   requestList.delete(response.config.url)
+  // }, 600)
 
-  //   // return res?.data // return res.data即可
+    // return res?.data // return res.data即可
   //   console.log('request');
   //   return res;
   // }, err => {

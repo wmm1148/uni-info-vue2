@@ -53,7 +53,7 @@ export default {
       })
     },
     backClick () {
-      this.$router.push('/stu/stuInfo/')
+      this.$router.push('/stu/stuInfo')
     },
     addClick () {
       this.$router.push('/stu/stuInfo/add')

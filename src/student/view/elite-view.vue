@@ -64,6 +64,7 @@
         :data-source="list"
         bordered
         :pagination="{ pageSize: 5 }">
+        @change="tableChange"
         <a-table-column
           v-for="(col) in $options.columns"
           :key="col.dataIndex"
@@ -71,7 +72,7 @@
           <template #title>
             {{ col.title }}
           </template>
-          <template slot-scope="text">
+          <template slot-scope="text, row">
             <!-- <router-link v-if="col.dataIndex === 'name'" :to="{ name: 'detail', params: {id: record.id}}" >{{ text }}</router-link> -->
             <!-- <a-switch v-else-if="col.dataIndex === 'status'"
             @click="statusChange(record.id)"
@@ -82,37 +83,64 @@
             </a-switch> -->
             <a-tooltip v-if="col.dataIndex === 'status'">
               <template #title>
-                {{ text }}
+                {{ text === 0 ? '非在读' : '在读' }}
               </template>
-              {{ text }}
+              {{ text === 0 ? '非在读' : '在读' }}
             </a-tooltip>
             <a-tooltip v-else>
-              <template #title>
+              <template #title v-if="!row.editable">
                 {{ text }}
               </template>
-              {{ text }}
+              <template v-if="['age'].includes(col.dataIndex) && row.editable">
+                <a-input
+                :value="text"
+                type="number"
+                @change="e => editHandleChange(e.target.value, col.dataIndex, row)"
+                ></a-input>
+              </template>
+              <template v-else-if="['remark'].includes(col.dataIndex) && row.editable">
+                <a-input
+                :value="text"
+                :max-length="20"
+                @change="e => editHandleChange(e.target.value, col.dataIndex, row)"
+                ></a-input>
+              </template>
+              <template v-else>
+                {{ text }}
+              </template>
             </a-tooltip>
           </template>
         </a-table-column>
         <a-table-column title="Action" class="flex-action">
-          <template v-slot="text, record">
-            <!-- <a-button  type="primary" @click="showModal"> 更新 </a-button> -->
-            <a>
-              <a-icon type="edit" style="fontSize:1.3em" @click="editclick"/>
-            </a>
-            <a>
+          <template v-slot="text, row">
+            <span v-if="row.editable">
+              <a
+              v-text="'Save'"
+              @click="saveRow(row)"
+              />
+              <a
+              v-text="'Cancel'"
+              @click="cancelEditRow(row)"
+              />
+            </span>
+            <span v-else>
+              <a
+              v-text="'Edit'"
+              @click="editRow(row)"
+              :disabled="editingKey !== ''"
+              />
               <a-popconfirm
               title="你确定删除吗?"
               ok-text="Yes"
               cancel-text="No"
-              @confirm="removeClickHandler(record.id)"
+              @confirm="removeClickHandler(row.id)"
               @cancel="cancel"
-            >
-              <!-- <a href="#">删除</a> -->
-              <!-- <a-button>删除</a-button> -->
-                <a-icon type="delete" style="fontSize:1.3em" @click="iconclick"/>
+              >
+                <a v-text="'Delete'" 
+                :disabled="editingKey !== ''"
+                />
               </a-popconfirm>
-            </a>
+            </span>
           </template>
         </a-table-column>
       </a-table>
@@ -124,30 +152,41 @@
 
 <script>
 import api from '../api.js'
-import { studentTableColumns } from '@/common/student.js'
+import { eliteStuColumns } from '@/common/student.js'
 
 export default {
-  columns: studentTableColumns,
+  columns: eliteStuColumns,
   data () {
     return {
       headStyle: { 'font-weight': 'bold' },
       formItemSpan: 4,
       list: [],
       id: 1,
+      editingKey: '',
+      copyData: null,
+      copyAge: null,
+      copyRemark: null,
       // pagination: {},
-
       ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
     }
   },
   created () {
-    this.fetchStudentList()
-    console.log('studentTableColumns', studentTableColumns);
+    this.fetch()
+    console.log('eliteStuColumns', eliteStuColumns);
   },
-
+  activated () {
+    this.editingKey = '';
+    this.fetch();
+  },
+  watch: {
+    editingKey (newValue) {
+      console.log('new key:', newValue);
+    }
+  },
   methods: {
-    fetchStudentList () {
+    fetch () {
       api.getEliteStuList().then((res) => {
         console.log('stu res', res)
         // this.pagination.total = res.total;
@@ -157,29 +196,65 @@ export default {
         console.log(err)
       })
     },
-    edit (id) {
-      console.log(id)
+    editRow(row) {
+      //存id 存原数据 切换编辑状态
+      //存的数据有两种写法，根据数据量的多少
+      //方式一：定义一个copyData
+      //方式二: 有多少需要保存的就定义多少变量
+
+      //方式一：
+      const { age, remark, id } = row;
+      this.copyData = { age, remark, id }
+      this.editingKey = id
+      // row.editable = true  //这里使用这种方式就不对
+      this.$set(row, 'editable', true)  
+
+      //方式二：
+      // this.editingKey = row.id;
+      // this.copyAge = row[this.age];
+      // this.copyRemark = row[this.remark];
+      // this.$set(row, 'editable', true);
+    },
+    saveRow(row) {
+      api.updateStudent(row).then((res) => {
+        console.log('updateStudent res', res);
+        this.$set(row, 'editable', false)
+        this.editingKey = ''
+      }).catch((err) => {
+        console.log(err);
+      })
+    },
+    cancelEditRow(row) {
+      const { age, remark } = this.copyData;
+      row.age = age
+      row.remark = remark
+      this.editingKey = ''
+      this.$set(row, 'editable', false) //修改对象页面不刷新，这里还是用$set
+      console.log(row.editable);
+    },
+    editHandleChange (value, dataIndex, row) {
+      this.$set(row, dataIndex, value)
+    },
+    tableChange () {
+      console.log('tableChange tableChange');
+      this.editingKey = '';
+      this.fetch();
     },
     updateClickHandler (id) {
       console.log(id)
     },
     removeClickHandler (id) {
       console.log(id)
-      api.removeStudent(id).then((res) => {
-        console.log('res',res);
-        // this.pagination.total = res.total;
-        // this.list = res.list
-        // this.$router.push('list');
-      }).catch((err) => {
+      api.removeStudent(id).then().catch((err) => {
         console.log(err)
       })
-    this.fetchStudentList()
+    this.fetch()  //这里重新获取数据，
     },
     handleClick (e) {
       console.log('click', e)
     },
     searchHandle () {
-      this.fetchStudentList()
+      this.fetch()
     },
     handleChange(value) {
       console.log(value);
@@ -225,7 +300,8 @@ export default {
       }).catch((err) => {
         console.log(err)
       })
-    }
+    },
+    
   },
   // computed: {
   //   formItemLayout() {
@@ -247,7 +323,15 @@ export default {
   //   }
   // }
 }
-
+/**
+ * 编辑单行需要的数据：数字（可加减1）——age、输入框——remark
+ * 需要一个变量控制显示编辑按钮还是保存等按钮 row.editable
+ * 需要一个变量保存当前编辑的行 editingKey = row.id
+ * 
+ * 点击编辑->保存行、保存当前数据
+ *    点击保存->保存数据并更新
+ *    点击取消->恢复原数据
+ */
 </script>
 
 <style scoped>
@@ -291,4 +375,7 @@ export default {
   a {
     margin-right: 10px;
     }
+  td {
+    width: 200px;
+  }
 </style>

@@ -3,8 +3,11 @@
     <a-card class="stu-card" title="View Component" :headStyle='headStyle'>
       <view-cpn :status.sync="status" @refresh="loadingClick">
         <h1>ahhhhhhhhhhhh</h1>
+        <!-- <template v-slot:[dynamicSlotName]>
+          hh
+        </template> -->
       </view-cpn>
-      <a-radio-group class="radio-group" v-if="status === 'init'">
+      <!-- <a-radio-group class="radio-group" v-if="status === 'init'">
         <a-radio-button value="loading" @click="loadingClick">
           Loading
         </a-radio-button>
@@ -23,7 +26,7 @@
         <a-radio-button value="view" @click="viewClick">
           View
         </a-radio-button>
-      </a-radio-group>
+      </a-radio-group> -->
     </a-card>
   </div>
 </template>
@@ -34,6 +37,7 @@
       return {
         headStyle: { 'font-weight': 'bold' },
         status: 'init',
+        dynamicSlotName: 'init'
         // refresh: false
       }
   },

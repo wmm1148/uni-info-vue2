@@ -13,13 +13,14 @@ const routes = [
   {
     path: '/stu',
     name: 'Student',
+    redirect:'/stu/stuInfo',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import( '../views/Stu.vue'),
     children: [
       {
-        path: '',
+        path: 'stuInfo',
         name: 'stuInfo',
         component: () => import( '../student/router/stuInfo.vue'),
         children: [
