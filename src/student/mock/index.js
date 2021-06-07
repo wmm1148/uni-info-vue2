@@ -11,7 +11,8 @@ const list = [
     major: '计算机科学与技术',
     status: 0, //1,在读  0，非在读
     elite: 0,
-    remark: 'hh'
+    remark: 'hh',
+    img: '/avatar2.jpg',
   },
   {
     id: '02',
@@ -21,7 +22,9 @@ const list = [
     major: '金融学',
     status: 0,
     elite: 0,
-    remark: 'hhh优秀h'
+    remark: 'hhh优秀h',
+    img: '/avatar2.jpg',
+
   },
   {
     id: '03',
@@ -31,7 +34,9 @@ const list = [
     major: '会计学',
     status: 1,
     elite: 0,
-    remark: 'hhh优秀h'
+    remark: 'hhh优秀h',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -42,7 +47,9 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 0,
-    remark: 'hhh优秀h'
+    remark: 'hhh优秀h',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -53,7 +60,9 @@ const list = [
     major: '计算机科学与技术',
     status: 1,
     elite: 0,
-    remark: 'hhh优秀h'
+    remark: 'hhh优秀h',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -64,7 +73,9 @@ const list = [
     major: '金融学',
     status: 0,
     elite: 1,
-    remark: 'hh'
+    remark: 'hh',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -75,7 +86,9 @@ const list = [
     major: '会计学',
     status: 1,
     elite: 0,
-    remark: 'hh'
+    remark: 'hh',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -86,7 +99,9 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 0,
-    remark: 'hh优秀'
+    remark: 'hh优秀',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -97,7 +112,9 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 1,
-    remark: 'hhhh优秀'
+    remark: 'hhhh优秀',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -108,7 +125,9 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 0,
-    remark: 'hhh优秀h'
+    remark: 'hhh优秀h',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -119,7 +138,9 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 1,
-    remark: 'hhh优秀h'
+    remark: 'hhh优秀h',
+    img: '/avatar2.jpg',
+
 
   },
   {
@@ -130,7 +151,9 @@ const list = [
     major: '物流管理',
     status: 1,
     elite: 1,
-    remark: 'hh'
+    remark: 'hh',
+    img: '/avatar2.jpg',
+
 
   }
 ]

@@ -68,7 +68,7 @@ const age = {
   scopedSlots: {
     customRender: 'age',
   },
-  width:300,
+  width:200,
 };
 const gender = {
   dataIndex: 'gender',
@@ -76,6 +76,7 @@ const gender = {
   // scopedSlots: {
   //   customRender: 'gender',
   // },
+
 };
 const remark = {
   dataIndex: 'remark',
@@ -83,6 +84,7 @@ const remark = {
   // scopedSlots: {
   //   customRender: 'remark',
   // },
+  width:400,
 };
 const major = {
   dataIndex: 'major',

@@ -64,13 +64,17 @@
         :data-source="list"
         bordered
         :pagination="{ pageSize: 5 }">
+        :scroll="{x: false}"
         @change="tableChange"
         <a-table-column
           v-for="(col) in $options.columns"
           :key="col.dataIndex"
-          :data-index="col.dataIndex">
+          :data-index="col.dataIndex"
+          :width="col.width"
+        >
+          <!-- 如果写#title插槽，绑定的col.title优先级更高，#title不起作用，可以不在col里写title这个属性 -->
           <template #title>
-            {{ col.title }}
+            <span>{{ col.title }}</span>
           </template>
           <template slot-scope="text, row">
             <!-- <router-link v-if="col.dataIndex === 'name'" :to="{ name: 'detail', params: {id: record.id}}" >{{ text }}</router-link> -->
@@ -216,9 +220,10 @@ export default {
       // this.$set(row, 'editable', true);
     },
     saveRow(row) {
+      //正常要把这行写到.then里，这里为了避开《修改数据后 再删除数据 input框重新出现》这个bug，思路都没问题，没有后端
+      this.$set(row, 'editable', false)
       api.updateStudent(row).then((res) => {
         console.log('updateStudent res', res);
-        this.$set(row, 'editable', false)
         this.editingKey = ''
       }).catch((err) => {
         console.log(err);

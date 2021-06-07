@@ -4,20 +4,36 @@
       <template #extra>
         <a-icon type="left-square" style="fontSize:1.3em" @click="backClick"/>
       </template>
-      <a-form-model>
-        <a-form-model-item label="姓名">
-          <a-input />
-        </a-form-model-item>
-        <a-form-model-item label="年龄">
-          <a-input />
-        </a-form-model-item>
-        <a-form-model-item label="性别">
-          <a-input />
-        </a-form-model-item>
-        <a-form-model-item label="专业">
-          <a-input />
-        </a-form-model-item>
-      </a-form-model>
+      <a-row :gutter="24">
+        <a-form-model 
+        >
+          <a-col :span="12">
+            <a-form-model-item label="Name">
+              <a-input />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-model-item label="Age">
+              <a-input />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-model-item label="Gender">
+              <a-input />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-model-item label="Major">
+              <a-input />
+            </a-form-model-item>
+          </a-col>
+          <a-col :span="12">
+            <a-form-model-item label="Status">
+              <a-input />
+            </a-form-model-item>
+          </a-col>
+        </a-form-model>
+      </a-row>
     </a-card>
   </div>
 </template>
