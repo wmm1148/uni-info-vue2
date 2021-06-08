@@ -5,6 +5,7 @@ import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import './student/mock'
 import './book/mock'
+import 'echarts'
 
 Vue.config.productionTip = false
 
