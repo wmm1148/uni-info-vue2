@@ -4,6 +4,7 @@ import router from './router'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
 import './student/mock'
+import './book/mock'
 
 Vue.config.productionTip = false
 

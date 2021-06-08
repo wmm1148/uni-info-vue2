@@ -6,9 +6,13 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '',
+    redirect:'/stu/stuInfo',
+  },
+  {
     path: '/Home',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/stu',
@@ -69,6 +73,42 @@ const routes = [
         path: 'view',
         name: 'view',
         component: () => import('../student/router/viewer.vue'),
+      }
+    ]
+  },
+  {
+    path: '/book',
+    name: 'Book',
+    redirect:'/book/wangeditor',
+    component: () => import('../views/Book.vue'),
+    children: [
+      {
+        path: 'wangeditor',
+        name: 'wangeditor',
+        component: () => import( '../book/router/wangeditor.vue'),
+        children: [
+          {
+            path: 'detail/:id',
+            name: 'detail',
+            component: () => import('../book/router/wangeditor/~detail.id.vue'),
+            props: true
+          },
+          {
+            path: 'add',
+            name: 'add',
+            component: () => import('../book/router/wangeditor/~add.vue')
+          },
+          {
+            path: 'edit/:edit',
+            name: 'edit',
+            component: () => import('../book/router/wangeditor/~edit.id.vue')
+          },
+        ]
+      },
+      {
+        path: 'test',
+        name: 'test',
+        component: () => import( '../book/router/test.vue'),
       }
     ]
   },
