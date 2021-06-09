@@ -1,18 +1,22 @@
 <template>
   <div>
     <a-card>
-      <template #extra>
+      <!-- <template #extra>
         <slot name="extra"></slot>
-      </template>
-      <template #title>
+      </template> -->
+      <!-- <template #title>
         <slot name="title"></slot>
-      </template>
-      <slot></slot>
-      <p>Card content</p>
+      </template> -->
+      <div class="titleee">
+      <slot name="title"></slot>
+      </div>
       <template #actions>
-        <slot name="actions"></slot>
+        <!-- <slot name="actions"></slot> -->
+        actions
       </template>
-      
+      <p>Card content</p>
+      <p>Card content</p>
+
     </a-card>
   </div>
 </template>
@@ -25,6 +29,6 @@
 
 <style lang="less" scoped>
 .ant-card {
-  height: 180px;
+  height: 280px;
 }
 </style>

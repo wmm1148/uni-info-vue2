@@ -3,16 +3,16 @@
     <a-row :gutter="16" style="padding: 10px 0;">
       <a-col :span="6">
         <mini-chart-card>
-          <!-- <template #title>
-            hhhhhhhhh
-          </template> -->
+          <template #title>
+            <!-- kkk -->
+          </template>
           <!-- <template #extra>
             hhhuss
           </template> -->
           <p>hhhhhhhhhhhhhhhhhhh</p>
-          <template #actions>
+          <!-- <template #actions>
             Daily Visit: 1234
-          </template>
+          </template> -->
         </mini-chart-card>
       </a-col>
       <a-col :span="6">
