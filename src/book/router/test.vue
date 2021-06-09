@@ -13,20 +13,22 @@ export default {
     // 'stu-info-view': () => import('../view/wangeditor-view.vue')
     // 'stu-info-view': () => import('../view/wangeditor-view.vue')
     // 'wang-editor': () => import('/components/common/wangeditor.vue')
-    'ChartLine': () => import('/components/display/chartLine.vue')
+    'ChartLine': () => import('/components/display/chartLine2.vue')
   },
   data(){
-        return{
-          name:'张雪',
-          xData: ['2020-02', '2020-03', '2020-04', '2020-05'],
-          yData: [30, 132, 80, 134],
-        }
+    return{
+      name:'张雪',
+      xData: ['2020-02', '2020-03', '2020-04', '2020-05'],
+      yData: [30, 132, 80, 134],
+    }
     },
     mounted () {
-      const {name,xData,yData} = this
-      console.log(this.$refs)
+      // const {name,xData,yData} = this
       // this.$refs.chart_line_one.initChart(name,xData,yData)
-      this.$refs.initChart(name,xData,yData)
+      setTimeout(() => {
+      // this.$refs.chart_line_one.initChart(name, xData, yData)
+      this.$refs.chart_line_one.initChart()
+      }, 5000);
     },
 }
 </script>

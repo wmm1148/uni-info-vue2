@@ -7,12 +7,30 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '',
-    redirect:'/stu/stuInfo',
+    redirect:'/home/analysis',
   },
   {
-    path: '/Home',
+    path: '/home',
     name: 'Home',
     component: Home,
+    redirect: '/home/analysis',
+    children: [
+      {
+        path: 'analysis',
+        name: 'analysis',
+        component: () => import( '../home/router/analysis.vue'),
+      },
+      {
+        path: 'monitor',
+        name: 'monitor',
+        component: () => import( '../home/router/monitor.vue'),
+      },
+      {
+        path: 'workplace',
+        name: 'workplace',
+        component: () => import( '../home/router/workplace.vue'),
+      },
+    ]
   },
   {
     path: '/stu',

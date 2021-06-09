@@ -1,9 +1,10 @@
-<template>  
+<template> 
     <div class="echart" id="echart-line" :style="{float:'left',width: '100%', height: '230px'}"></div>   
 </template>
 
 <script>
-import echarts from  "echarts";
+// import echarts from  "echarts";
+import * as echarts from 'echarts';
 
 export default {
     created() {
@@ -11,7 +12,6 @@ export default {
     },
     methods: {
     initChart(name, xData, yData) {
-        console.log('object', echarts);
         let getchart = echarts.init(document.getElementById('echart-line'));
         var option = {
             tooltip: {
