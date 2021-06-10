@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="main" style="width: 600px;height:400px;"></div>
+    <div id="miniPie" style="width: 600px;height:400px;"></div>
   </div>
 </template>
 
@@ -15,7 +15,7 @@
     methods: {
       initChart() {
         // (document).ready(function(){
-          var myChart = echarts.init(document.getElementById('main'));
+          var myChart = echarts.init(document.getElementById('miniPie'));
 
           // 指定图表的配置项和数据
           var option = {

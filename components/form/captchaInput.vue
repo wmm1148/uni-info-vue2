@@ -3,10 +3,9 @@
     <a-input :placeholder="placeholder" v-model="inputValue">
       <a-icon slot="prefix" type="safety" />
     </a-input>
-    <!-- <a-spin> -->
+    <a-spin :spinning="loading">
       <img :src="captchaPath" @click="getCaptcha()" alt="hold on">
-    <!-- </a-spin> -->
-    <!-- <img :src="captchaPath" @click="getCaptcha()" alt="hold on"> -->
+    </a-spin>
   </div>
 </template>
 
@@ -17,7 +16,8 @@ import { request } from '@/network/request.js'
     data () {
       return {
         captchaPath: '',
-        inputValue: ''
+        inputValue: '',
+        loading: false,
       }
     },
     props: {
@@ -41,6 +41,7 @@ import { request } from '@/network/request.js'
       }
     },
     created () {
+      this.loading = true;
       this.getCaptcha();
     },
     methods: {
@@ -51,6 +52,7 @@ import { request } from '@/network/request.js'
 
         fetch.then((res) => {
           this.captchaPath = res.data;
+          this.loading = false;
         }).catch((err) => {
           console.log('err', err);
         })
@@ -62,8 +64,8 @@ import { request } from '@/network/request.js'
 
 <style lang="less" scoped>
 .captcha-layout {
-  display: inline-block;
-  width: 300px;
+  display: inline-flex;
+  // width: 300px;
   // height: 100%;
   // background:#dddddd;
 }
@@ -71,13 +73,12 @@ import { request } from '@/network/request.js'
   width: 135px;
 }
 .ant-spin-nested-loading {
-  width: 120px;
+  width: 55px;
 }
 img {
     border-radius: 0 4px 4px 0;
     // margin-bottom: 0.1em;   //放大样式就有问题
     margin-bottom: 0.14em;
-    // width: 80px;
   }
 /deep/ .ant-input {
   // width: 120px;

@@ -2,7 +2,12 @@
   <div style="padding: 10px 20px;">
     <a-row :gutter="16" style="padding: 10px 0;">
       <a-col :span="6">
-        <mini-chart-card>
+        <mini-chart-card
+        :footerDivider="true"
+        >
+          <template #title>
+            Visit
+          </template>
           <template #extra>
             <a-icon type="info-circle" />
           </template>
@@ -13,7 +18,19 @@
         </mini-chart-card>
       </a-col>
       <a-col :span="6">
-        <mini-chart-card>
+        <mini-chart-card
+        :footerDivider="true"
+        >
+          <template #title>
+            TEST
+          </template>
+          <template #extra>
+            <a-icon type="info-circle" />
+          </template>
+          <test></test>
+          <template #footer>
+            TEST: TEST
+          </template>
         </mini-chart-card>
       </a-col>
       <a-col :span="6">
@@ -33,7 +50,7 @@
     <a-row :gutter="16" style="padding: 10px 0">
       <a-col :span="12">
         <a-card style="height: 450px">
-          <!-- <mini-pie></mini-pie> -->
+        <mini-pie></mini-pie>
         </a-card>
       </a-col>
       <a-col :span="12">
@@ -46,7 +63,7 @@
     </a-row>
     <a-row style="padding: 10px 0;">
       <a-card>
-        <mini-pie></mini-pie>
+        <!-- <mini-pie></mini-pie> -->
       </a-card>
     </a-row>
   </div>
@@ -59,7 +76,8 @@ export default {
   components: {
     'mini-chart-card': () => import('/components/charts/miniChartCard.vue'),
     'mini-pie': () => import('/components/charts/miniPie.vue'),
-    'mini-area': () => import('/components/charts/miniArea.vue')
+    'mini-area': () => import('/components/charts/miniArea.vue'),
+    'test': () => import('/components/charts/test.vue'),
   }
 }
 </script>

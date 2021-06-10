@@ -1,16 +1,20 @@
 <template>
   <div>
     <a-card>
-      <div class="title">
+      <!-- <div class="title">
         <slot name="title"></slot>
       </div>
       <div class="extra">
         <slot name="extra"></slot>
+      </div> -->
+      <div class="flex-title">
+        <slot name="title"></slot>
+        <slot name="extra"></slot>
       </div>
-      <slot></slot>
+      <slot class="content"></slot>
       <div class="footer">
-        <a-divider />
-        <slot name="footer"></slot>
+        <a-divider v-if="footerDivider"/>
+        <slot name="footer" ref="footer"></slot>
       </div>
     </a-card>
   </div>
@@ -18,7 +22,15 @@
 
 <script>
   export default {
-    
+    props: {
+      footerDivider: {
+        type: Boolean,
+        default: false
+      }
+    },
+    created() {
+      console.log('object', this.$refs.footer);
+    }
   }
 </script>
 
@@ -28,23 +40,20 @@
   // background-color:rgba(233, 231, 231, 0.65);
   position: relative;
   width: 100%;
+  /deep/ .ant-card-body {
+    padding: 24px;
+  }
 }
-.extra {
-  // background: black;
-  height: 50px;
-  line-height: 50px;
-  // height: 30%;
-  position:absolute;
-  right: 0;
-  top: 0;
-  width: 14%;
-  text-align: center;
-  vertical-align: middle;
-  margin: auto;
+.flex-title {
+  display: flex;
+  justify-content: space-between;
+}
+.content {
+  top: 50px;
 }
 .footer {
   // background: black;
-  height: 50px;
+  height: 40px;
   position:absolute;
   left: 0;
   bottom: 0;
