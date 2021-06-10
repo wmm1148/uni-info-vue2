@@ -6,4 +6,8 @@ export default {
     url: '/get/book/list',
     method: 'get'
   }),
+  getCaptcha: request({
+    url: '/get/captcha.jpg',
+    method: 'get'
+  }),
 }

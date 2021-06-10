@@ -1,5 +1,6 @@
 // import Mock from 'mockjs'
 import Mock from 'router-mock'
+import { Random } from 'mockjs';
 
 const list = [
   {
@@ -22,6 +23,18 @@ Mock.get('/get/book/list', () => {
     data: {
       list,
       total: list.length
+    }
+  })
+})
+
+Mock.get('/get/captcha.jpg', () => {
+  console.log('captchacaptchamockkkkkk');
+  const imgSrc = Random.image('60x32', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
+
+  return Promise.resolve({
+    code: 1,
+    data: {
+      data: imgSrc,
     }
   })
 })

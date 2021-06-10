@@ -100,6 +100,11 @@
           </template>
         </a-table-column>
       </a-table>
+      <captcha-input
+      url="/get/captcha.jpg"
+      :value="captchaValue"
+      placeholder="Input Captcha"
+      />
     </a-card>
     <editor-modal
     v-if="showEditorModel"
@@ -117,6 +122,7 @@ import { editorBookColumns } from '@/common/book.js'
 export default {
   components: {
     'editor-modal': () => import('./editor-modal.vue'),
+    'captcha-input': () => import('/components/form/captchaInput.vue'),
   },
   columns: editorBookColumns,
   data () {
@@ -130,10 +136,11 @@ export default {
       visible: false,
       confirmLoading: false,
       showEditorModel: false,
+      captchaValue: '',
     }
   },
   created () {
-    this.fetchBookList()
+    this.fetchBookList();
   },
 
   methods: {
@@ -216,7 +223,7 @@ export default {
       }).catch((err) => {
         console.log(err)
       })
-    }
+    },
   },
   // computed: {
   //   formItemLayout() {
