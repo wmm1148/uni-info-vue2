@@ -132,6 +132,11 @@ const routes = [
         path: 'test2',
         name: 'test2',
         component: () => import( '../book/router/test2.vue'),
+      },
+      {
+        path: 'test3',
+        name: 'test3',
+        component: () => import( '../book/router/test3.vue'),
       }
     ]
   },
