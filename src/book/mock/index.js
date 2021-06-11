@@ -17,7 +17,6 @@ const list = [
 
 // Mock.get(`/get/student/list?page=${page}&limit=${size}`, () => {
 Mock.get('/get/book/list', () => {
-  console.log('mockkkkkk');
   return Promise.resolve({
     code: 1,
     data: {
@@ -28,8 +27,7 @@ Mock.get('/get/book/list', () => {
 })
 
 Mock.get('/get/captcha.jpg', () => {
-  console.log('captchacaptchamockkkkkk');
-  const imgSrc = Random.image('60x32', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
+  const imgSrc = Random.image('600x320', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
 
   return Promise.resolve({
     code: 1,

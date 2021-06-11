@@ -19,6 +19,9 @@
                 <a-menu-item key="test">
                   <router-link :to="{ name: 'test'}">test</router-link>
                 </a-menu-item>
+                <a-menu-item key="test2">
+                  <router-link :to="{ name: 'test2'}">test2</router-link>
+                </a-menu-item>
               </a-menu-item-group>
             </a-sub-menu>
         </a-menu>

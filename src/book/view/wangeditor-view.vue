@@ -102,9 +102,14 @@
       </a-table>
       <captcha-input
       url="/get/captcha.jpg"
-      :value="captchaValue"
+      v-model="captchaValue"
       placeholder="Input Captcha"
-      />
+      >
+      <template #prefix>
+        <a-icon type="safety"></a-icon>
+      </template>
+      </captcha-input>
+      <!-- <a-icon slot="prefix" type="safety" /> -->
     </a-card>
     <editor-modal
     v-if="showEditorModel"
@@ -139,7 +144,13 @@ export default {
       captchaValue: '',
     }
   },
+  watch: {
+    captchaValue(newVal) {
+      console.log('captchaValue', newVal);
+    }
+    },
   created () {
+    console.log('this.$slots', this.$slots);
     this.fetchBookList();
   },
 

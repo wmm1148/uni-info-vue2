@@ -1,10 +1,17 @@
 <template>
   <div class="captcha-layout">
-    <a-input :placeholder="placeholder" v-model="inputValue">
-      <a-icon slot="prefix" type="safety" />
+    <a-input
+    :placeholder="placeholder" 
+    v-model="inputValue" 
+    @change="e => inputValue = e.target.value"
+    >
+      <template #prefix>
+        <slot name="prefix"></slot>
+      </template>
     </a-input>
     <a-spin :spinning="loading">
-      <img :src="captchaPath" @click="getCaptcha()" alt="hold on">
+      <img :src="captchaPath" @click="getCaptcha()" alt="hold on" class="captcha-img">
+      <!-- <div class="captcha" :style="val"></div> -->
     </a-spin>
   </div>
 </template>
@@ -18,7 +25,12 @@ import { request } from '@/network/request.js'
         captchaPath: '',
         inputValue: '',
         loading: false,
+        // val: `background-image:url(${this.captchaPath})`
       }
+    },
+    model: {
+      prop: 'value',
+      event: 'change'
     },
     props: {
       url: {
@@ -36,13 +48,17 @@ import { request } from '@/network/request.js'
     },
     watch: {
       value(newVal) {
-        console.log('newVal', newVal);
         this.inputValue = newVal;
+      },
+      inputValue(newVal) {
+        this.$emit('change', newVal)
       }
     },
     created () {
+      console.log('value', this.value);
       this.loading = true;
       this.getCaptcha();
+      console.log('listeners', this.$listeners);
     },
     methods: {
       getCaptcha() {
@@ -56,8 +72,7 @@ import { request } from '@/network/request.js'
         }).catch((err) => {
           console.log('err', err);
         })
-    },
-
+      },
     }
   }
 </script>
@@ -78,7 +93,7 @@ import { request } from '@/network/request.js'
 img {
     border-radius: 0 4px 4px 0;
     // margin-bottom: 0.1em;   //放大样式就有问题
-    margin-bottom: 0.14em;
+    // margin-bottom: 0.14em;
   }
 /deep/ .ant-input {
   // width: 120px;
@@ -86,5 +101,16 @@ img {
   // border-radius: 0;
   padding: 0;
 }
-
+.captcha-img {
+  width: 60px;
+  // height: 32px;
+  // max-width: 60px;
+  // height: auto;
+}
+.captcha {
+  width: 90px;
+  height: 32px;
+  // background-color: red;
+  //background: url({{ captchaPath }}) no-repeat;  //此时captchaPath中是路径
+}
 </style>
