@@ -108,6 +108,9 @@
       <template #prefix>
         <a-icon type="safety"></a-icon>
       </template>
+      <!-- <template #suffix>
+        <a-icon type="safety"></a-icon>
+      </template> -->
       </captcha-input>
       <!-- <a-icon slot="prefix" type="safety" /> -->
     </a-card>
@@ -226,7 +229,8 @@ export default {
       this.showEditorModel = true
     },
     addClick () {
-      this.$router.push('/book/wangeditor/add')
+      // this.$router.push('/book/wangeditor/add')
+      this.showEditorModel = true;
     },
     statusChange (id) {
       api.changeStuStatus(id).then(res => {

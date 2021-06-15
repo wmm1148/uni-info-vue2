@@ -10,4 +10,5 @@ export default {
     url: '/get/captcha.jpg',
     method: 'get'
   }),
+  
 }

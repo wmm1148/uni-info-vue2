@@ -110,6 +110,10 @@
           </template>
         </a-table-column>
       </a-table>
+      <edit-modal
+      v-if="showEditModel"
+      :visible.sync="showEditModel"
+    />
     </a-card>
   </div>
   <!-- <router-view v-else/> -->
@@ -122,6 +126,10 @@ import { studentTableColumns } from '@/common/student.js'
 
 export default {
   columns: studentTableColumns,
+  components: {
+    'edit-modal': () => import('./login-form.vue'),
+  },
+  
   data () {
     return {
       headStyle: { 'font-weight': 'bold' },
@@ -131,8 +139,9 @@ export default {
       // pagination: {},
 
       ModalText: 'Content of the modal',
-      visible: false,
+      visible2: false,
       confirmLoading: false,
+      showEditModel: false,
       // layout: 'horizontal',
         // 姓名: '',
         // 年龄: '',
@@ -141,15 +150,12 @@ export default {
     }
   },
   created () {
-    console.log('uuuuuuuuuuuuuu')
     this.fetchStudentList()
-    console.log('studentTableColumns', studentTableColumns);
   },
 
   methods: {
     fetchStudentList () {
       api.getStudentList().then((res) => {
-        console.log('stu res', res)
         // this.pagination.total = res.total;
         this.list = res.list
         // window.list = this.list
@@ -194,19 +200,19 @@ export default {
       this.$message.error('Click on No');
     },
     showModal() {
-      this.visible = true;
+      this.visible2 = true;
     },
     handleOk() {
       this.ModalText = 'The modal will be closed after two seconds';
       this.confirmLoading = true;
       setTimeout(() => {
-        this.visible = false;
+        this.visible2 = false;
         this.confirmLoading = false;
       }, 2000);
     },
     handleCancel() {
       console.log('Clicked cancel button');
-      this.visible = false;
+      this.visible2 = false;
     },
     iconclick () {
 
@@ -215,7 +221,8 @@ export default {
       this.$router.push('/stu/stuInfo/')
     },
     editclick () {
-      this.$router.push('/stu/stuInfo/add')
+      // this.$router.push('/stu/stuInfo/add')
+      this.showEditModel = true;
     },
     addClick () {
       this.$router.push('/stu/stuInfo/add')

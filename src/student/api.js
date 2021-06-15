@@ -53,4 +53,10 @@ export default {
     url: '/get/eliteStudent/list',
     method: 'get'
   }),
+  // getCaptcha: (uuid) => request ({
+  //   url: `/post/captcha?uuid=${uuid}`,
+  //   method: 'pppost',
+  //   data: 'uuid'
+  // })(),
+
 }
