@@ -313,3 +313,15 @@ Mock.post('/post/captcha', data => {
   })
 })
 
+Mock.get('/get/captcha', data => {
+  console.log('uuid mockkkkkkkkkkkkkkkkk', data);
+  const imgSrc = Random.image('1200x820', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
+
+  return Promise.resolve({
+    code: 1,
+    data: {
+      data: imgSrc,
+    }
+  })
+})
+
