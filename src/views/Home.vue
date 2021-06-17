@@ -21,6 +21,15 @@
                 <router-link :to="{ name: 'workplace'}">Workplace</router-link>
               </a-menu-item>
             </a-sub-menu>
+            <a-sub-menu key="sub2" @titleClick="titleClick">
+              <span slot="title"><a-icon type="idcard" /><span>Components</span></span>
+              <a-menu-item key="menuTree">
+                <router-link :to="{ name: 'menuTree'}">MenuTree</router-link>
+              </a-menu-item>
+              <a-menu-item key="captchaInput">
+                <router-link :to="{ name: 'captchaInput'}">CaptchaInput</router-link>
+              </a-menu-item>
+            </a-sub-menu>
         </a-menu>
       </a-layout-sider>
       <a-layout>

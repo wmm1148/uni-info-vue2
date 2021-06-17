@@ -30,6 +30,16 @@ const routes = [
         name: 'workplace',
         component: () => import( '../home/router/workplace.vue'),
       },
+      {
+        path: 'captchaInput',
+        name: 'captchaInput',
+        component: () => import( '../home/router/components/captchaInput.vue'),
+      },
+      {
+        path: 'menuTree',
+        name: 'menuTree',
+        component: () => import( '../home/router/components/menuTree.vue'),
+      },
     ]
   },
   {
