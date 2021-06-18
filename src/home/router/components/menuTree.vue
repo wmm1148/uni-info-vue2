@@ -2,15 +2,15 @@
   <div class="layout">
     <basic-card class="basic-card" title="MenuTree Icon">
       <menu-tree>
-
       </menu-tree>
     </basic-card>
     <basic-card title="MenuTree Dropdown">
       <menu-tree2
       :treeData="treeData"
       :menuData="menuData"
+      :treeMap="treeMap"
+      :menuMap="menuMap"
       >
-
       </menu-tree2>
     </basic-card>
   </div>
@@ -28,44 +28,55 @@ export default {
     return {
       treeData: [
         {
-          title: 'parent 1',
-          key: '0-0',
-          slots: {
-            icon: 'smile',
-          },
+          id: '0',
+          name: 'parent 1',
           children: [
-            { title: 'leaf', key: '0-0-0', slots: { icon: 'meh' } },
-            { title: 'leaf', key: '0-0-1', scopedSlots: { icon: 'custom' } },
+            { name: 'pp1', 
+              id: '0-0', 
+              slots: { icon: 'meh' }, 
+              children: [
+              { name: 'leaf', id: '0-0-0', slots: { icon: 'meh' } },
+            ]},
+            { name: 'leaf', id: '0-1', scopedSlots: { icon: 'custom' } },
           ],
         },
         {
-          title: 'parent 2',
-          key: '0-1',
-          slots: {
-            icon: 'smile',
-          },
+          name: 'parent 2',
+          id: '1',
           children: [
-            { title: 'leaf', key: '0-1-0', slots: { icon: 'meh' } },
-            { title: 'leaf', key: '0-1-1', scopedSlots: { icon: 'custom' } },
-            { title: 'leaf', key: '0-1-2', scopedSlots: { icon: 'custom' } },
-            { title: 'leaf', key: '0-1-3', scopedSlots: { icon: 'custom' } },
+            { name: 'leaf', id: '1-0', slots: { icon: 'meh' } },
+            { name: 'leaf', id: '1-1', scopedSlots: { icon: 'custom' } },
+            { name: 'leaf', id: '1-2', scopedSlots: { icon: 'custom' } },
+            { name: 'leaf', id: '1-3', scopedSlots: { icon: 'custom' } },
           ],
         },
       ],
       menuData: [
         {
-          key: '1',
+          key: 1,
           title: 'menu1',
         },
         {
-          key: '2',
+          key: 2,
           title: 'menu2',
         },
         {
-          key: '3',
+          key: 3,
           title: 'menu3',
         },
-      ]
+        {
+          key: 4,
+          title: 'menu4',
+        },
+      ],
+      treeMap: {
+        title: 'name',
+        key: 'id'
+      },
+      menuMap: {  //树形结构层级 ：显示的菜单Ids  没有提到的层级则不赋予任何权限（或给予所有权限）
+        2: [1,2,4],
+        3: [2]
+      }
     }
   }
 };

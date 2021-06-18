@@ -1,21 +1,19 @@
 <template>
   <div>
-    <a-dropdown :trigger="['contextmenu']" @contextmenu.native="contextmenu">
+    <a-dropdown :trigger="['contextmenu']" @click.native="dropdownClick">
       <a-tree
       :show-line="showLine"
       :show-icon="showIcon"
-      :default-expanded-keys="['0-0-0', '0-0-1', '0-0-2']"
+      :default-expanded-keys="['0-0-0']"
       @select="onSelect"
       @rightClick="onRightClick"
+      :treeData="treeData | filterTreeData(treeMap, recursionTree, level)"
+      blockNode
+      @contextmenu.native="contextmenu"
       >
-      <!-- <div>hh</div> -->
-        <a-tree-node :key="item.key" :title="item.title" v-for="item in treeData">
-          <a-tree-node :key="children.key" :title="children.title"  v-for="children in item.children">
-          </a-tree-node>
-        </a-tree-node>
       </a-tree>
-      <a-menu slot="overlay" v-if="nodeClick && dropClick">
-        <a-menu-item :key="item.key" v-for="item in menuData">
+      <a-menu slot="overlay" v-if="showMenuItem">
+        <a-menu-item :key="item.key" v-for="item in showMenuData">
           {{ item.title }}
         </a-menu-item>
       </a-menu>
@@ -23,17 +21,15 @@
   </div>
 </template>
 
-
 <script>
 export default {
   data() {
     return {
       showLine: true,
       showIcon: false,
-      nodeMenu: null, // 右键菜单
       showMenuItem: false,
-      nodeClick: false,
-      dropClick: false,
+      level: 0,
+      showMenuData: [],
     };
   },
   props: {
@@ -45,51 +41,67 @@ export default {
       type: Array,
       default: () => {}
     },
-    
+    treeMap: {
+      type: Object,
+      default: () => {}
+    },
+    menuMap: {
+      type: Object,
+      default: () => {}
+    },
+  },
+  filters: {
+    filterTreeData(treeData, treeMap, recursionTree, level) {
+      recursionTree(treeData, treeMap, level);
+      return treeData;
+    }
   },
   created() {
-    console.log('object', this.menuData);
   },
   methods: {
+    //过滤器可以传参函数，将递归写到函数里，过滤器使用
+    recursionTree(node, treeMap, level) {
+      const { title, key } = treeMap;
+      for(let item of node) {
+        item.title = item[title];
+        item.key = item[key];
+        item.level = level + 1;
+        if(item.children) {
+          this.recursionTree(item.children, treeMap, item.level)
+        }
+      }
+      return node
+    },
     onSelect(selectedKeys, info) {
+      // this.showMenuItem = false;
       console.log('selected', selectedKeys, info);
     },
     onRightClick({ event, node }) {
       console.log('event', event);
       console.log('node', node);
-      //右键时需要显示菜单 —————— 只有叶子节点可以增删改查？
-      // ————————设置两种，都可以（麻烦），只有叶子节点可以（先做这个）
-
-      //点击右键显示菜单
-      //判断是否是叶子节点————————目前叶子节点，没展开的父节点都满足
-      if(node.$children.length == 1) {
-        this.nodeClick = true;
-        console.log('this.nodeClick', this.nodeClick);
-        // this.showMenuItem = true;
+      this.showMenuData = [];
+      const nodeLevel = node.$options.propsData.dataRef.level; //点击级别
+      //遍历出 给定级别 和 点击级别 相等的
+      //相等，则展示showMenuData中，id和map.menu中相同的
+      //如果没有相等的
+      for(let key1 in this.menuMap){  //这个key是menuMap提供的level,为什么不是index呢
+        if(Number(key1) === nodeLevel) { //级别相同了
+          const showIds = this.menuMap[key1]; //showIds是一个对象,存放这一级需要展示的menu-key
+          for(let key2 in showIds) { //i是index
+            this.showMenuData.push(this.menuData[showIds[key2] - 1])
+          }
+        }
       }
+      this.showMenuData = this.showMenuData.length === 0 ?  this.menuData : this.showMenuData
+      this.showMenuItem = true;
     },
-    onLoadData(treeNode) {
-      return new Promise(resolve => {
-        // if (treeNode.dataRef.children) {
-        //   resolve();
-        //   return;
-        // }
-        setTimeout(() => {
-          treeNode.dataRef.children = [
-            { title: 'Child Node', key: `${treeNode.eventKey}-0` },
-            { title: 'Child Node', key: `${treeNode.eventKey}-1` },
-          ];
-          this.treeData = [...this.treeData];
-          resolve();
-        }, 1000);
-      });
+    dropdownClick () {
+      console.log('hhhhh');
+      // this.showMenuItem = false
     },
     contextmenu(e) {
-      console.log('contextmenu-e', e);
-      // this.showMenuItem = false;
-      this.dropClick = true
-      // console.log('this.dropClick', this.dropClick);
-    },
+      console.log('e', e);
+    }
   },
 };
 </script>
