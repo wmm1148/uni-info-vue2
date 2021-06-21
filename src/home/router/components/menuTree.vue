@@ -6,7 +6,7 @@
     </basic-card>
     <basic-card title="MenuTree Dropdown">
       <menu-tree2
-      :treeData="treeData"
+      :treeData="treeData2"
       :menuData="menuData"
       :treeMap="treeMap"
       :menuMap="menuMap"
@@ -15,7 +15,7 @@
     </basic-card>
     <basic-card title="MenuTree Dropdown V2">
       <menu-tree3
-      :treeData="treeData"
+      :treeData="treeData3"
       :treeMap="treeMap"
       >
       <a-menu
@@ -50,7 +50,36 @@ export default {
   },
   data() {
     return {
-      treeData: [
+      treeData2: [
+        {
+          id: '0',
+          name: 'parent 1',
+          children: [
+            { name: 'pp1', 
+              id: '0-0', 
+              slots: { icon: 'meh' }, 
+              children: [
+              { name: 'leaf', id: '0-0-0', slots: { icon: 'meh' } },
+            ]},
+            { name: 'leaf', id: '0-1', scopedSlots: { icon: 'custom' } },
+          ],
+        },
+        {
+          name: 'parent 2',
+          id: '1',
+          children: [
+            { name: 'leaf1', id: '1-0', slots: { icon: 'meh' } },
+            { name: 'leaf2', id: '1-1', scopedSlots: { icon: 'custom' } },
+            { name: 'leaf3', id: '1-2', scopedSlots: { icon: 'custom' } },
+            { name: 'leaf4', id: '1-3', scopedSlots: { icon: 'custom' } },
+          ],
+        },
+        {
+          name: 'parent 3',
+          id: '2'
+        },
+      ],
+      treeData3: [
         {
           id: '0',
           name: 'parent 1',

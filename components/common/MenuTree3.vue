@@ -20,10 +20,13 @@
     defaultExpandAll
     @select="onSelect"
     @rightClick="onRightClick"
-    :treeData="treeData"
+    :treeData="treeData | filterTreeData(treeMap, recursionTree, level)"
     blockNode
     @contextmenu.native="contextmenu"
     >
+    <template #title>
+      {{ treeData.name + 2 }}
+    </template>
     </a-tree>
   </a-dropdown>
 </template>
@@ -47,11 +50,33 @@ export default {
       type: Array,
       default: () => {}
     },
+    treeMap: {
+      type: Object,
+      default: () => {}
+    },
+  },
+  filters: {
+    filterTreeData(treeData, treeMap, recursionTree, level) {
+      recursionTree(treeData, treeMap, level);
+      return treeData;
+    }
   },
   created() {
-    console.log('treeData', this.treeData);
   },
   methods: {
+    //过滤器可以传参函数，将递归写到函数里，过滤器使用
+    recursionTree(node, treeMap, level) {
+      const { title, key } = treeMap;
+      for(let item of node) {
+        item.title = item[title];
+        item.key = item[key];
+        item.level = level + 1;
+        if(item.children) {
+          this.recursionTree(item.children, treeMap, item.level)
+        }
+      }
+      return node
+    },
     onSelect(selectedKeys, info) {
       this.showMenuItem = false;
       console.log('selected', selectedKeys, info);
