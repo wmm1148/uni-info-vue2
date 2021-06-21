@@ -61,7 +61,7 @@
                 :url="`/post/captcha?uuid=${uuid}`"
                 v-model="captchaValue"
                 placeholder="Input Captchaaaaaaaaaaaaaaaa"
-                allowClear 
+                allowClear
                 alt="hold on"
                 size="default"
                 method="post"

@@ -1,9 +1,9 @@
 <template>
-<!-- 有改动的版本 -->
   <div class="captcha-layout" :class="size">
     <a-input
     :placeholder="placeholder" 
     v-model="inputValue" 
+    @change="e => inputValue = e.target.value"
     ref="input"
     :allowClear="allowClear"
     v-bind="$attrs"

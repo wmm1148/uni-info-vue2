@@ -1,24 +1,23 @@
 <template>
-  <div>
-    <a-dropdown :trigger="['contextmenu']" @click.native="dropdownClick">
-      <a-tree
-      :show-line="showLine"
-      :show-icon="showIcon"
-      :default-expanded-keys="['0-0-0']"
-      @select="onSelect"
-      @rightClick="onRightClick"
-      :treeData="treeData | filterTreeData(treeMap, recursionTree, level)"
-      blockNode
-      @contextmenu.native="contextmenu"
-      >
-      </a-tree>
-      <a-menu slot="overlay" v-if="showMenuItem">
-        <a-menu-item :key="item.key" v-for="item in showMenuData">
-          {{ item.title }}
-        </a-menu-item>
-      </a-menu>
-    </a-dropdown>
-  </div>
+<!-- 树型数据和菜单数据均由外部提供 -->
+  <a-dropdown :trigger="['contextmenu']" @click.native="dropdownClick" :visible="showMenuItem">
+    <a-tree
+    :show-line="showLine"
+    :show-icon="showIcon"
+    :default-expanded-keys="['0-0-0']"
+    @select="onSelect"
+    @rightClick="onRightClick"
+    :treeData="treeData | filterTreeData(treeMap, recursionTree, level)"
+    blockNode
+    @contextmenu.native="contextmenu"
+    >
+    </a-tree>
+    <a-menu slot="overlay">
+      <a-menu-item :key="item.key" v-for="item in showMenuData">
+        {{ item.title }}
+      </a-menu-item>
+    </a-menu>
+  </a-dropdown>
 </template>
 
 <script>
