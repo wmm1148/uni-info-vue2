@@ -46,12 +46,14 @@ export default {
   },
   created () {
     this.selectedKeys = [this.$route.name];
+    this.openKeys = [this.$route.name];
     // console.log('selectedKeys', this.selectedKeys);
   },
   methods: {
     handleClick(e) {
       console.log('click', e);
       this.selectedKeys = [e.key]
+      this.openKeys = [e.key]
     },
     titleClick(e) {
       console.log('titleClick', e);

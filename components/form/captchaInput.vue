@@ -94,26 +94,34 @@ const Qs = require('qs')
       },
         },
     created () {
+      console.log('url', this.url);
       this.getCaptcha();
     },
     methods: {
       async getCaptcha() {
         this.loading = true;
-        //无论是get还是post这里都使用query的传参方式
-        const url= this.url.split("?")[0];  //获取url
-        const data = Qs.parse(this.url.split("?")[1])  //获取参数 进行序列化，这里先单独使用，可以在网络请求里封装下
-        try {
-          const res = await request({ url, method: this.method, data})();
-          setTimeout(() => {
-            console.log(res);
-            this.captchaPath = res.data;
-          }, 2000);
-          } finally {
+        if (/\.(png|jpe?g|gif|svg)(\?.*)?$/.test(this.url)) {
+          this.captchaPath = this.url;
+          this.loading = false;
+        }
+        else {
+          //无论是get还是post这里都使用query的传参方式
+          const url= this.url.split("?")[0];  //获取url
+          const data = Qs.parse(this.url.split("?")[1])  //获取参数 进行序列化，这里先单独使用，可以在网络请求里封装下
+          try {
+            const res = await request({ url, method: this.method, data})();
             setTimeout(() => {
-              this.loading = false;
+              console.log(res);
+              this.captchaPath = res.data;
             }, 2000);
-            
+            } finally {
+              setTimeout(() => {
+                this.loading = false;
+              }, 2000);
+              
+            }
           }
+        
       },
       captchaClick () {
         this.loading = true;

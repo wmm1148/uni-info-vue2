@@ -21,12 +21,9 @@
     @select="onSelect"
     @rightClick="onRightClick"
     :treeData="treeData | filterTreeData(treeMap, recursionTree, level)"
-    blockNode
+    blockNode2
     @contextmenu.native="contextmenu"
     >
-    <template #title>
-      {{ treeData.name + 2 }}
-    </template>
     </a-tree>
   </a-dropdown>
 </template>

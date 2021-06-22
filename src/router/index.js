@@ -31,9 +31,9 @@ const routes = [
         component: () => import( '../home/router/workplace.vue'),
       },
       {
-        path: 'captchaInput',
-        name: 'captchaInput',
-        component: () => import( '../home/router/components/captchaInput.vue'),
+        path: 'form',
+        name: 'form',
+        component: () => import( '../home/router/components/form.vue'),
       },
       {
         path: 'menuTree',

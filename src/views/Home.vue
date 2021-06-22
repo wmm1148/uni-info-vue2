@@ -3,10 +3,9 @@
     <a-layout class="stu-layout">
       <a-layout-sider width="240" style="background: #fff">
         <a-menu
-          :default-selected-keys="['0101']"
           :selectedKeys="selectedKeys"
           mode="inline"
-          :open-keys.sync="openKeys"
+          :open-keys="openKeys"
           @click="handleClick"
           class="ant-mune">
             <a-sub-menu key="sub1" @titleClick="titleClick">
@@ -26,8 +25,8 @@
               <a-menu-item key="menuTree">
                 <router-link :to="{ name: 'menuTree'}">MenuTree</router-link>
               </a-menu-item>
-              <a-menu-item key="captchaInput">
-                <router-link :to="{ name: 'captchaInput'}">CaptchaInput</router-link>
+              <a-menu-item key="form">
+                <router-link :to="{ name: 'form'}">Form</router-link>
               </a-menu-item>
             </a-sub-menu>
         </a-menu>
@@ -43,18 +42,20 @@
 export default {
   data () {
     return {
-      openKeys: ['sub1'],
+      openKeys: [],
       selectedKeys: [],
     }
   },
   created () {
     this.selectedKeys = [this.$route.name];
+    this.openKeys = ['sub1', 'sub2'];
     // console.log('selectedKeys', this.selectedKeys);
   },
   methods: {
     handleClick(e) {
       console.log('click', e);
       this.selectedKeys = [e.key]
+      this.openKeys = [e.keypath[1]]
     },
     titleClick(e) {
       console.log('titleClick', e);
