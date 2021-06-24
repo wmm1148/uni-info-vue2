@@ -13,6 +13,13 @@
     >
       <slot name="prefix" slot="prefix"></slot>
       <slot name="suffix" slot="suffix"></slot>
+      <template
+      #[slot]="scope"
+      v-for="(_,slot) of $scopedSlots"
+      >
+      <span :key="slot">{{$scopedSlots}}</span>
+      <slot v-bind="scope" :name="slot"></slot>
+      </template>
     </a-input>
     <a-spin :spinning="loading" :size="size" :delay="delay">
       <img :src="captchaPath" @click="captchaClick()" :alt="alt" :class="size | imgSize" class="img-captcha">
@@ -94,6 +101,7 @@ const Qs = require('qs')
       },
         },
     created () {
+      console.log('$$$$$$$$$$$$$$$$$', this.$scopedSlots);
       console.log('url', this.url);
       this.getCaptcha();
     },

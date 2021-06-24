@@ -1,6 +1,9 @@
 <template>
 <!-- 树型数据由外部提供，菜单暴露出去，由外部数据自行设置 -->
-  <a-dropdown :trigger="['contextmenu']" @click.native="dropdownClick" :visible="showMenuItem">
+  <a-dropdown
+  ref="dropdown"
+  :trigger="['contextmenu']"
+  >
     <template #overlay>
       <slot
       name="menu" 
@@ -21,14 +24,15 @@
     @select="onSelect"
     @rightClick="onRightClick"
     :treeData="treeData | filterTreeData(treeMap, recursionTree, level)"
-    blockNode2
-    @contextmenu.native="contextmenu"
+    @click.native="nativeClick"
+    @contextmenu.native="nativeClick"
     >
     </a-tree>
   </a-dropdown>
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -78,21 +82,43 @@ export default {
       this.showMenuItem = false;
       console.log('selected', selectedKeys, info);
     },
-    onRightClick({ event, node }) {
-      console.log('event', event);
-      console.log('node', node);
+    // onRightClick({ event, node }) {
+    //   console.log('event', event);
+    //   console.log('node', node);
+    //   event.preventDefault();
+    //   this.showMenuItem = true;
+    //   this.currentNode = node.$options.propsData;
+    //   this.currentNodeParent = node.$parent.dataRef;
+    //   this.currentNodeChildren = this.currentNode.dataRef.children;
+    //   this.currentIsLeaf = this.currentNodeChildren ? false : true;
+    // },
+    onRightClick ({ event: e }) {
+      //阻止默认事件的发生
+      e.preventDefault();
+      
       this.showMenuItem = true;
-      this.currentNode = node.$options.propsData;
-      this.currentNodeParent = node.$parent.dataRef;
-      this.currentNodeChildren = this.currentNode.dataRef.children;
-      this.currentIsLeaf = this.currentNodeChildren ? false : true;
     },
-    dropdownClick () {
-      console.log('hhhhh');
-      // this.showMenuItem = false
-    },
-    contextmenu(e) {
-      console.log('e', e);
+    nativeClick(e) {  //左键或右键点击树的其他部分
+      e.preventDefault();  //取消默认事件  默认事件是什么？？
+      e.stopPropagation();  //取消继续传播
+      console.log('this.showMenuItem', this.showMenuItem);
+      console.log('this.$refs', this.$refs);
+      //如果是菜单 并且 不是右键结点
+      if (this.$refs.dropdown && !this.showMenuItem) {
+        //美观
+        const { dropdown } = this.$refs;
+        this.$nextTick(() => {
+          //如果菜单有孩子？？  并且菜单的第一个孩子存在？？
+          if (dropdown.$children && dropdown.$children[0]) {
+            //让它的孩子不显示
+            dropdown.$children[0].sVisible = false;
+          }
+        });
+      }
+
+      // this.$nextTick(() => {
+        this.showMenuItem = false;
+      // });
     },
     addNodes(node) {
       //node内容从父组件获取，直接插到对应位置，只有没有children的可以删除
@@ -193,7 +219,7 @@ export default {
         }
       }
       this.showMenuItem = false;
-    }
+    },
     
   },
 };

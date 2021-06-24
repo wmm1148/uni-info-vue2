@@ -1,10 +1,13 @@
 <template>
   <div class="layout">
-    <basic-card class="basic-card" title="MenuTree Icon">
+    <basic-card title="Hover">
+      <hover-menu-tree></hover-menu-tree>
+    </basic-card>
+    <basic-card class="basic-card" title="Icon">
       <menu-tree>
       </menu-tree>
     </basic-card>
-    <basic-card title="MenuTree Dropdown">
+    <basic-card title="Dropdown">
       <menu-tree2
       :treeData="treeData2"
       :menuData="menuData"
@@ -13,7 +16,7 @@
       >
       </menu-tree2>
     </basic-card>
-    <basic-card title="MenuTree Dropdown V2">
+    <basic-card title="Dropdown V2">
       <menu-tree3
       :treeData="treeData3"
       :treeMap="treeMap"
@@ -46,7 +49,8 @@ export default {
     'basic-card': () => import('/components/common/BasicCard.vue'),
     'menu-tree': () => import('/components/common/MenuTree.vue'),
     'menu-tree2': () => import('/components/common/MenuTree2.vue'),
-    'menu-tree3': () => import('/components/common/MenuTree3.vue')
+    'menu-tree3': () => import('/components/common/MenuTree3.vue'),
+    'hover-menu-tree': () => import('/components/common/HoverMenuTree.vue')
   },
   data() {
     return {
@@ -164,6 +168,7 @@ export default {
 <style scoped>
 .layout {
   display: flex;
+  padding: 0 12px;
 }
 .basic-card {
   width: 48;
