@@ -17,7 +17,7 @@
       #[slot]="scope"
       v-for="(_,slot) of $scopedSlots"
       >
-      <span :key="slot">{{$scopedSlots}}</span>
+      <!-- <span :key="slot">{{$scopedSlots}}</span> -->
       <slot v-bind="scope" :name="slot"></slot>
       </template>
     </a-input>

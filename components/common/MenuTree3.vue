@@ -82,21 +82,17 @@ export default {
       this.showMenuItem = false;
       console.log('selected', selectedKeys, info);
     },
-    // onRightClick({ event, node }) {
-    //   console.log('event', event);
-    //   console.log('node', node);
-    //   event.preventDefault();
-    //   this.showMenuItem = true;
-    //   this.currentNode = node.$options.propsData;
-    //   this.currentNodeParent = node.$parent.dataRef;
-    //   this.currentNodeChildren = this.currentNode.dataRef.children;
-    //   this.currentIsLeaf = this.currentNodeChildren ? false : true;
-    // },
-    onRightClick ({ event: e }) {
+    onRightClick({ event, node }) {
       //阻止默认事件的发生
-      e.preventDefault();
-      
+      event.preventDefault();
+      console.log('event', event);
+      console.log('node', node);
+      event.preventDefault();
       this.showMenuItem = true;
+      this.currentNode = node.$options.propsData;
+      this.currentNodeParent = node.$parent.dataRef;
+      this.currentNodeChildren = this.currentNode.dataRef.children;
+      this.currentIsLeaf = this.currentNodeChildren ? false : true;
     },
     nativeClick(e) {  //左键或右键点击树的其他部分
       e.preventDefault();  //取消默认事件  默认事件是什么？？

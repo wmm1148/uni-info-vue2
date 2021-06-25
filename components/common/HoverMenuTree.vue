@@ -1,5 +1,5 @@
 <template>
-  <a-tree :tree-data="treeData" v-bind="$attrs">
+  <a-tree :tree-data="treeData" v-bind="$attrs" @mouseenter="enter">
     <template v-for="(_, slot) of $scopedSlots" #[slot]="scope">
       <slot :name="slot" v-bind="scope"></slot>
     </template>
@@ -13,7 +13,7 @@
         </slot>
       </div>
       <template #overlay>
-        <slot name="menu"/>
+        <slot name="menu" :node="currentNode"/>
       </template>
     </a-dropdown>
     </template>
@@ -24,6 +24,7 @@
   export default {
     data() {
       return {
+        currentNode: {},
         };
     },
     props: {
@@ -32,12 +33,38 @@
         default: () => {}
       }
     },
+    // computed: {
+    //   data() {
+    //     this.recursionTree(this.treeData);
+    //     return this.treeData
+    //   }
+    // },
     created() {
+      this.recursionTree(this.treeData);
+      // console.log('$options', this.$options.propsData.treeData);
+
+      console.log('$options', this.$options.propsData.treeData);
     },
     mounted () {
       console.log('$scopedSlots', this.$scopedSlots)
     },
     methods: {
+      recursionTree(node) {
+        for(let item of node) {
+          console.log('old item', item);
+          // item.scopedSlots.title = 'node';
+          // console.log('item', item);
+          if(item.children) {
+            this.recursionTree(item.children)
+          }
+        }
+        return node
+    },
+      enter({ node}) {
+      // console.log('enter node', node);
+      this.currentNode = node.$options.propsData.dataRef;
+      // console.log('this.currentNode', this.currentNode);
+    },
     },
   }
 </script>

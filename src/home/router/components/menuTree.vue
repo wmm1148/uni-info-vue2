@@ -3,26 +3,27 @@
     <basic-card title="Hover">
       <hover-menu-tree
       :treeData="treeData"
-      default-expand-all 
+      default-expand-all
+      showIcon
       >
-      <!-- <a-icon slot="switcherIcon" type="down"/>
+      <a-icon slot="switcherIcon" type="down"/>
       <a-icon slot="smile" type="smile-o"/>
       <a-icon slot="meh" type="smile-o" />
       <template slot="custom" slot-scope="data">
         <a-icon :type="data.selected ? 'frown' : 'frown-o'" />
-      </template> -->
-      <a-menu slot="menu">
-        <a-menu-item>
-          <a href="javascript:;">1st menu item</a>
+      </template>
+      <a-menu slot="menu" @click="handleMenuClick" slot-scope="{ node }">
+        <a-menu-item v-show="node.children">
+          <a>1st is not a leaf</a>
         </a-menu-item>
         <a-menu-item>
-          <a href="javascript:;">2nd menu item</a>
+          <a >2nd</a>
         </a-menu-item>
         <a-menu-item>
-          <a href="javascript:;">3rd menu item</a>
+          <a >333 </a>
         </a-menu-item>
-        <a-menu-item>
-          <a href="javascript:;">44 menu item</a>
+        <a-menu-item v-show="!node.children">
+          <a >444 isLeaf</a>
         </a-menu-item>
       </a-menu>
       </hover-menu-tree>
@@ -71,17 +72,10 @@ const treeData = [
     {
       title: 'parent 1',
       key: '0-0',
-      scopedSlots: {
-        title: 'node',
-      },
+      slots: { icon: 'meh'},
       children: [
-        //slots是为了支撑slot的属性，scopedSlots是为了支持slot-scope的属性
-        //所以上面支持slot-scope的插槽只可以是custom
-        //那么，selected是哪来的？——————>这个组件提前封装好的，可以先打印出来看看都有啥
-        //像树，icon只支持slot,slot-scope，所以要以这种形式写，但是必须手动一个一个写出来？应该可以循环
-        //'node'用的是title的插槽位置，已经是单个结点的一部分了
-        { title: 'leaf1', key: '0-0-0', scopedSlots: { title: 'node' }},
-        { title: 'leaf2', key: '0-0-1', scopedSlots: { title: 'node' } },
+        { title: 'leaf1', key: '0-0-0', slots: { icon: 'smile'}},
+        { title: 'leaf2', key: '0-0-1', scopedSlots: { icon: 'custom' } },
       ],
     },
   ];
@@ -199,6 +193,9 @@ export default {
     updateMenuClick(updateNodes) {
       const node = {name: 'parent 44', id: ''};
       updateNodes(node);
+    },
+    handleMenuClick(e) {
+      console.log('e', e);
     }
   },
   created() {
