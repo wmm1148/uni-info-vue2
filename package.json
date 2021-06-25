@@ -17,7 +17,8 @@
     "qs": "^6.10.1",
     "vue": "^2.6.11",
     "vue-router": "^3.5.1",
-    "wangeditor": "^4.7.2"
+    "wangeditor": "^4.7.2",
+    "ramda": "^0.27.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.170",

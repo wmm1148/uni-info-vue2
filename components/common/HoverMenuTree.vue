@@ -1,6 +1,6 @@
 <template>
   <a-tree :tree-data="treeData" v-bind="$attrs" @mouseenter="enter">
-    <template v-for="(_, slot) of $scopedSlots" #[slot]="scope">
+    <template v-for="(_, slot) of $options.omit(['title', 'icon'], $scopedSlots)" #[slot]="scope">
       <slot :name="slot" v-bind="scope"></slot>
     </template>
     <template
@@ -21,7 +21,9 @@
 </template>
 
 <script>
+import { omit } from 'ramda';
   export default {
+    omit,
     data() {
       return {
         currentNode: {},
@@ -41,9 +43,14 @@
     // },
     created() {
       this.recursionTree(this.treeData);
-      // console.log('$options', this.$options.propsData.treeData);
+      console.log('$options', this.$options);
+      const R = require('ramda');
+      // console.log('r', R.omit(['a', 'd'])({a: 1, b: 2, c: 3, d: 4}));
+      console.log('r', R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}));
 
-      console.log('$options', this.$options.propsData.treeData);
+
+      // R.omit(['a', 'd'])({a: 1, b: 2, c: 3, d: 4})
+      // console.log('$options', this.$options.propsData.treeData);
     },
     mounted () {
       console.log('$scopedSlots', this.$scopedSlots)
