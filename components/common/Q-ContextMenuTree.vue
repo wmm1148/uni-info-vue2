@@ -91,6 +91,7 @@ export default {
     };
   },
   computed: {
+    //这里对treeData进行了处理，添加了作用域插槽，遍历了树
     treeData () {
       const dataSource = [...this.dataSource];
       treeEach((item) => {

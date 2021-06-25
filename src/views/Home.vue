@@ -55,7 +55,7 @@ export default {
     handleClick(e) {
       console.log('click', e);
       this.selectedKeys = [e.key]
-      this.openKeys = [e.keypath[1]]
+      // this.openKeys = [e.keypath[1]]
     },
     titleClick(e) {
       console.log('titleClick', e);

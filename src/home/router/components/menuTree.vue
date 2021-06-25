@@ -1,7 +1,31 @@
 <template>
-  <div class="layout">
+  <div class="layout" >
     <basic-card title="Hover">
-      <hover-menu-tree></hover-menu-tree>
+      <hover-menu-tree
+      :treeData="treeData"
+      default-expand-all 
+      >
+      <!-- <a-icon slot="switcherIcon" type="down"/>
+      <a-icon slot="smile" type="smile-o"/>
+      <a-icon slot="meh" type="smile-o" />
+      <template slot="custom" slot-scope="data">
+        <a-icon :type="data.selected ? 'frown' : 'frown-o'" />
+      </template> -->
+      <a-menu slot="menu">
+        <a-menu-item>
+          <a href="javascript:;">1st menu item</a>
+        </a-menu-item>
+        <a-menu-item>
+          <a href="javascript:;">2nd menu item</a>
+        </a-menu-item>
+        <a-menu-item>
+          <a href="javascript:;">3rd menu item</a>
+        </a-menu-item>
+        <a-menu-item>
+          <a href="javascript:;">44 menu item</a>
+        </a-menu-item>
+      </a-menu>
+      </hover-menu-tree>
     </basic-card>
     <basic-card class="basic-card" title="Icon">
       <menu-tree>
@@ -42,8 +66,25 @@
   </div>
 </template>
 
-
 <script>
+const treeData = [
+    {
+      title: 'parent 1',
+      key: '0-0',
+      scopedSlots: {
+        title: 'node',
+      },
+      children: [
+        //slots是为了支撑slot的属性，scopedSlots是为了支持slot-scope的属性
+        //所以上面支持slot-scope的插槽只可以是custom
+        //那么，selected是哪来的？——————>这个组件提前封装好的，可以先打印出来看看都有啥
+        //像树，icon只支持slot,slot-scope，所以要以这种形式写，但是必须手动一个一个写出来？应该可以循环
+        //'node'用的是title的插槽位置，已经是单个结点的一部分了
+        { title: 'leaf1', key: '0-0-0', scopedSlots: { title: 'node' }},
+        { title: 'leaf2', key: '0-0-1', scopedSlots: { title: 'node' } },
+      ],
+    },
+  ];
 export default {
   components: {
     'basic-card': () => import('/components/common/BasicCard.vue'),
@@ -54,6 +95,7 @@ export default {
   },
   data() {
     return {
+      treeData,
       treeData2: [
         {
           id: '0',
