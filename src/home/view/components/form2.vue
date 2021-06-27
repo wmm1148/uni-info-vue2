@@ -53,13 +53,13 @@
           :url="`/post/captcha?uuid=${uuid}`"
           v-model="captchaValue"
           method="post"
+          size="large"
+          :maxLength="3"
+          allowClear
           >
           <template #prefix>
             <a-icon type="safety"></a-icon>
           </template>
-          <!-- <template #suffix>
-            <a-icon type="safety"></a-icon>
-          </template> -->
           </captcha-input2>
       </a-form-model-item>
     </a-col>
@@ -82,6 +82,11 @@ export default {
       type: Boolean,
       default: false,
     }
+    },
+    watch: {
+      captchaValue(newVal) {
+        console.log('newVallllllllllllllllllll', newVal);
+      }
     },
   components: {
     'captcha-input2': () => import('/components/form/captchaInput2.vue')

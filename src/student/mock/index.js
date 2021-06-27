@@ -303,7 +303,7 @@ Mock.get('/get/eliteStudent/list', () => {
 
 Mock.post('/post/captcha', data => {
   console.log('uuid mockkkkkkkkkkkkkkkkk', data);
-  const imgSrc = Random.image('1200x820', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
+  const imgSrc = Random.image('900x820', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
 
   return Promise.resolve({
     code: 1,
@@ -315,7 +315,7 @@ Mock.post('/post/captcha', data => {
 
 Mock.get('/get/captcha', data => {
   console.log('uuid mockkkkkkkkkkkkkkkkk', data);
-  const imgSrc = Random.image('1200x820', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
+  const imgSrc = Random.image('2400x820', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
 
   return Promise.resolve({
     code: 1,

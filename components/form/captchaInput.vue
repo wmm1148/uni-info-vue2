@@ -88,6 +88,7 @@ const Qs = require('qs')
     },
     watch: {
       value(newVal) {
+        console.log('iiiii');
         this.inputValue = newVal;
       },
       inputValue(newVal) {
