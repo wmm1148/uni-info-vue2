@@ -1,106 +1,148 @@
 <template>
-  <div class="layout" >
-    <basic-card title="Hover">
-      <hover-menu-tree
-      :treeData="treeData"
-      default-expand-all
-      showIcon
-      >
-      <a-icon slot="switcherIcon" type="down"/>
-      <a-icon slot="smile" type="smile-o"/>
-      <a-icon slot="meh" type="smile-o" />
-      <template slot="custom" slot-scope="data">
-        <a-icon :type="data.selected ? 'frown' : 'frown-o'" />
-      </template>
-      <a-menu slot="menu" @click="handleMenuClick" slot-scope="{ node }">
-        <a-menu-item v-show="node.children">
-          <a>1st is not a leaf</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a >2nd</a>
-        </a-menu-item>
-        <a-menu-item>
-          <a >333 </a>
-        </a-menu-item>
-        <a-menu-item v-show="!node.children">
-          <a >444 isLeaf</a>
-        </a-menu-item>
-      </a-menu>
+  <div class="layout">
+    <basic-card title="Hover & Icon(Right)">
+      <a-tree :tree-data="treeDataTest" show-icon default-expand-all :default-selected-keys="['0-0-0']">
+        <a-icon slot="switcherIcon" type="down" />
+        <span slot="uu">你好呀</span>
+        <a-icon slot="smile" type="smile-o" />
+        <a-icon slot="meh" type="smile-o" />
+        <template slot="custom" slot-scope="{ selected }">
+          <a-icon :type="selected ? 'frown' : 'frown-o'" />
+        </template>
+      </a-tree>
+    </basic-card>
+    <basic-card title="Hover & Dropdown">
+      <hover-menu-tree :treeData="treeData" default-expand-all showIcon>
+        <a-icon slot="switcherIcon" type="down" />
+        <a-icon slot="smile" type="smile-o" />
+        <a-icon slot="meh" type="smile-o" />
+        <template slot="custom" slot-scope="data">
+          <a-icon :type="data.selected ? 'frown' : 'frown-o'" />
+        </template>
+        <a-menu slot="menu" @click="handleMenuClick" slot-scope="{ node }">
+          <a-menu-item v-show="node.children">
+            <a>1st is not a leaf</a>
+          </a-menu-item>
+          <a-menu-item>
+            <a>2nd</a>
+          </a-menu-item>
+          <a-menu-item>
+            <a>333 </a>
+          </a-menu-item>
+          <a-menu-item v-show="!node.children">
+            <a>444 isLeaf</a>
+          </a-menu-item>
+        </a-menu>
       </hover-menu-tree>
     </basic-card>
     <basic-card class="basic-card" title="Icon">
-      <menu-tree>
-      </menu-tree>
+      <menu-tree> </menu-tree>
     </basic-card>
-    <basic-card title="Dropdown">
+    <basic-card title="RightClick & Dropdown">
       <menu-tree2
-      :treeData="treeData2"
-      :menuData="menuData"
-      :treeMap="treeMap"
-      :menuMap="menuMap"
+        :treeData="treeData2"
+        :menuData="menuData"
+        :treeMap="treeMap"
+        :menuMap="menuMap"
       >
       </menu-tree2>
     </basic-card>
-    <basic-card title="Dropdown V2">
-      <menu-tree3
-      :treeData="treeData3"
-      :treeMap="treeMap"
-      >
-      <a-menu
-      slot="menu"
-      slot-scope="{currentIsLeaf, addNodes, removeNodes, removeAllNodes, updateNodes}">
-        <a-menu-item @click="addMenuClick(addNodes)">
-          新增
-        </a-menu-item>
-        <a-menu-item @click="removeAllMenuClick(removeAllNodes)"  v-if="!currentIsLeaf">
-          删除（包含子结点）
-        </a-menu-item>
-        <a-menu-item @click="removeMenuClick(removeNodes)" v-if="currentIsLeaf">
-          删除（仅叶子结点）
-        </a-menu-item>
-        <a-menu-item  @click="updateMenuClick(updateNodes)">
-          修改
-        </a-menu-item>
-      </a-menu>
+    <basic-card title="RightClick & DropdownV2">
+      <menu-tree3 :treeData="treeData3" :treeMap="treeMap">
+        <a-menu
+          slot="menu"
+          slot-scope="{
+            currentIsLeaf,
+            addNodes,
+            removeNodes,
+            removeAllNodes,
+            updateNodes,
+          }"
+        >
+          <a-menu-item @click="addMenuClick(addNodes)">
+            新增
+          </a-menu-item>
+          <a-menu-item
+            @click="removeAllMenuClick(removeAllNodes)"
+            v-if="!currentIsLeaf"
+          >
+            删除（包含子结点）
+          </a-menu-item>
+          <a-menu-item
+            @click="removeMenuClick(removeNodes)"
+            v-if="currentIsLeaf"
+          >
+            删除（仅叶子结点）
+          </a-menu-item>
+          <a-menu-item @click="updateMenuClick(updateNodes)">
+            修改
+          </a-menu-item>
+        </a-menu>
       </menu-tree3>
     </basic-card>
   </div>
 </template>
 
 <script>
+import BasicCard from '../../../../components/common/BasicCard.vue'
 const treeData = [
-    {
-      title: 'parent 1',
-      key: '0-0',
-      slots: { icon: 'meh'},
-      children: [
-        { title: 'leaf1', key: '0-0-0', slots: { icon: 'smile'}},
-        { title: 'leaf2', key: '0-0-1', scopedSlots: { icon: 'custom' } },
-      ],
+  {
+    title: 'parent 1',
+    key: '0-0',
+    slots: { icon: 'meh' },
+    // scopedSlots: { title: 'node' },
+    children: [
+      {
+        title: 'leaf1',
+        key: '0-0-0',
+        slots: { icon: 'smile' },
+        // scopedSlots: { title: 'node' }
+      },
+      {
+        title: 'leaf2',
+        key: '0-0-1',
+        scopedSlots: { icon: 'custom', title: 'node' },
+      },
+    ],
+  },
+];
+const treeDataTest = [
+  {
+    title: 'parent 1',
+    key: '0-0',
+    slots: {
+      icon: 'smile',
     },
-  ];
+    children: [
+      { title: 'leaf', key: '0-0-0', slots: { icon: 'meh' } },
+      { key: '0-0-1', slots: { title: 'uu'}, scopedSlots: { icon: 'custom' } },
+    ],
+  },
+];
 export default {
   components: {
     'basic-card': () => import('/components/common/BasicCard.vue'),
     'menu-tree': () => import('/components/common/MenuTree.vue'),
     'menu-tree2': () => import('/components/common/MenuTree2.vue'),
     'menu-tree3': () => import('/components/common/MenuTree3.vue'),
-    'hover-menu-tree': () => import('/components/common/HoverMenuTree.vue')
+    'hover-menu-tree': () => import('/components/common/HoverMenuTree.vue'),
   },
   data() {
+    BasicCard
     return {
       treeData,
+      treeDataTest,
       treeData2: [
         {
           id: '0',
           name: 'parent 1',
           children: [
-            { name: 'pp1', 
-              id: '0-0', 
-              slots: { icon: 'meh' }, 
-              children: [
-              { name: 'leaf', id: '0-0-0', slots: { icon: 'meh' } },
-            ]},
+            {
+              name: 'pp1',
+              id: '0-0',
+              slots: { icon: 'meh' },
+              children: [{ name: 'leaf', id: '0-0-0', slots: { icon: 'meh' } }],
+            },
             { name: 'leaf', id: '0-1', scopedSlots: { icon: 'custom' } },
           ],
         },
@@ -116,7 +158,7 @@ export default {
         },
         {
           name: 'parent 3',
-          id: '2'
+          id: '2',
         },
       ],
       treeData3: [
@@ -124,12 +166,12 @@ export default {
           id: '0',
           name: 'parent 1',
           children: [
-            { name: 'pp1', 
-              id: '0-0', 
-              slots: { icon: 'meh' }, 
-              children: [
-              { name: 'leaf', id: '0-0-0', slots: { icon: 'meh' } },
-            ]},
+            {
+              name: 'pp1',
+              id: '0-0',
+              slots: { icon: 'meh' },
+              children: [{ name: 'leaf', id: '0-0-0', slots: { icon: 'meh' } }],
+            },
             { name: 'leaf', id: '0-1', scopedSlots: { icon: 'custom' } },
           ],
         },
@@ -145,7 +187,7 @@ export default {
         },
         {
           name: 'parent 3',
-          id: '2'
+          id: '2',
         },
       ],
       menuData: [
@@ -168,46 +210,47 @@ export default {
       ],
       treeMap: {
         title: 'name',
-        key: 'id'
+        key: 'id',
       },
-      menuMap: {  //树形结构层级 ：显示的菜单Ids  没有提到的层级则不赋予任何权限（或给予所有权限）
-        2: [1,2,4],
-        3: [2]
-      }
+      menuMap: {
+        //树形结构层级 ：显示的菜单Ids  没有提到的层级则不赋予任何权限（或给予所有权限）
+        2: [1, 2, 4],
+        3: [2],
+      },
     }
   },
   methods: {
     addMenuClick(addNodes) {
       //新增时需要获取当前结点信息——作用域插槽传过来
-      const node = {name: 'parent 3', id: '2'};
-      addNodes(node);
+      const node = { name: 'parent 3', id: '2' }
+      addNodes(node)
       //传来父结点，在其children中添加一条，children也是数组
       // this.currentNodeParent.push(node);
     },
     removeMenuClick(removeNodes) {
-      removeNodes();
+      removeNodes()
     },
     removeAllMenuClick(removeAllNodes) {
-      removeAllNodes();
+      removeAllNodes()
     },
     updateMenuClick(updateNodes) {
-      const node = {name: 'parent 44', id: ''};
-      updateNodes(node);
+      const node = { name: 'parent 44', id: '' }
+      updateNodes(node)
     },
     handleMenuClick(e) {
-      console.log('e', e);
-    }
+      console.log('e', e)
+    },
   },
   created() {
-    console.log('treeData', this.treeData);
-  }
-};
+    console.log('treeData', this.treeData)
+  },
+}
 </script>
 
 <style scoped>
 .layout {
   display: flex;
-  padding: 0 12px;
+  padding: 0 6px;
 }
 .basic-card {
   width: 48;

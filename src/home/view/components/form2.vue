@@ -3,7 +3,7 @@
   <a-form-model>
     <a-col :span="formItemSpan">
       <a-form-model-item label="Name">
-        <a-input />
+        <a-input allowClear/>
       </a-form-model-item>
     </a-col>
     <a-col :span="formItemSpan">
@@ -20,7 +20,7 @@
     </a-col>
     <a-col :span="formItemSpan">
       <a-form-model-item label="Gender">
-        <a-input />
+        <a-input allowClear/>
       </a-form-model-item>
     </a-col>
     <a-col :span="formItemSpan">
@@ -37,7 +37,10 @@
     </a-col>
     <a-col :span="formItemSpan">
       <a-form-model-item label="Status">
-        <a-input size="small" placeholder="Input Captchaaddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaa">
+        <a-input 
+        size="small" 
+        placeholder="Input Captchaaddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaa"
+        allowClear>
           <template #prefix>
             <a-icon type="safety"></a-icon>
           </template>
@@ -54,7 +57,6 @@
           v-model="captchaValue"
           method="post"
           size="large"
-          :maxLength="3"
           allowClear
           >
           <template #prefix>

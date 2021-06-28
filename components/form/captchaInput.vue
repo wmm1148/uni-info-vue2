@@ -21,7 +21,7 @@
       <slot v-bind="scope" :name="slot"></slot>
       </template>
     </a-input>
-    <a-spin :spinning="loading" :size="size" :delay="delay">
+    <a-spin :spinning="loading" :size="size" :delay="delay" :indicator="indicator">
       <img :src="captchaPath" @click="captchaClick()" :alt="alt" :class="size | imgSize" class="img-captcha">
     </a-spin>
   </div>
@@ -38,6 +38,7 @@ const Qs = require('qs')
         inputValue: '',
         loading: true,
         delayTime: 2000,
+        indicator: <a-icon type="loading" style="font-size: 24px" spin />,
         // val: `background-image:url(${this.captchaPath})`
       }
     },

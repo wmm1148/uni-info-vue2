@@ -1,9 +1,10 @@
 <template>
-  <a-spin :spinning="loading" :class="size" :size="size" v-bind="$attrs">
-    <a-input v-bind="$attrs" :size="size" :value="value" @input="$emit('input', $event.target.value)">
+  <a-spin :spinning="loading" :class="size" :size="size" v-bind="$attrs" :indicator="indicator">
+    <a-input v-bind="$attrs" :size="size" :value="value" @change="$emit('input', $event.target.value)">
       <template #suffix>
         <img :src="captchaPath" @click="getCaptcha"/>
       </template>
+      <!-- hh -->
       <template
         v-for="(_, slot) of $options.omit(['suffix'],$scopedSlots)"
         #[slot]="scope"
@@ -28,9 +29,14 @@ const Qs = require('qs')
       return {
         loading: false,
         captchaPath: '',
-        inputValue: ''
+        inputValue: '',
+        indicator: <a-icon type="loading" style="font-size: 24px" spin />,
       }
     },
+    // model: {
+    //   prop: 'value',
+    //   event: 'change'
+    // },
     props: {
       url: {
         type: String,
@@ -110,6 +116,9 @@ const Qs = require('qs')
 <style lang="less" scoped>
 /deep/ .ant-input-suffix{
   right: 0px;
+  .ant-input-clear-icon {
+    padding-right: 4px;
+  }
 }
 img {
   border-radius: 0 4px 4px 0;

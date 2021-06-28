@@ -15,7 +15,7 @@
     "echarts": "^5.1.1",
     "mockjs": "^1.1.0",
     "qs": "^6.10.1",
-    "vue": "^2.6.11",
+    "vue": "^2.6.14",
     "vue-router": "^3.5.1",
     "wangeditor": "^4.7.2",
     "ramda": "^0.27.1"
@@ -31,7 +31,7 @@
     "less": "^4.1.1",
     "less-loader": "^7.3.0",
     "router-mock": "0.0.4",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {
     "root": true,
