@@ -1,5 +1,5 @@
 <template>
-<!-- 有改动的版本 -->
+<!-- 有改动的版本，以拼接方式写的验证码 -->
   <div class="captcha-layout" :class="size">
     <a-input
     :placeholder="placeholder" 
@@ -145,9 +145,6 @@ const Qs = require('qs')
 //公共样式
 .captcha-layout {
   display: flex;
-  // border:1px solid #fea91d;
-  // box-shadow: 12px 12px 2px black;
-  // box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); // 浮层阴影
 }
 img {
   border-radius: 0 4px 4px 0;

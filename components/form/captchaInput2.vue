@@ -1,19 +1,17 @@
 <template>
+<!-- 以第二种方式写的验证码 -->
   <a-spin :spinning="loading" :class="size" :size="size" v-bind="$attrs" :indicator="indicator">
     <a-input v-bind="$attrs" :size="size" :value="value" @change="$emit('input', $event.target.value)">
       <template #suffix>
         <img :src="captchaPath" @click="getCaptcha"/>
       </template>
-      <!-- hh -->
-      <template
-        v-for="(_, slot) of $options.omit(['suffix'],$scopedSlots)"
-        #[slot]="scope"
-      >
-        <slot
-          :name="slot"
-          v-bind="scope"
-        />
+      <template v-for="(_, slot) of $options.omit(['suffix', 'scopedTest'],$scopedSlots)" #[slot]="scope" >
+        <slot :name="slot" v-bind="scope" />
       </template>
+      <slot name="scopedTest" :data="test"></slot>
+      <!-- <template v-for="(_, slot) of $slots" :slot="slot">
+        <slot :name="slot"></slot>
+      </template> -->
     </a-input>
   </a-spin>
 </template>
@@ -31,6 +29,7 @@ const Qs = require('qs')
         captchaPath: '',
         inputValue: '',
         indicator: <a-icon type="loading" style="font-size: 24px" spin />,
+        test: { name: 'wmm'}
       }
     },
     // model: {
@@ -61,9 +60,12 @@ const Qs = require('qs')
       // },
     },
     created () {
-      console.log('captchaValue', this.captchaValue);
+      // console.log('captchaValue', this.captchaValue);
       this.getCaptcha();
-      console.log('this.$attrs', this.$attrs);
+      // console.log('this.$attrs', this.$attrs);
+    },
+    mounted() {
+      console.log('kkkkkk$scopedSlots', this.$options.omit(['suffix'],this.$scopedSlots));
     },
     methods: {
       async getCaptcha() {
@@ -109,7 +111,6 @@ const Qs = require('qs')
         }
       }
     }
-    
   }
 </script>
 

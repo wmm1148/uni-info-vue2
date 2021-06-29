@@ -49,26 +49,18 @@ export default {
   // },
   created() {
     this.recursionTree(this.treeData)
-    console.log('$options', this.$options)
-    console.log('$scopedSlots.title', this.$scopedSlots.title)
-
-    
-    // const R = require('ramda');
-    // console.log('r', R.omit(['a', 'd'])({a: 1, b: 2, c: 3, d: 4}));
-    // console.log('r', R.omit(['a', 'd'], {a: 1, b: 2, c: 3, d: 4}));
-
-    // R.omit(['a', 'd'])({a: 1, b: 2, c: 3, d: 4})
-    // console.log('$options', this.$options.propsData.treeData);
+    // console.log('$options', this.$options)
+    // console.log('$scopedSlots.title', this.$scopedSlots.title)
   },
   mounted () {
-    console.log('$slots', this.$slots)
-    console.log('$scopedSlots', this.$scopedSlots)
+    // console.log('$slots', this.$slots)
+    // console.log('$scopedSlots', this.$scopedSlots)
     console.log(this. $options.omit(this.$options.keys(this.$slots), this.$scopedSlots))
   },
   methods: {
     recursionTree(node) {
       for (let item of node) {
-        console.log('old item', item)
+        // console.log('old item', item)
         if(!item.scopedSlots) {  //树在没有上层的时候
           item.scopedSlots = {};
         }

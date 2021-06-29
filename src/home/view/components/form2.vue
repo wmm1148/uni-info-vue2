@@ -62,6 +62,12 @@
           <template #prefix>
             <a-icon type="safety"></a-icon>
           </template>
+          <template #suffix>
+            <a-icon type="safety"></a-icon>
+          </template>
+          <template #scopedTest="{ test }">
+            {{ test }}
+          </template>
           </captcha-input2>
       </a-form-model-item>
     </a-col>

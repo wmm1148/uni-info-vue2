@@ -4,7 +4,7 @@
       <slot :name="slot" v-bind="scope"></slot>
     </template> -->
     <!-- 插槽继承，$scopedSlots确实可以继承$slots中的具名插槽，但具名插槽没有作用域没有数据，以下面这种形式不起作用，需要再单独写下具名插槽的遍历 -->
-    <template v-for="(_, slot) of $scopedSlots" #[slot]="scope">
+    <template v-for="(_, slot) of $options.omit(['actions'], $scopedSlots)" #[slot]="scope">
       <slot :name="slot" v-bind="scope"></slot>
     </template>
     <template v-for="(_, slot) of $slots" :slot="slot">
@@ -54,8 +54,6 @@ export default {
   // },
   created() {
     this.recursionTree(this.treeData)
-    console.log('$options', this.$options)
-    console.log('$scopedSlots.title', this.$scopedSlots.title)
 
     
     // const R = require('ramda');
@@ -73,7 +71,7 @@ export default {
   methods: {
     recursionTree(node) {
       for (let item of node) {
-        console.log('old item', item)
+        // console.log('old item', item)
         if(!item.scopedSlots) {  //树在没有上层的时候
           item.scopedSlots = {};
         }
