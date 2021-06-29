@@ -1,5 +1,5 @@
 <template>
-<!-- 树型数据由外部提供，菜单暴露出去，由外部数据自行设置 -->
+<!-- 树型数据由外部提供，菜单暴露出去，由外部数据自行设置 ———————最终版-->
   <a-dropdown
   ref="dropdown"
   :trigger="['contextmenu']"
@@ -21,6 +21,7 @@
     :show-line="showLine"
     :show-icon="showIcon"
     defaultExpandAll
+    :selectedKeys.sync="selectedKeys"
     @select="onSelect"
     @rightClick="onRightClick"
     :treeData="treeData | filterTreeData(treeMap, recursionTree, level)"
@@ -36,6 +37,7 @@
 export default {
   data() {
     return {
+      selectedKeys: [],
       showLine: true,
       showIcon: false,
       showMenuItem: false,
@@ -80,19 +82,23 @@ export default {
     },
     onSelect(selectedKeys, info) {
       this.showMenuItem = false;
+      
+      console.log('selectedKeys', this.selectedKeys);
       console.log('selected', selectedKeys, info);
     },
     onRightClick({ event, node }) {
       //阻止默认事件的发生
       event.preventDefault();
-      console.log('event', event);
-      console.log('node', node);
+      // console.log('event', event);
+      // console.log('node', node);
       event.preventDefault();
       this.showMenuItem = true;
       this.currentNode = node.$options.propsData;
       this.currentNodeParent = node.$parent.dataRef;
       this.currentNodeChildren = this.currentNode.dataRef.children;
       this.currentIsLeaf = this.currentNodeChildren ? false : true;
+      this.selectedKeys = [this.currentNode.dataRef.key];
+      console.log('this.selectedKeys', this.selectedKeys);
     },
     nativeClick(e) {  //左键或右键点击树的其他部分
       e.preventDefault();  //取消默认事件  默认事件是什么？？

@@ -1,22 +1,13 @@
 <template>
-  <div class="layout">
+  <div>
     <basic-card title="Hover & Icon(Right)" class="hoverIconStyle">
       <hover-button-tree :treeData="treeData" default-expand-all showIcon blockNode>
-        <!-- <template #title>
-          777777
-        </template> -->
         <template #actions="{ isLeaf }">
           <a-icon type="edit" v-if="isLeaf"/>
           <a-icon type="minus-circle" v-if="isLeaf"/>
           <a-icon type="edit" v-if="isLeaf"/>
           <a-icon type="delete" v-if="isLeaf"/>
           <a-icon type="minus-circle" v-if="isLeaf"/>
-          <a-icon type="edit" v-if="isLeaf"/>
-          <a-icon type="delete" v-if="isLeaf"/>
-          <a-icon type="minus-circle" v-if="isLeaf"/>
-          <a-icon type="edit" />
-          <a-icon type="delete" />
-          <a-icon type="minus-circle" />
           <a-icon type="edit" />
           <a-icon type="delete" />
           <a-icon type="minus-circle" />
@@ -105,6 +96,9 @@
             <a-icon type="double-right" @click="showAll"/>
           </a-popover> -->
         </template>
+        <template #title="{ node }" >
+          {{ node.title + 11212}}
+        </template>
         <!-- <template #moreActions="{ isLeaf }">
           <a-icon type="edit" v-if="isLeaf"/>
           <a-icon type="delete" v-if="isLeaf"/>
@@ -122,14 +116,13 @@
         </template> -->
       </hover-button-tree>
     </basic-card>
-    <basic-card title="Hover & Dropdown">
+    <div class="layout">
+      <basic-card title="Hover & Dropdown">
       <hover-menu-tree :treeData="treeData" default-expand-all showIcon>
         <a-icon slot="switcherIcon" type="down" />
         <a-icon slot="smile" type="smile-o" />
         <a-icon slot="meh" type="smile-o" />
-        <!-- <template #title>
-          777777
-        </template> -->
+        
         <template #actions>
           <a-icon type="pic-center" />
         </template>
@@ -155,9 +148,9 @@
         </a-menu>
       </hover-menu-tree>
     </basic-card>
-    <basic-card class="basic-card" title="Icon">
+    <!-- <basic-card class="basic-card" title="Icon">
       <menu-tree> </menu-tree>
-    </basic-card>
+    </basic-card> -->
     <basic-card title="RightClick & Dropdown">
       <menu-tree2
         :treeData="treeData2"
@@ -200,6 +193,8 @@
         </a-menu>
       </menu-tree3>
     </basic-card>
+    </div>
+    
   </div>
 </template>
 
@@ -240,7 +235,7 @@ const treeDataTest = [
 export default {
   components: {
     'basic-card': () => import('/components/common/BasicCard.vue'),
-    'menu-tree': () => import('/components/common/MenuTree.vue'),
+    // 'menu-tree': () => import('/components/common/MenuTree.vue'),
     'menu-tree2': () => import('/components/common/MenuTree2.vue'),
     'menu-tree3': () => import('/components/common/MenuTree3.vue'),
     'hover-menu-tree': () => import('/components/common/HoverMenuTree.vue'),
@@ -249,6 +244,7 @@ export default {
   data() {
     BasicCard
     return {
+      selectedKeys: '',
       treeData,
       treeDataTest,
       treeData2: [
@@ -371,12 +367,9 @@ export default {
 
 <style scoped>
 .layout {
-  /* display: flex; */
+  display: flex;
   padding: 0 6px;
 }
-/* .basic-card {
-  width: 48;
-} */
 .hoverIconStyle {
   width:350px;
 }

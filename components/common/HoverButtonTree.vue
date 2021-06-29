@@ -1,4 +1,5 @@
 <template>
+<!-- 按钮悬浮在title上面的悬浮菜单树 -->
   <a-tree :tree-data="treeData" v-bind="$attrs" @mouseenter="enter" @mouseleave="leave">
     <template v-for="(_, slot) of $scopedSlots" #[slot]="scope">
       <slot :name="slot" v-bind="scope"></slot>
@@ -13,8 +14,8 @@
           </slot>
         </span>
         <span class="titleStyle">
-          <slot name="title">
-            {{ node.title + 'uu' }}
+          <slot name="title" :node="node">
+            {{ node.title }}
           </slot>
         </span>
       </div>
@@ -31,7 +32,6 @@ export default {
     return {
       currentNode: {},
       showBtns: false,
-      showMoreBtns: false,
       currentIsLeaf: false,
     }
   },
@@ -110,11 +110,12 @@ export default {
   overflow: hidden;
   .actionStyle {
     float: right;
+    // display: flex;
   }
 }
 .nodeStyle:hover {
   .titleStyle {
-    opacity: 0.5;
+    opacity: 0.4;
   }
 }
 </style>
