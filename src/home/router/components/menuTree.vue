@@ -1,21 +1,141 @@
 <template>
   <div class="layout">
-    <basic-card title="Hover & Icon(Right)">
-      <a-tree :tree-data="treeDataTest" show-icon default-expand-all :default-selected-keys="['0-0-0']">
-        <a-icon slot="switcherIcon" type="down" />
-        <span slot="uu">你好呀</span>
-        <a-icon slot="smile" type="smile-o" />
-        <a-icon slot="meh" type="smile-o" />
-        <template slot="custom" slot-scope="{ selected }">
-          <a-icon :type="selected ? 'frown' : 'frown-o'" />
+    <basic-card title="Hover & Icon(Right)" class="hoverIconStyle">
+      <hover-button-tree :treeData="treeData" default-expand-all showIcon blockNode>
+        <!-- <template #title>
+          777777
+        </template> -->
+        <template #actions="{ isLeaf }">
+          <a-icon type="edit" v-if="isLeaf"/>
+          <a-icon type="minus-circle" v-if="isLeaf"/>
+          <a-icon type="edit" v-if="isLeaf"/>
+          <a-icon type="delete" v-if="isLeaf"/>
+          <a-icon type="minus-circle" v-if="isLeaf"/>
+          <a-icon type="edit" v-if="isLeaf"/>
+          <a-icon type="delete" v-if="isLeaf"/>
+          <a-icon type="minus-circle" v-if="isLeaf"/>
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="minus-circle" />
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="minus-circle" />
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="minus-circle" />
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="minus-circle" />
+          <!-- <a-tooltip placement="bottomRight">
+            <template slot="title">
+              <a-icon type="edit" v-if="isLeaf"/>
+              <a-icon type="delete" v-if="isLeaf"/>
+              <a-icon type="carry-out" v-if="isLeaf"/>
+              <a-icon type="edit" v-if="isLeaf"/>
+              <a-icon type="delete" v-if="isLeaf"/>
+              <a-icon type="carry-out" v-if="isLeaf"/>
+              <a-icon type="edit" v-if="isLeaf"/>
+              <a-icon type="delete" v-if="isLeaf"/>
+              <a-icon type="carry-out" v-if="isLeaf"/>
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+            </template>
+            <a-icon type="double-right" @click="showAll"/>
+          </a-tooltip> -->
+          <!-- <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="carry-out" />
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="carry-out" />
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="carry-out" /> -->
+          <!-- <a-popconfirm placement="bottomRight">
+            <a-icon type="double-right" @click="showAll"/>
+          </a-popconfirm> -->
+          <!-- <a-icon type="edit" />
+          <a-icon type="edit" /> -->
+          <!-- <a-popover placement="bottomRight" trigger="click">
+            <template slot="content" class="popoverStyle">
+              <a-icon type="edit" v-if="isLeaf"/>
+              <a-icon type="delete" v-if="isLeaf"/>
+              <a-icon type="carry-out" v-if="isLeaf"/>
+              <a-icon type="edit" v-if="isLeaf"/>
+              <a-icon type="delete" v-if="isLeaf"/>
+              <a-icon type="carry-out" v-if="isLeaf"/>
+              <a-icon type="edit" v-if="isLeaf"/>
+              <a-icon type="delete" v-if="isLeaf"/>
+              <a-icon type="carry-out" v-if="isLeaf"/>
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+              <a-icon type="edit" />
+              <a-icon type="delete" />
+              <a-icon type="carry-out" />
+            </template>
+            <a-icon type="double-right" @click="showAll"/>
+          </a-popover> -->
         </template>
-      </a-tree>
+        <!-- <template #moreActions="{ isLeaf }">
+          <a-icon type="edit" v-if="isLeaf"/>
+          <a-icon type="delete" v-if="isLeaf"/>
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="carry-out" />
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="carry-out" />
+          <a-icon type="edit" />
+          <a-icon type="delete" />
+          <a-icon type="carry-out" />
+        </template> -->
+        <!-- <template #showMore>
+        </template> -->
+      </hover-button-tree>
     </basic-card>
     <basic-card title="Hover & Dropdown">
       <hover-menu-tree :treeData="treeData" default-expand-all showIcon>
         <a-icon slot="switcherIcon" type="down" />
         <a-icon slot="smile" type="smile-o" />
         <a-icon slot="meh" type="smile-o" />
+        <!-- <template #title>
+          777777
+        </template> -->
+        <template #actions>
+          <a-icon type="pic-center" />
+        </template>
+        <template #showMore>
+        </template>
+
         <template slot="custom" slot-scope="data">
           <a-icon :type="data.selected ? 'frown' : 'frown-o'" />
         </template>
@@ -90,18 +210,16 @@ const treeData = [
     title: 'parent 1',
     key: '0-0',
     slots: { icon: 'meh' },
-    // scopedSlots: { title: 'node' },
     children: [
       {
-        title: 'leaf1',
+        title: 'leafwwwwwww',
         key: '0-0-0',
         slots: { icon: 'smile' },
-        // scopedSlots: { title: 'node' }
       },
       {
-        title: 'leaf2',
+        title: 'leafffff2',
         key: '0-0-1',
-        scopedSlots: { icon: 'custom', title: 'node' },
+        scopedSlots: { icon: 'custom'},
       },
     ],
   },
@@ -126,6 +244,7 @@ export default {
     'menu-tree2': () => import('/components/common/MenuTree2.vue'),
     'menu-tree3': () => import('/components/common/MenuTree3.vue'),
     'hover-menu-tree': () => import('/components/common/HoverMenuTree.vue'),
+    'hover-button-tree': () => import('/components/common/HoverButtonTree.vue'),
   },
   data() {
     BasicCard
@@ -240,6 +359,9 @@ export default {
     handleMenuClick(e) {
       console.log('e', e)
     },
+    showAll() {
+      console.log('object');
+    }
   },
   created() {
     console.log('treeData', this.treeData)
@@ -249,10 +371,16 @@ export default {
 
 <style scoped>
 .layout {
-  display: flex;
+  /* display: flex; */
   padding: 0 6px;
 }
-.basic-card {
+/* .basic-card {
   width: 48;
+} */
+.hoverIconStyle {
+  width:350px;
+}
+.popoverStyle {
+  width: 20px;
 }
 </style>

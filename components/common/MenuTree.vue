@@ -57,6 +57,51 @@
           <a-icon type="minus-circle-o" />
         </a-tooltip>
       </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="新增">
+          <a-icon type="plus-circle-o" />
+        </a-tooltip>
+      </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="修改">
+          <a-icon type="edit" />
+        </a-tooltip>
+      </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="删除">
+          <a-icon type="minus-circle-o" />
+        </a-tooltip>
+      </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="新增">
+          <a-icon type="plus-circle-o" />
+        </a-tooltip>
+      </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="修改">
+          <a-icon type="edit" />
+        </a-tooltip>
+      </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="删除">
+          <a-icon type="minus-circle-o" />
+        </a-tooltip>
+      </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="新增">
+          <a-icon type="plus-circle-o" />
+        </a-tooltip>
+      </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="修改">
+          <a-icon type="edit" />
+        </a-tooltip>
+      </div>
+      <div class="menu-item">
+        <a-tooltip placement="bottom" title="删除">
+          <a-icon type="minus-circle-o" />
+        </a-tooltip>
+      </div>
     </div>
   </div>
 </template>

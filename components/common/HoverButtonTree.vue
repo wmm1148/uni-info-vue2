@@ -1,9 +1,5 @@
 <template>
-  <a-tree :tree-data="treeData" v-bind="$attrs">
-    <!-- <template v-for="(_, slot) of $options.omit($options.keys($slots), $scopedSlots)" #[slot]="scope">
-      <slot :name="slot" v-bind="scope"></slot>
-    </template> -->
-    <!-- 插槽继承，$scopedSlots确实可以继承$slots中的具名插槽，但具名插槽没有作用域没有数据，以下面这种形式不起作用，需要再单独写下具名插槽的遍历 -->
+  <a-tree :tree-data="treeData" v-bind="$attrs" @mouseenter="enter" @mouseleave="leave">
     <template v-for="(_, slot) of $scopedSlots" #[slot]="scope">
       <slot :name="slot" v-bind="scope"></slot>
     </template>
@@ -11,21 +7,17 @@
       <slot :name="slot"></slot>
     </template>
     <template slot="node" slot-scope="node">
-      <a-dropdown>
-        <span>
-          <!-- <template>
-            {{ node.title + 'uu' }}
-          </template> -->
+      <div class="nodeStyle">
+        <span class="actionStyle">
+          <slot name="actions" v-if="node.key === currentNode.key & showBtns" :node="currentNode" :isLeaf="currentIsLeaf">
+          </slot>
+        </span>
+        <span class="titleStyle">
           <slot name="title">
             {{ node.title + 'uu' }}
           </slot>
-          <slot name="actions">
-          </slot>
         </span>
-        <template #overlay>
-          <slot name="menu" :node="currentNode" />
-        </template>
-      </a-dropdown>
+      </div>
     </template>
   </a-tree>
 </template>
@@ -38,6 +30,9 @@ export default {
   data() {
     return {
       currentNode: {},
+      showBtns: false,
+      showMoreBtns: false,
+      currentIsLeaf: false,
     }
   },
   props: {
@@ -84,8 +79,42 @@ export default {
       }
       return node
     },
+    enter({ node }) {
+      console.log('enter node', node);
+      this.currentNode = node.$options.propsData.dataRef
+      this.showBtns = true;
+      console.log('this.currentNode', this.currentNode);
+      // this.currentNodeParent = node.$parent.dataRef;
+      this.currentNodeChildren = this.currentNode.children;
+      this.currentIsLeaf = this.currentNodeChildren ? false : true;
+      
+    },
+    leave() {
+      this.showBtns = false;
+      this.showMoreBtns = false
+    },
+    showMore() {
+      this.showMoreBtns = true
+    },
+    clickBack() {
+      this.showMoreBtns = false
+    }
   },
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.nodeStyle {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  .actionStyle {
+    float: right;
+  }
+}
+.nodeStyle:hover {
+  .titleStyle {
+    opacity: 0.5;
+  }
+}
+</style>
