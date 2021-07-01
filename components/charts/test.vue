@@ -53,7 +53,7 @@
 
 <style lang="less" scoped>
 .charts-layout {
-  width: 400px;
+  width: 300px;
   height:80px;
 }
 </style>

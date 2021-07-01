@@ -1,19 +1,28 @@
 <template>
 <!-- 以第二种方式写的验证码 -->
-  <a-spin :spinning="loading" :class="size" :size="size" v-bind="$attrs" :indicator="indicator">
-    <a-input v-bind="$attrs" :size="size" :value="value" @change="$emit('input', $event.target.value)">
+<div class="layout">
+  <a-spin :spinning="loading" :class="size" v-bind="$attrs" v-if="!CaptchaOnly">
+    <a-input v-bind="$attrs" :value="value" @change="$emit('change', $event.target.value)" v-if="!CaptchaOnly">
       <template #suffix>
         <img :src="captchaPath" @click="getCaptcha"/>
       </template>
-      <template v-for="(_, slot) of $options.omit(['suffix', 'scopedTest'],$scopedSlots)" #[slot]="scope" >
+      <template v-for="(_, slot) of $options.omit(['suffix'],$scopedSlots)" #[slot]="scope" >
         <slot :name="slot" v-bind="scope" />
       </template>
-      <slot name="scopedTest" :data="test"></slot>
-      <!-- <template v-for="(_, slot) of $slots" :slot="slot">
+      <template v-for="(_, slot) of $slots" :slot="slot">
         <slot :name="slot"></slot>
-      </template> -->
+      </template>
     </a-input>
+    <template slot="indicator">
+      <slot name="indicator"></slot>
+    </template>
   </a-spin>
+  <div class="testDiv" v-if="CaptchaOnly">
+    <a-spin class="imgOnly" :spinning="loading" >
+      <img :src="captchaPath" @click="getCaptcha"/>
+    </a-spin>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -27,15 +36,14 @@ const Qs = require('qs')
       return {
         loading: false,
         captchaPath: '',
-        inputValue: '',
-        indicator: <a-icon type="loading" style="font-size: 24px" spin />,
-        test: { name: 'wmm'}
+        size: 'default',
+        // indicator: <a-icon type="loading" style="font-size: 24px" spin />,
       }
     },
-    // model: {
-    //   prop: 'value',
-    //   event: 'change'
-    // },
+    model: {
+      prop: 'value',
+      event: 'change'
+    },
     props: {
       url: {
         type: String,
@@ -45,27 +53,15 @@ const Qs = require('qs')
         type: String,
         default: 'get',
       },
-      size: {
-        type: String,
-        default: 'default',
-      },
       value: String,
-    },
-    watch: {
-      // value(newVal) {
-      //   this.inputValue = newVal;
-      // },
-      // inputValue(newVal) {
-      //   this.$emit('change', newVal)
-      // },
+      CaptchaOnly: {
+        type: Boolean,
+        default: false
+      }
     },
     created () {
-      // console.log('captchaValue', this.captchaValue);
+      this.size = this.$attrs.size ? this.$attrs.size : 'default';
       this.getCaptcha();
-      // console.log('this.$attrs', this.$attrs);
-    },
-    mounted() {
-      console.log('kkkkkk$scopedSlots', this.$options.omit(['suffix'],this.$scopedSlots));
     },
     methods: {
       async getCaptcha() {
@@ -115,6 +111,9 @@ const Qs = require('qs')
 </script>
 
 <style lang="less" scoped>
+.layout {
+  // width: 280px;
+}
 /deep/ .ant-input-suffix{
   right: 0px;
   .ant-input-clear-icon {
@@ -141,5 +140,14 @@ img {
   img {
     height: 40px;
     }
+}
+.testDiv {
+  // height: 24px;
+  width: 48px;
+  .imgOnly {
+    img {
+      height: 24px;
+      }
+  }
 }
 </style>

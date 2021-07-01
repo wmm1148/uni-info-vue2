@@ -1,14 +1,10 @@
 <template>
 <!-- 有改动的版本，以拼接方式写的验证码 -->
-  <div class="captcha-layout" :class="size">
+  <div class="captcha-layout" :class="$attrs.size">
     <a-input
-    :placeholder="placeholder" 
-    v-model="inputValue" 
-    ref="input"
-    :allowClear="allowClear"
+    v-model="inputValue"
     v-bind="$attrs"
     v-if="!deleteInput"
-    :size="size"
     :disabled="loading"
     >
       <slot name="prefix" slot="prefix"></slot>
@@ -21,8 +17,11 @@
       <slot v-bind="scope" :name="slot"></slot>
       </template>
     </a-input>
-    <a-spin :spinning="loading" :size="size" :delay="delay" :indicator="indicator">
-      <img :src="captchaPath" @click="captchaClick()" :alt="alt" :class="size | imgSize" class="img-captcha">
+    <a-spin :spinning="loading" v-bind="$attrs" :delay="delay">
+      <img :src="captchaPath" @click="captchaClick()" :alt="alt" :class="$attrs.size | imgSize" class="img-captcha" v-bind="$attrs">
+      <template slot="indicator">
+        <slot name="indicator"></slot>
+    </template>
     </a-spin>
   </div>
 </template>
@@ -38,7 +37,7 @@ const Qs = require('qs')
         inputValue: '',
         loading: true,
         delayTime: 2000,
-        indicator: <a-icon type="loading" style="font-size: 24px" spin />,
+        // indicator: <a-icon type="loading" style="font-size: 24px" spin />,
         // val: `background-image:url(${this.captchaPath})`
       }
     },
@@ -54,14 +53,6 @@ const Qs = require('qs')
       alt: {
         type: String,
       },
-      size: {
-        type: String,
-        default: 'default',
-      },
-      allowClear: {
-        type: Boolean,
-        default: false,
-      },
       deleteInput: {
         type: Boolean,
         default: false,
@@ -74,10 +65,6 @@ const Qs = require('qs')
         type: String,
         default: undefined,
       },
-      placeholder: {
-        type: String,
-        default: 'Please input',
-      },
       method: {
         type: String,
         default: 'get',
@@ -89,7 +76,7 @@ const Qs = require('qs')
     },
     watch: {
       value(newVal) {
-        console.log('iiiii');
+        // console.log('iiiii');
         this.inputValue = newVal;
       },
       inputValue(newVal) {
@@ -99,12 +86,12 @@ const Qs = require('qs')
     
     filters:{
       imgSize(size) {
+        // if(!this.deleteInput) {
           return 'img-'+size;
+        // }
       },
         },
     created () {
-      console.log('$$$$$$$$$$$$$$$$$', this.$scopedSlots);
-      console.log('url', this.url);
       this.getCaptcha();
     },
     methods: {
@@ -152,7 +139,6 @@ img {
 .ant-input-affix-wrapper {
   margin-bottom: 1em;
   height: 100%;
-  // border-color:#fea91d;
   /deep/ .ant-input {
     border-radius: 4px 0 0 4px;
     // padding: 4px 11px;
