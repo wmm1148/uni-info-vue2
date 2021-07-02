@@ -3,7 +3,7 @@
   <a-form-model>
     <a-col :span="formItemSpan">
       <a-form-model-item label="Name">
-        <a-input allowClear/>
+        <a-input allowClear type="textarea"/>
       </a-form-model-item>
     </a-col>
     <a-col :span="formItemSpan">
@@ -28,15 +28,9 @@
       </a-form-model-item>
     </a-col>
     <a-col :span="formItemSpan">
-      <a-form-model-item label="Age">
-        <a-input>
-          <template #prefix>
-            <a-icon type="safety"></a-icon>
-          </template>
-          <template #suffix>
-            <a-icon type="safety"></a-icon>
-          </template>
-        </a-input> 
+      <a-form-model-item label="Input">
+        <basic-input v-model="email">
+        </basic-input> 
       </a-form-model-item>
     </a-col>
     <a-col :span="formItemSpan">
@@ -127,7 +121,8 @@ export default {
       formItemSpan: 12,
       headStyle: { 'font-weight': 'bold' },
       captchaValue: '',
-      uuid: '12345'
+      uuid: '12345',
+      email: '哦吼吼'
     }
   },
   props: {
@@ -139,10 +134,14 @@ export default {
     watch: {
       captchaValue(newVal) {
         console.log('newVallllllllllllllllllll', newVal);
+      },
+      email(newVal) {
+        console.log('newEmaillllllll', newVal);
       }
     },
   components: {
-    'captcha-input2': () => import('/components/form/captchaInput2.vue')
+    'captcha-input2': () => import('/components/form/captchaInput2.vue'),
+    'basic-input': () => import('/components/form/basicInput.vue')
   },
   methods: {
     backClick () {
@@ -154,9 +153,9 @@ export default {
     handleOk() {
       console.log('captchaValue', this.captchaValue);
     },
-      handleCancel() {
-      this.$emit('update:visible', false);
-      }
+    handleCancel() {
+    this.$emit('update:visible', false);
+    },
   },
 }
 </script>

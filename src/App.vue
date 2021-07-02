@@ -15,6 +15,9 @@
 export default {
   name: 'App',
   components: {
+  },
+  created() {
+    console.log('this.$router', this.$router);
   }
 }
 </script>

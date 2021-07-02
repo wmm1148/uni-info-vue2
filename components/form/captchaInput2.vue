@@ -28,7 +28,8 @@
 <script>
 import { omit } from 'ramda';
 import { request } from '@/network/request.js'
-const Qs = require('qs')
+// const Qs = require('qs')
+import qs from 'qs'
   export default {
     inheritAttrs: false,
     omit,
@@ -74,7 +75,7 @@ const Qs = require('qs')
           else {
             //无论是get还是post这里都使用query的传参方式
             const url= this.url.split("?")[0];  //获取url
-            const data = Qs.parse(this.url.split("?")[1])  //获取参数 进行序列化，这里先单独使用，可以在网络请求里封装下
+            const data = qs.parse(this.url.split("?")[1])  //获取参数 进行序列化，这里先单独使用，可以在网络请求里封装下
             try {
               const res = await request({ url, method: this.method, data})();
               //如果发过来的是图片直接渲染
