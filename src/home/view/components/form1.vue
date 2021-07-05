@@ -1,11 +1,7 @@
 <template>
+<!-- 采用方式三写验证码的封装 -->
   <a-row :gutter="24">
     <a-form-model>
-      <a-col :span="formItemSpan">
-        <a-form-model-item label="Name">
-          <a-input />
-        </a-form-model-item>
-      </a-col>
       <a-col :span="formItemSpan">
         <a-form-model-item label="Captcha By Way3 ——— large">
           <captcha-input
@@ -31,18 +27,6 @@
         </a-form-model-item>
       </a-col>
       <a-col :span="formItemSpan">
-        <a-form-model-item label="Age">
-          <a-input>
-            <template #prefix>
-              <a-icon type="safety"></a-icon>
-            </template>
-            <template #suffix>
-              <a-icon type="safety"></a-icon>
-            </template>
-          </a-input> 
-        </a-form-model-item>
-      </a-col>
-      <a-col :span="formItemSpan">
         <a-form-model-item label="Captcha By Way3 ——— default">
           <captcha-input
             :url="`/post/captcha?uuid=${uuid}`"
@@ -63,18 +47,6 @@
         </a-form-model-item>
       </a-col>
       <a-col :span="formItemSpan">
-        <a-form-model-item label="Major">
-          <a-input size="large">
-            <template #prefix>
-              <a-icon type="safety"></a-icon>
-            </template>
-            <template #suffix>
-              <a-icon type="safety"></a-icon>
-            </template>
-          </a-input> 
-        </a-form-model-item>
-      </a-col>
-      <a-col :span="formItemSpan">
         <a-form-model-item label="Captcha By Way3 ——— small">
           <captcha-input
             :url="`/post/captcha?uuid=${uuid}`"
@@ -92,18 +64,6 @@
               <a-icon type="safety"></a-icon>
             </template>
             </captcha-input>
-        </a-form-model-item>
-      </a-col>
-      <a-col :span="formItemSpan">
-        <a-form-model-item label="Status">
-          <a-input size="small" placeholder="Input Captchaaddddddddddddddddddddddddddddddddddaaaaaaaaaaaaaa">
-            <template #prefix>
-              <a-icon type="safety"></a-icon>
-            </template>
-            <!-- <template #suffix>
-              <a-icon type="safety"></a-icon>
-            </template> -->
-          </a-input> 
         </a-form-model-item>
       </a-col>
       <a-col :span="formItemSpan">
@@ -135,7 +95,7 @@
 export default {
   data () {
     return {
-      formItemSpan: 12,
+      formItemSpan: 13,
       headStyle: { 'font-weight': 'bold' },
       captchaValue: '',
       uuid: '12345'
