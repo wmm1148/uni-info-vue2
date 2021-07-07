@@ -29,8 +29,9 @@
   background: #feffff;
   width: 100%;
   text-align: left;
-  height: 600px;
+  /* height: 600px; */
   margin: 12px;
+  height: auto;
 }
 .ant-card-body {
   padding: 0 24px 24px 24px;

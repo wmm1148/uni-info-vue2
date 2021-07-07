@@ -10,7 +10,7 @@
     </a-col>
     <a-col :span="formItemSpan">
       <a-form-model-item label="回显只读模式 & 一键复制 & 长数据预览">
-        <basic-input v-model="email" copyAll readOnly>
+        <basic-input v-model="email" copyAll readOnly >
         </basic-input> 
       </a-form-model-item>
     </a-col>
@@ -18,6 +18,16 @@
       <a-form-model-item label="预格式化展示">
         <basic-input v-model="textShow" showNumber type="textarea">
         </basic-input> 
+      </a-form-model-item>
+    </a-col>
+    <a-col :span="formItemSpan">
+      <a-form-model-item label="自定义指令作用于原生input上">
+        <input v-numberOnly placeholder="Number Only">
+      </a-form-model-item>
+    </a-col>
+    <a-col :span="formItemSpan">
+      <a-form-model-item label="原生电话号(有空格)">
+        <input type="phone" v-model="dataPhone" maxlength="13">
       </a-form-model-item>
     </a-col>
   </a-form-model>
@@ -34,7 +44,8 @@ export default {
       uuid: '12345',
       email: '哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼',
       textLimit: '',
-      textShow: ''
+      textShow: '',
+      dataPhone: ''
     }
   },
   props: {
@@ -43,9 +54,34 @@ export default {
       default: false,
     }
     },
+    directives: {
+      numberOnly: {
+        bind: function(e) {
+          console.log('bind eeeeeeeeeeeee', e);
+          e.handler = function() {
+            e.value = e.value.replace(/\D+/, '')
+          }
+          e.addEventListener('input', e.handler)
+        },
+        unbind: function(e) {
+          e.removeEventListener('input', e.handler)
+        }
+      }
+    },
     watch: {
       email(newVal) {
         console.log('newEmaillllllll', newVal);
+      },
+      dataPhone(newValue, oldValue) {
+        if (newValue.length > oldValue.length) { // 文本框中输入
+        if (newValue.length === 3 || newValue.length === 8) {
+        this.dataPhone += ' '
+        }
+        } else { // 文本框中删除
+        if (newValue.length === 9 || newValue.length === 4) {
+        this.dataPhone = this.dataPhone.trim()
+        }
+        }
       }
     },
   components: {

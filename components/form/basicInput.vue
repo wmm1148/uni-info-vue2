@@ -35,6 +35,7 @@
       prop: 'value',
       event: 'change'
     },
+    
     props: {
       value: String,
       readOnly: {  //这种自定义的必须在prop里写吗
