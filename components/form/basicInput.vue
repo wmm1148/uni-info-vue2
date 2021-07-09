@@ -23,6 +23,7 @@
         <a-icon type="copy" @click="copyText" />
       </template>
       <template #suffix v-if="showNumber">
+        <!-- 显示的数据还没修改 -->
         <span :class="[{ changeNumber: lengthLimit < enter }]">
           <!-- <span :class="[ (lengthLimit <= enter ) ? 'changeNumber':'' ]"> -->
           {{ enter }}
@@ -60,6 +61,9 @@ export default {
       default: false,
     },
     lengthLimit: {
+      type: Number,
+    },
+    byteLimit: {
       type: Number,
     },
   },
@@ -102,7 +106,7 @@ export default {
     },
     numberCount(event) {
       this.enter = event.target.value.length
-      // this.WidthCheckTest(event.target.value, 10)
+      this.WidthCheckTest(event.target.value, this.byteLimit)
     },
     WidthCheckTest(str, maxLen) {
       //length 获取字数数，不区分汉子和英文

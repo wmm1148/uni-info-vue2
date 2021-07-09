@@ -4,7 +4,13 @@
   <a-form-model>
     <a-col :span="formItemSpan">
       <a-form-model-item label="字数统计 & 字数限制">
-        <basic-input v-model="textLimit" :lengthLimit="5" showNumber allowClear :maxLength="2">
+        <basic-input v-model="textLimit" :byteLimit="6" showNumber :maxLength="2">
+        </basic-input>
+      </a-form-model-item>
+    </a-col>
+    <a-col :span="formItemSpan">
+      <a-form-model-item label="字节限制">
+        <basic-input v-model="byteLimit" :lengthLimit="5" showNumber allowClear :maxLength="2">
         </basic-input>
       </a-form-model-item>
     </a-col>
@@ -53,7 +59,8 @@ export default {
       textLimit: '',
       textShow: '',
       dataPhone: '',
-      test: ''
+      test: '',
+      byteLimit: ''
     }
   },
   props: {
