@@ -4,7 +4,7 @@
   <a-form-model>
     <a-col :span="formItemSpan">
       <a-form-model-item label="字数统计 & 字数限制">
-        <basic-input v-model="textLimit" :lengthLimit="5" showNumber allowClear>
+        <basic-input v-model="textLimit" :lengthLimit="5" showNumber allowClear :maxLength="2">
         </basic-input>
       </a-form-model-item>
     </a-col>
@@ -15,19 +15,26 @@
       </a-form-model-item>
     </a-col>
     <a-col :span="formItemSpan">
+      <a-form-model-item label="预格式化展示——电话号">
+        <basic-input v-model="dataPhone" type="mobile">
+        </basic-input> 
+      </a-form-model-item>
+    </a-col>
+    <a-col :span="formItemSpan">
       <a-form-model-item label="预格式化展示">
         <basic-input v-model="textShow" showNumber type="textarea">
         </basic-input> 
       </a-form-model-item>
     </a-col>
-    <a-col :span="formItemSpan">
+    <!-- <a-col :span="formItemSpan">
       <a-form-model-item label="自定义指令作用于原生input上">
         <input v-numberOnly placeholder="Number Only">
       </a-form-model-item>
-    </a-col>
+    </a-col> -->
     <a-col :span="formItemSpan">
-      <a-form-model-item label="原生电话号(有空格)">
-        <input type="phone" v-model="dataPhone" maxlength="13">
+      <a-form-model-item label="字节个数 作用于原生input上">
+        <!-- <a-input :value="test" @change.native="ontest"/> -->
+        <!-- <input type="text" id="nickname" class="nickname" :value="test" onkeyup="WidthCheck(this,10)"/> -->
       </a-form-model-item>
     </a-col>
   </a-form-model>
@@ -45,7 +52,8 @@ export default {
       email: '哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼',
       textLimit: '',
       textShow: '',
-      dataPhone: ''
+      dataPhone: '',
+      test: ''
     }
   },
   props: {
@@ -57,7 +65,6 @@ export default {
     directives: {
       numberOnly: {
         bind: function(e) {
-          console.log('bind eeeeeeeeeeeee', e);
           e.handler = function() {
             e.value = e.value.replace(/\D+/, '')
           }
@@ -68,41 +75,12 @@ export default {
         }
       }
     },
-    watch: {
-      email(newVal) {
-        console.log('newEmaillllllll', newVal);
-      },
-      dataPhone(newValue, oldValue) {
-        if (newValue.length > oldValue.length) { // 文本框中输入
-        if (newValue.length === 3 || newValue.length === 8) {
-        this.dataPhone += ' '
-        }
-        } else { // 文本框中删除
-        if (newValue.length === 9 || newValue.length === 4) {
-        this.dataPhone = this.dataPhone.trim()
-        }
-        }
-      }
-    },
   components: {
     'basic-input': () => import('/components/form/basicInput.vue')
   },
   created() {
-      },
+  },
   methods: {
-    backClick () {
-      this.$router.push('/stu/stuInfo/')
-    },
-    addClick () {
-      this.$router.push('/stu/stuInfo/add')
-    },
-    handleOk() {
-      console.log('captchaValue', this.captchaValue);
-    },
-    handleCancel() {
-    this.$emit('update:visible', false);
-    },
-    
   }
 }
 </script>

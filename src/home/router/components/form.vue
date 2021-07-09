@@ -3,11 +3,11 @@
     <basic-card class="basic-card" title="Input">
       <form3></form3>
     </basic-card>
-    <basic-card title="Captcha By Way3">
-      <form1></form1>
-    </basic-card>
     <basic-card class="basic-card" title="Captcha By Way2">
       <form2></form2>
+    </basic-card>
+    <basic-card title="Captcha By Way3">
+      <form1></form1>
     </basic-card>
     
   </div>
