@@ -1,8 +1,8 @@
 <template>
-  <a-tooltip>
+  <!-- <a-tooltip>
     <template #title v-if="true">
       {{ value }}
-    </template>
+    </template> -->
     <a-input
       :value="value"
       v-bind="$attrs"
@@ -41,7 +41,7 @@
         </span>
       </template>
     </a-input>
-  </a-tooltip>
+  <!-- </a-tooltip> -->
 </template>
 
 <script>
@@ -50,6 +50,7 @@ export default {
     return {
       enter: 0,
       byteNumber: 0,
+      innerMaxLength: 0,
     }
   },
   model: {
@@ -124,7 +125,7 @@ export default {
     },
     numberCount(event) {
       this.enter = event.target.value.length
-      this.WidthCheckTest(event.target.value, this.byteLimit)
+      // this.WidthCheckTest(event.target.value, this.byteLimit)
     },
     WidthCheckTest(str, maxLen) {
       this.byteNumber = 0;
