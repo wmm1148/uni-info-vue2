@@ -49,14 +49,14 @@
       </a-col>
       <a-col :span="formItemSpan">
         <a-form-model-item label="7. 预格式化展示————手机号mobile">
-          <basic-input v-model="value71" type="mobile" placeholder="xxx xxxx xxxx">
+          <basic-input v-model="value71" type="mobile" placeholder="xxx xxxx xxxx" allowClear>
           </basic-input>
           <p>说明：预格式化只负责格式控制，不负责校验等功能。这里拿手机号举例，具体格式将在下面展示。</p>
         </a-form-model-item>
       </a-col>
       <a-col :span="formItemSpan">
         <a-form-model-item label="8. 提示输入内容（舍弃）">
-          <a-input ref="userNameInput" v-model="userName" placeholder="Basic usage">
+          <a-input ref="userNameInput" v-model="value8" placeholder="Basic usage">
           <a-icon slot="prefix" type="lock" />
           <a-tooltip slot="suffix" title="Tips:The password must be 15-30 characters long" trigger="click">
             <a-icon type="info-circle" style="color: rgba(0,0,0,.45)" />
@@ -64,12 +64,6 @@
         </a-input>
         </a-form-model-item>
       </a-col>
-      <!-- <a-col :span="formItemSpan">
-        <a-form-model-item label="8. 提示输入内容">
-          <basic-input v-model="value8" readOnly>
-          </basic-input>
-        </a-form-model-item>
-      </a-col> -->
     </a-form-model>
   </a-row>
   <br>
@@ -101,23 +95,8 @@
           </basic-input> 
         </a-form-model-item>
       </a-col>
-      <a-col :span="formItemSpan">
-        <a-form-model-item label="预格式化展示——电话号">
-          <basic-input v-model="dataPhone" type="mobile">
-          </basic-input> 
-        </a-form-model-item>
-      </a-col>
-      <a-col :span="formItemSpan">
-        <a-form-model-item label="预格式化展示">
-          <basic-input v-model="textShow" count type="textarea">
-          </basic-input> 
-        </a-form-model-item>
-      </a-col>
-      <!-- <a-col :span="formItemSpan">
-        <a-form-model-item label="自定义指令作用于原生input上">
-          <input v-numberOnly placeholder="Number Only">
-        </a-form-model-item>
-      </a-col> -->
+      
+      
       <a-col :span="formItemSpan">
         <a-form-model-item label="字节个数 作用于原生input上">
           <!-- <a-input :value="test" @change.native="ontest"/> -->
@@ -145,7 +124,6 @@
           <label for="start">Start month:</label>
           <input type="month" id="start" name="start" min="2018-03" value="2018-05">
           <a-input type.native="month">
-
           </a-input>
         </a-form-model-item>
       </a-col>
@@ -163,11 +141,26 @@
           </a-input-group>
         </a-form-model-item>
       </a-col>
-    </a-form-model>
-    <a-form-model>
+      <a-col :span="formItemSpan">
+        <a-form-model-item label="自定义指令作用于原生input上">
+          <input v-numberOnly placeholder="Number Only">
+        </a-form-model-item>
+      </a-col>
       <a-col :span="formItemSpan">
         <a-form-model-item label="uu">
           <a-textarea placeholder="textarea with clear icon" allow-clear @change="onChange" />
+        </a-form-model-item>
+      </a-col>
+      <a-col :span="formItemSpan">
+        <a-form-model-item label="预格式化展示——电话号">
+          <basic-input v-model="dataPhone" type="mobile">
+          </basic-input> 
+        </a-form-model-item>
+      </a-col>
+      <a-col :span="formItemSpan">
+        <a-form-model-item label="预格式化展示">
+          <basic-input v-model="textShow" count type="textarea">
+          </basic-input> 
         </a-form-model-item>
       </a-col>
     </a-form-model>
@@ -210,7 +203,7 @@ export default {
       numberOnly: {
         bind: function(e) {
           e.handler = function() {
-            e.value = e.value.replace(/\D+/, '')
+            e.value = e.value.replace(/\D+/, '') //删掉所有不是数字的
           }
           e.addEventListener('input', e.handler)
         },

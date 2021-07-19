@@ -1,27 +1,27 @@
 <template>
-<!-- 以第二种方式写的验证码 -->
-<div class="layout">
-  <a-spin :spinning="loading" :class="size" v-bind="$attrs" v-if="!CaptchaOnly">
-    <a-input v-bind="$attrs" :value="value" @change="$emit('change', $event.target.value)" v-if="!CaptchaOnly">
-      <template #suffix>
-        <img :src="captchaPath" @click="getCaptcha"/>
+<!-- 以第二种方式写的验证码 ———— 交互更舒服一点 -->
+  <div>
+    <a-spin :spinning="loading" :class="size" v-bind="$attrs" v-if="!CaptchaOnly">
+      <a-input v-bind="$attrs" :value="value" @change="$emit('change', $event.target.value)" v-if="!CaptchaOnly">
+        <template #suffix>
+          <img :src="captchaPath" @click="getCaptcha"/>
+        </template>
+        <template v-for="(_, slot) of $options.omit(['suffix'],$scopedSlots)" #[slot]="scope" >
+          <slot :name="slot" v-bind="scope" />
+        </template>
+        <template v-for="(_, slot) of $slots" :slot="slot">
+          <slot :name="slot"></slot>
+        </template>
+      </a-input>
+      <template slot="indicator">
+        <slot name="indicator"></slot>
       </template>
-      <template v-for="(_, slot) of $options.omit(['suffix'],$scopedSlots)" #[slot]="scope" >
-        <slot :name="slot" v-bind="scope" />
-      </template>
-      <template v-for="(_, slot) of $slots" :slot="slot">
-        <slot :name="slot"></slot>
-      </template>
-    </a-input>
-    <template slot="indicator">
-      <slot name="indicator"></slot>
-    </template>
-  </a-spin>
-  <div class="testDiv" v-if="CaptchaOnly">
-    <a-spin class="imgOnly" :spinning="loading" >
-      <img :src="captchaPath" @click="getCaptcha"/>
     </a-spin>
-  </div>
+    <div class="testDiv" v-if="CaptchaOnly">
+      <a-spin class="imgOnly" :spinning="loading" >
+        <img :src="captchaPath" @click="getCaptcha"/>
+      </a-spin>
+    </div>
   </div>
 </template>
 
@@ -112,9 +112,6 @@ import qs from 'qs'
 </script>
 
 <style lang="less" scoped>
-.layout {
-  // width: 280px;
-}
 /deep/ .ant-input-suffix{
   right: 0px;
   .ant-input-clear-icon {
@@ -125,30 +122,22 @@ img {
   border-radius: 0 4px 4px 0;
 }
 
-.default {
-  img {
-    height:32px;
-  }
+.default img {
+  height:32px;
 }
 
-.small {
-  img {
-    height: 24px;
-    }
+.small img {
+  height: 24px;
 }
 
-.large {
-  img {
-    height: 40px;
-    }
+.large img {
+  height: 40px;
 }
 .testDiv {
   // height: 24px;
   width: 48px;
-  .imgOnly {
-    img {
-      height: 24px;
-      }
+  .imgOnly img {
+    height: 24px;
   }
 }
 </style>

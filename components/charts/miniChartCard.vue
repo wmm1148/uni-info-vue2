@@ -40,8 +40,10 @@
   // background-color:rgba(233, 231, 231, 0.65);
   position: relative;
   width: 100%;
+  overflow: hidden;
   /deep/ .ant-card-body {
     padding: 24px;
+    overflow: hidden;
   }
 }
 .flex-title {

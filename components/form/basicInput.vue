@@ -76,6 +76,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    delimiter: {
+      type: String,
+      default: ' ',
+    },
     // 忘了lengthLimit是干啥的
     // lengthLimit: {
     //   type: Number,
@@ -84,20 +88,20 @@ export default {
       type: Number,
     },
   },
-  watch: {
+  watch: { //监听只能处理手动输入的情况
     value(newValue, oldValue) {
       if (this.$attrs.type === 'mobile') {
-        console.log('watch mobile');
+        console.log('newValue.length', newValue.length);
         if (newValue.length > oldValue.length) {
           // 文本框中输入
           if (newValue.length === 3 || newValue.length === 8) {
-            var insertTemp = this.value + ' ';
+            var insertTemp = this.value + this.delimiter;
             this.$emit('change', insertTemp);
           }
         } else {
           // 文本框中删除
           if (newValue.length === 9 || newValue.length === 4) {
-            var delTemp = this.value.trim();
+            var delTemp = this.value.trim(); //如果不是空格应该就用不了trim
             this.$emit('change', delTemp);
           }
         }
@@ -107,12 +111,11 @@ export default {
   created() {
     // $("#input1").inputlimitor({limit:10});
     // document.querySelector('#input').inputlimitor({limit:10});
-    console.log('attrs.type', this.$attrs.type);
-    // console.log('value', this.value);
-    this.enter = this.value.length
+    console.log('this.value', this.value);
+    this.enter = this.value ? this.value.length : 0;
     this.innerMaxLength = this.$attrs.type === 'mobile' ? 13 : this.$attrs.maxLength
     // this.innerMaxLength = this.byteLimit ? this.byteLimit : (this.$attrs.type === 'mobile' ? 13 : this.$attrs.maxLength)
-    console.log('this.innerMaxLength', this.innerMaxLength);
+    // console.log('this.innerMaxLength', this.innerMaxLength);
   },
   methods: {
     copyText() {
@@ -124,6 +127,7 @@ export default {
       this.$message.success('复制成功！')
     },
     numberCount(event) {
+      console.log('event.target.value.length', event.target.value.length);
       this.enter = event.target.value.length
       // this.WidthCheckTest(event.target.value, this.byteLimit)
     },
@@ -150,7 +154,7 @@ export default {
           break
         }
       }
-      console.log('this.byteNumber', this.byteNumber)
+      // console.log('this.byteNumber', this.byteNumber)
       this.enter = this.byteNumber;
       if(this.byteNumber >= this.byteLimit) {
         this.innerMaxLength = this.enter;

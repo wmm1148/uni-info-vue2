@@ -1,5 +1,5 @@
 <template>
-<!-- 有改动的版本，以拼接方式写的验证码 -->
+<!-- 以input框和验证码拼接方式写的验证码 -->
   <div class="captcha-layout" :class="$attrs.size">
     <a-input
     v-model="inputValue"
@@ -28,7 +28,9 @@
 
 <script>
 import { request } from '@/network/request.js'
-const Qs = require('qs')
+//require是AMD引用方式 import是ES6引用方式
+// const Qs = require('qs')
+import * as qs from 'qs'
 
   export default {
     data () {
@@ -76,7 +78,6 @@ const Qs = require('qs')
     },
     watch: {
       value(newVal) {
-        // console.log('iiiii');
         this.inputValue = newVal;
       },
       inputValue(newVal) {
@@ -104,7 +105,7 @@ const Qs = require('qs')
         else {
           //无论是get还是post这里都使用query的传参方式
           const url= this.url.split("?")[0];  //获取url
-          const data = Qs.parse(this.url.split("?")[1])  //获取参数 进行序列化，这里先单独使用，可以在网络请求里封装下
+          const data = qs.parse(this.url.split("?")[1])  //获取参数 进行序列化，这里先单独使用，可以在网络请求里封装下
           try {
             const res = await request({ url, method: this.method, data})();
             setTimeout(() => {
@@ -129,6 +130,7 @@ const Qs = require('qs')
 </script>
 
 <style lang="less" scoped>
+@basicBorder: 1px solid #1890ff;
 //公共样式
 .captcha-layout {
   display: flex;
@@ -151,18 +153,18 @@ img {
   }
   .ant-spin-blur {
     .img-captcha {
-    border: 1px solid #1890ff;
+    border: @basicBorder;
     border-left: none;
     }
   }
 }
 .captcha-layout:hover {
   .img-captcha {
-    border: 1px solid #1890ff;
+    border: @basicBorder;
     border-left: none;
   }
   /deep/ .ant-input {
-    border: 1px solid #1890ff;
+    border: @basicBorder;
   // border: black;
   // border-color: #C0C4CC;
   // border-bottom: 1px solid black !important;
@@ -173,7 +175,7 @@ img {
   // /deep/ .ant-input:focus {
   //   box-shadow: none;
   //   /deep/ .img-captcha {
-  //     border: 1px solid #1890ff;
+  //     border: @basicBorder;
   //     border-left: none;
   //     // box-shadow: #1890ff;
   //   }
@@ -225,12 +227,11 @@ img {
       margin-bottom: 2em;
       height: 24px;
       line-height: 24px;
-      // border: 1px solid #1890ff;
+      // border: @basicBorder;
     }
   }
   
 }
-
 
 // size为large
 .large {
@@ -250,7 +251,7 @@ img {
       margin-bottom: 0.4em;
       height: 40px;
       line-height: 40px;
-      // border: 1px solid #1890ff;
+      // border: @basicBorder;
     }
   }
 }
