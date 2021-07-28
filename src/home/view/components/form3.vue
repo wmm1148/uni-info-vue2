@@ -213,7 +213,7 @@ export default {
       }
     },
   components: {
-    'basic-input': () => import('/components/form/basicInput.vue')
+    'basic-input': () => import('/components/form/BasicInput.vue')
   },
   created() {
   },

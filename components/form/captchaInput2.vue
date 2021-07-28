@@ -1,8 +1,8 @@
 <template>
 <!-- 以第二种方式写的验证码 ———— 交互更舒服一点 -->
   <div>
-    <a-spin :spinning="loading" :class="size" v-bind="$attrs" v-if="!CaptchaOnly">
-      <a-input v-bind="$attrs" :value="value" @change="$emit('change', $event.target.value)" v-if="!CaptchaOnly">
+    <a-spin :spinning="loading" :class="size" v-bind="$attrs" v-if="!captchaOnly">
+      <a-input v-bind="$attrs" :value="value" @change="$emit('change', $event.target.value)" v-if="!captchaOnly">
         <template #suffix>
           <img :src="captchaPath" @click="getCaptcha"/>
         </template>
@@ -17,7 +17,7 @@
         <slot name="indicator"></slot>
       </template>
     </a-spin>
-    <div class="testDiv" v-if="CaptchaOnly">
+    <div class="testDiv" v-if="captchaOnly">
       <a-spin class="imgOnly" :spinning="loading" >
         <img :src="captchaPath" @click="getCaptcha"/>
       </a-spin>
@@ -55,7 +55,7 @@ import qs from 'qs'
         default: 'get',
       },
       value: String,
-      CaptchaOnly: {
+      captchaOnly: {
         type: Boolean,
         default: false
       }
@@ -69,15 +69,24 @@ import qs from 'qs'
         if (!this.loading) {
           this.loading = true;
           if (/\.(png|jpe?g|gif|svg)(\?.*)?$/.test(this.url)) {
+            //如果传的本来就是图片格式，直接显示就行了
             this.captchaPath = this.url;
             this.loading = false;
           }
           else {
             //无论是get还是post这里都使用query的传参方式
+            //如果服务端使用post但将参数放在url上直接传过去就行了
+            //这里假设使用post请求方式，body里传json，具体情况要看具体使用
             const url= this.url.split("?")[0];  //获取url
             const data = qs.parse(this.url.split("?")[1])  //获取参数 进行序列化，这里先单独使用，可以在网络请求里封装下
             try {
-              const res = await request({ url, method: this.method, data})();
+              let res = '';
+              if(this.method === 'get') {
+                res = await request({ url: this.url })();
+              }else {
+                res = await request({ url, method: 'post', data})();
+              }
+              console.log('res');
               //如果发过来的是图片直接渲染
               if (/\.(png|jpe?g|gif|svg)(\?.*)?$/.test(res)) {
                 this.captchaPath = res.data;

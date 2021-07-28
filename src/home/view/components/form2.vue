@@ -11,7 +11,7 @@
           size="large"
           allowClear
           placeholder="Input Captchaaaaaaaaaaaddddddddaaaa"
-          disabled
+          type="number"
           >
           <template #prefix>
             <a-icon type="safety"></a-icon>
@@ -26,6 +26,7 @@
           v-model="captchaValue"
           method="post"
           allowClear
+          type="number"
           >
           <template #prefix>
             <a-icon type="safety"></a-icon>
@@ -58,7 +59,7 @@
           v-model="captchaValue"
           method="post"
           size="small"
-          CaptchaOnly
+          captchaOnly
           >
           <template #prefix>
             <a-icon type="safety"></a-icon>
@@ -101,24 +102,6 @@ export default {
     'captcha-input2': () => import('/components/form/captchaInput2.vue'),
     // 'basic-input': () => import('/components/form/basicInput.vue')
   },
-  created() {
-    // $(document).ready(function(){
-    //   $('.input').on('input focus keyup',
-    //       function(){
-    //     var strs   = getByteLen($(this).val());
-    //     remain = strs.length;
-    //     var content_msg = remain+'字';
-    //     $(this).next().html(content_msg);			
-    //       }
-    //   );
-    // });
-    // //获取除标点符号之外的字数
-    // function getByteLen(val) {
-    //   strs = val.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\，|\。|\？|\：|\；|\‘|\’|\”|\“|\、|\·|\！|\（|\）|\》|\《|\『|\』]/g,""); 
-    //   //let recxType = /^[0-9A-Za-z\u4e00-\u9fa5]{15,}$/;
-    //   return strs; 
-    // }
-      },
   methods: {
     backClick () {
       this.$router.push('/stu/stuInfo/')
@@ -130,7 +113,7 @@ export default {
       console.log('captchaValue', this.captchaValue);
     },
     handleCancel() {
-    this.$emit('update:visible', false);
+      this.$emit('update:visible', false);
     },
     
   }

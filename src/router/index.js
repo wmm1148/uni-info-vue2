@@ -13,7 +13,7 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    redirect: '/home/analysis',
+    redirect: '/home/input',
     children: [
       {
         path: 'analysis',
@@ -39,6 +39,16 @@ const routes = [
         path: 'menuTree',
         name: 'menuTree',
         component: () => import( '../home/router/components/menuTree.vue'),
+      },
+      {
+        path: 'basicCard',
+        name: 'basicCard',
+        component: () => import( '../home/router/display/basicCard.vue'),
+      },
+      {
+        path: 'input',
+        name: 'input',
+        component: () => import( '../home/router/form/input.vue'),
       },
     ]
   },

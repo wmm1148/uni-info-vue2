@@ -8,7 +8,7 @@
           :open-keys="openKeys"
           @click="handleClick"
           class="ant-mune">
-            <a-sub-menu key="sub1" @titleClick="titleClick">
+            <!-- <a-sub-menu key="sub1" @titleClick="titleClick">
               <span slot="title"><a-icon type="idcard" /><span>Dashboard</span></span>
               <a-menu-item key="analysis">
                 <router-link :to="{ name: 'analysis'}">Analysis</router-link>
@@ -19,15 +19,21 @@
               <a-menu-item key="workplace">
                 <router-link :to="{ name: 'workplace'}">Workplace</router-link>
               </a-menu-item>
-            </a-sub-menu>
+            </a-sub-menu> -->
             <a-sub-menu key="sub2" @titleClick="titleClick">
               <span slot="title"><a-icon type="idcard" /><span>Components</span></span>
-              <a-menu-item key="menuTree">
-                <router-link :to="{ name: 'menuTree'}">MenuTree</router-link>
-              </a-menu-item>
-              <a-menu-item key="form">
-                <router-link :to="{ name: 'form'}">Form</router-link>
-              </a-menu-item>
+              <a-menu-item-group key="display" class="ant-menu-sub">
+                <template slot="title"><span>Display</span></template>
+                <a-menu-item key="basicCard">
+                  <router-link :to="{ name: 'basicCard'}">BasicCard</router-link>
+                </a-menu-item>
+              </a-menu-item-group>
+              <a-menu-item-group key="form" class="ant-menu-sub">
+                <template slot="title"><span>Form</span></template>
+                <a-menu-item key="input">
+                  <router-link :to="{ name: 'input'}">Input</router-link>
+                </a-menu-item>
+              </a-menu-item-group>
             </a-sub-menu>
         </a-menu>
       </a-layout-sider>

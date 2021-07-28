@@ -1,47 +1,42 @@
 <template>
-  <!-- <a-tooltip>
-    <template #title v-if="true">
-      {{ value }}
-    </template> -->
-    <a-input
-      :value="value"
-      v-bind="$attrs"
-      @change="$emit('change', $event.target.value)"
-      v-bind:readOnly="readOnly"
-      @input="numberCount"
-      ref="input"
-      :class="[{ readOnly: readOnly }]"
-      :maxLength="innerMaxLength"
-    >
-      <template v-for="(_, slot) of $scopedSlots" #[slot]="scope">
-        <slot :name="slot" v-bind="scope" />
-      </template>
-      <template v-for="(_, slot) of $slots" :slot="slot">
-        <slot :name="slot"></slot>
-      </template>
-      <template #addonAfter v-if="copyAll">
-        <a-icon type="copy" @click="copyText" />
-      </template>
-      <template #suffix v-if="count">
-        <!-- 显示的数据还没修改 -->
-        <!-- <span :class="[{ changeNumber: lengthLimit <= enter }]" v-if="innerMaxLength"> -->
-        <span :class="[{ changeNumber: innerMaxLength <= enter }]"  v-if="innerMaxLength">
-          {{ enter + '/' + innerMaxLength}}
-        </span>
-        <span :class="[{ changeNumber: innerMaxLength <= enter }]" v-else>
-          {{ enter }}
-        </span>
-      </template>
-      <template #suffix v-else-if="byteCount">
-        <span :class="[{ changeNumber: byteLimit <= byteNumber }]"  v-if="byteLimit">
-          {{ byteNumber + '/' + byteLimit}}
-        </span>
-        <span :class="[{ changeNumber: byteLimit <= byteNumber }]" v-else>
-          {{ byteNumber }}
-        </span>
-      </template>
-    </a-input>
-  <!-- </a-tooltip> -->
+  <a-input
+    :value="value"
+    v-bind="$attrs"
+    @change="$emit('change', $event.target.value)"
+    v-bind:readOnly="readOnly"
+    @input="numberCount"
+    ref="input"
+    :class="{ readOnly: readOnly }"
+    :maxLength="innerMaxLength"
+  >
+    <template v-for="(_, slot) of $scopedSlots" #[slot]="scope">
+      <slot :name="slot" v-bind="scope" />
+    </template>
+    <template v-for="(_, slot) of $slots" :slot="slot">
+      <slot :name="slot"></slot>
+    </template>
+    <template #addonAfter v-if="copyAll">
+      <a-icon type="copy" @click="copyText" />
+    </template>
+    <template #suffix v-if="count">
+      <!-- 显示的数据还没修改 -->
+      <!-- <span :class="[{ changeNumber: lengthLimit <= enter }]" v-if="innerMaxLength"> -->
+      <span :class="[{ changeNumber: innerMaxLength <= enter }]"  v-if="innerMaxLength">
+        {{ enter + '/' + innerMaxLength}}
+      </span>
+      <span :class="[{ changeNumber: innerMaxLength <= enter }]" v-else>
+        {{ enter }}
+      </span>
+    </template>
+    <template #suffix v-else-if="byteCount">
+      <span :class="[{ changeNumber: byteLimit <= byteNumber }]"  v-if="byteLimit">
+        {{ byteNumber + '/' + byteLimit}}
+      </span>
+      <span :class="[{ changeNumber: byteLimit <= byteNumber }]" v-else>
+        {{ byteNumber }}
+      </span>
+    </template>
+  </a-input>
 </template>
 
 <script>
@@ -80,10 +75,6 @@ export default {
       type: String,
       default: ' ',
     },
-    // 忘了lengthLimit是干啥的
-    // lengthLimit: {
-    //   type: Number,
-    // },
     byteLimit: {
       type: Number,
     },
@@ -91,7 +82,7 @@ export default {
   watch: { //监听只能处理手动输入的情况
     value(newValue, oldValue) {
       if (this.$attrs.type === 'mobile') {
-        console.log('newValue.length', newValue.length);
+        // console.log('newValue.length', newValue.length);
         if (newValue.length > oldValue.length) {
           // 文本框中输入
           if (newValue.length === 3 || newValue.length === 8) {
@@ -111,7 +102,7 @@ export default {
   created() {
     // $("#input1").inputlimitor({limit:10});
     // document.querySelector('#input').inputlimitor({limit:10});
-    console.log('this.value', this.value);
+    // console.log('this.value', this.value);
     this.enter = this.value ? this.value.length : 0;
     this.innerMaxLength = this.$attrs.type === 'mobile' ? 13 : this.$attrs.maxLength
     // this.innerMaxLength = this.byteLimit ? this.byteLimit : (this.$attrs.type === 'mobile' ? 13 : this.$attrs.maxLength)
@@ -127,7 +118,7 @@ export default {
       this.$message.success('复制成功！')
     },
     numberCount(event) {
-      console.log('event.target.value.length', event.target.value.length);
+      // console.log('event.target.value.length', event.target.value.length);
       this.enter = event.target.value.length
       // this.WidthCheckTest(event.target.value, this.byteLimit)
     },
@@ -166,27 +157,21 @@ export default {
 
 <style lang="less" scoped>
 @border-base: 1px solid #d9d9d9;
+
 .readOnly {
   border: @border-base;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-}
-.readOnly:hover {
-  border: @border-base;
-}
-.readOnly:focus {
-  border: @border-base;
-  box-shadow: none;
-  border-color: #c0c4cc;
+  &:hover {
+    border: @border-base;
   }
-// .readOnly {
-//   /deep/ .ant-input {
-//     overflow: hidden;
-//     white-space: nowrap;
-//     text-overflow: ellipsis;
-//   }
-// }
+  &:focus {
+    border: @border-base;
+    box-shadow: none;
+    border-color: #c0c4cc;
+  }
+}
 .changeNumber {
   color: red;
 }

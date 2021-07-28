@@ -1,5 +1,5 @@
 <template>
-<!-- 以input框和验证码拼接方式写的验证码 -->
+<!-- 以input框和验证码拼接方式写的验证码，已弃用 -->
   <div class="captcha-layout" :class="$attrs.size">
     <a-input
     v-model="inputValue"
