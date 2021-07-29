@@ -1,9 +1,7 @@
 <template>
-  <!-- <div class="layout"> -->
-    <a-card class="card-layout" :title="title" :headStyle='headStyle'>
-      <slot></slot>
-    </a-card>
-  <!-- </div> -->
+  <a-card v-bind="$attrs" class="card-layout" :title="title" :headStyle='headStyle'>
+    <slot></slot>
+  </a-card>
 </template>
 
 <script>
@@ -24,11 +22,8 @@
 <style scoped>
 .card-layout {
   background: #feffff;
-  width: 100%;
   text-align: left;
-  /* height: 600px; */
   margin: 12px;
-  height: auto;
 }
 .ant-card-body {
   padding: 0 24px 24px 24px;

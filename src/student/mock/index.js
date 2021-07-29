@@ -1,6 +1,5 @@
 // import Mock from 'mockjs'
 import Mock from 'router-mock'
-import { Random } from 'mockjs';
 import api from '../api.js'
 
 const list = [
@@ -299,28 +298,4 @@ Mock.get('/get/eliteStudent/list', () => {
   })
 })
 
-// const uuid = '12345';
-//为什么这个mock只有写在这里可以拦截呢
-
-Mock.post('/post/captcha', data => {
-  // console.log('uuid mockkkk  post', data);
-  console.log(data);
-  const imgSrc = Random.image('800x420', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
-  return Promise.resolve({
-    code: 1,
-    data: {
-      data: imgSrc,
-    }
-  })
-})
-
-Mock.get('/get/captcha', () => {
-  const imgSrc = Random.image('800x420', '#' + Random.string('number', 6), '#ffffff', Random.string('abcdefghijklmnpqrstuvwxyz123456789', 6))
-  return Promise.resolve({
-    code: 1,
-    data: {
-      data: imgSrc,
-    }
-  })
-})
 

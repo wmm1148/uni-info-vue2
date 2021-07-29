@@ -174,7 +174,6 @@ export default {
   data () {
     return {
       formItemSpan: 12,
-      headStyle: { 'font-weight': 'bold' },
       captchaValue: '',
       uuid: '12345',
       email: '哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼哦吼吼',
