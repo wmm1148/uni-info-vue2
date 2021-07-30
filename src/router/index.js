@@ -31,11 +31,6 @@ const routes = [
         component: () => import( '../home/router/workplace.vue'),
       },
       {
-        path: 'form',
-        name: 'form',
-        component: () => import( '../home/router/components/form.vue'),
-      },
-      {
         path: 'menuTree',
         name: 'menuTree',
         component: () => import( '../home/router/components/menuTree.vue'),
@@ -49,6 +44,11 @@ const routes = [
         path: 'input',
         name: 'input',
         component: () => import( '../home/router/form/input.vue'),
+      },
+      {
+        path: 'captchaInput',
+        name: 'captchaInput',
+        component: () => import( '../home/router/form/captchaInput.vue'),
       },
     ]
   },

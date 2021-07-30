@@ -19,20 +19,18 @@
       <a-icon type="copy" @click="copyText" />
     </template>
     <template #suffix v-if="count">
-      <!-- 显示的数据还没修改 -->
-      <!-- <span :class="[{ changeNumber: lengthLimit <= enter }]" v-if="innerMaxLength"> -->
-      <span :class="[{ changeNumber: innerMaxLength <= enter }]"  v-if="innerMaxLength">
+      <span v-if="innerMaxLength" :class="{ changeNumber: innerMaxLength <= enter }">
         {{ enter + '/' + innerMaxLength}}
       </span>
-      <span :class="[{ changeNumber: innerMaxLength <= enter }]" v-else>
+      <span v-else :class="{ changeNumber: innerMaxLength <= enter }">
         {{ enter }}
       </span>
     </template>
     <template #suffix v-else-if="byteCount">
-      <span :class="[{ changeNumber: byteLimit <= byteNumber }]"  v-if="byteLimit">
+      <span :class="{ changeNumber: byteLimit <= byteNumber }"  v-if="byteLimit">
         {{ byteNumber + '/' + byteLimit}}
       </span>
-      <span :class="[{ changeNumber: byteLimit <= byteNumber }]" v-else>
+      <span :class="{ changeNumber: byteLimit <= byteNumber }" v-else>
         {{ byteNumber }}
       </span>
     </template>
@@ -120,37 +118,37 @@ export default {
     numberCount(event) {
       // console.log('event.target.value.length', event.target.value.length);
       this.enter = event.target.value.length
-      // this.WidthCheckTest(event.target.value, this.byteLimit)
+      // this.widthCheckTest(event.target.value, this.byteLimit)
     },
-    WidthCheckTest(str, maxLen) {
-      this.byteNumber = 0;
-      //length 获取字数数，不区分汉子和英文
-      for (var i = 0; i < str.length; i++) {
-        //charCodeAt()获取字符串中某一个字符的编码
-        var code = str.charCodeAt(i)
-        //单字节加1
-        if (
-          (code >= 0x0001 && code <= 0x007e) ||
-          (0xff60 <= code && code <= 0xff9f)
-        ) {
-          // if((this.byteNumber - this.innerMaxLength) === 1)
-        } else {
-          // this.byteNumber += 2
-          if((this.byteNumber += 2) >= this.byteLimit) {
-            this.innerMaxLength = this.enter;
-          }
-        }
-        if (this.byteNumber > maxLen) {
-          str = str.substr(0, i)
-          break
-        }
-      }
-      // console.log('this.byteNumber', this.byteNumber)
-      this.enter = this.byteNumber;
-      if(this.byteNumber >= this.byteLimit) {
-        this.innerMaxLength = this.enter;
-      }
-    },
+    // widthCheckTest(str, maxLen) {
+    //   this.byteNumber = 0;
+    //   //length 获取字数数，不区分汉子和英文
+    //   for (var i = 0; i < str.length; i++) {
+    //     //charCodeAt()获取字符串中某一个字符的编码
+    //     var code = str.charCodeAt(i)
+    //     //单字节加1
+    //     if (
+    //       (code >= 0x0001 && code <= 0x007e) ||
+    //       (0xff60 <= code && code <= 0xff9f)
+    //     ) {
+    //       // if((this.byteNumber - this.innerMaxLength) === 1)
+    //     } else {
+    //       // this.byteNumber += 2
+    //       if((this.byteNumber += 2) >= this.byteLimit) {
+    //         this.innerMaxLength = this.enter;
+    //       }
+    //     }
+    //     if (this.byteNumber > maxLen) {
+    //       str = str.substr(0, i)
+    //       break
+    //     }
+    //   }
+    //   // console.log('this.byteNumber', this.byteNumber)
+    //   this.enter = this.byteNumber;
+    //   if(this.byteNumber >= this.byteLimit) {
+    //     this.innerMaxLength = this.enter;
+    //   }
+    // },
   },
 }
 </script>

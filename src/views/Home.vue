@@ -24,15 +24,19 @@
               <span slot="title"><a-icon type="idcard" /><span>Components</span></span>
               <a-menu-item-group key="display" class="ant-menu-sub">
                 <template slot="title"><span>Display</span></template>
-                <a-menu-item key="basicCard">
+                <!-- <a-menu-item key="basicCard">
                   <router-link :to="{ name: 'basicCard'}">BasicCard</router-link>
-                </a-menu-item>
+                </a-menu-item> -->
               </a-menu-item-group>
               <a-menu-item-group key="form" class="ant-menu-sub">
                 <template slot="title"><span>Form</span></template>
                 <a-menu-item key="input">
                   <router-link :to="{ name: 'input'}">Input</router-link>
                 </a-menu-item>
+                <a-menu-item key="captchaInput">
+                  <router-link :to="{ name: 'captchaInput'}">Captcha Input</router-link>
+                </a-menu-item>
+                
               </a-menu-item-group>
             </a-sub-menu>
         </a-menu>
