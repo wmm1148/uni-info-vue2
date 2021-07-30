@@ -50,6 +50,11 @@ const routes = [
         name: 'captchaInput',
         component: () => import( '../home/router/form/captchaInput.vue'),
       },
+      {
+        path: 'singleNetSelect',
+        name: 'singleNetSelect',
+        component: () => import( '../home/router/form/singleNetSelect.vue'),
+      },
     ]
   },
   {

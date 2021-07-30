@@ -1,5 +1,5 @@
 <template>
-  <basic-card title="Basic Input" class="">
+  <basic-card title="BasicInput" class="">
     <h1 class="part-title">效果演示</h1>
     <a-row :gutter="24">
       <a-col class="ant-col-12">
@@ -66,10 +66,10 @@
 
 <script>
 import api from '../../api.js'
-import { inputAPI } from '@/common/components.js'
+import { APITitle } from '@/common/components.js'
 
   export default {
-  columns: inputAPI,
+  columns: APITitle,
     components: {
       'basic-card': () => import('../../../../components/display/BasicCard.vue'),
       'basic-input': () => import('/components/form/BasicInput.vue')
@@ -102,6 +102,7 @@ import { inputAPI } from '@/common/components.js'
 </script>
 
 <style lang="less" scoped>
+@border-radius-base: 4px;
 .part-title {
   margin: 12px 0;
   font-size: 18px; 
@@ -109,6 +110,7 @@ import { inputAPI } from '@/common/components.js'
 .cpn-card {
   margin-bottom: 24px;
   min-height: 180px;
+  border-radius: @border-radius-base;
   .cpn-title {
     margin: 12px 0;
     font-size: 16px; 

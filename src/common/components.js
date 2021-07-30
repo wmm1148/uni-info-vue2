@@ -1,4 +1,4 @@
-const inputAPI = [
+const APITitle = [
   {
   dataIndex: 'property',
   title: '参数'
@@ -15,4 +15,4 @@ const inputAPI = [
   }
 ]
 
-export { inputAPI };
+export { APITitle };

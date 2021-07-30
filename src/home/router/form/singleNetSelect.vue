@@ -1,5 +1,5 @@
 <template>
-  <basic-card title="CaptchaInput" class="">
+  <basic-card title="SingleNetSelect" class="">
     <h1 class="part-title">效果演示</h1>
     <a-row :gutter="24">
       <a-col class="ant-col-12">
@@ -8,7 +8,11 @@
           <br>
           <span>description</span>
           <a-divider dashed style="margin:12px 0"/>
-          <single-net-select></single-net-select>
+          <single-net-select 
+          :dataSource="mockData"
+          value-of="value"
+          label-of="label"
+          />
         </a-card>
       </a-col>
       <a-col class="ant-col-12">
@@ -41,13 +45,26 @@
 import api from '../../api.js'
 import { APITitle } from '@/common/components.js'
 
+const mockData = [
+  {
+    value: 'china',
+    label: 'China',
+  },
+  {
+    value: 'usa',
+    label: 'USA',
+  }
+]
+
   export default {
   columns: APITitle,
     components: {
       'basic-card': () => import('/components/display/BasicCard.vue'),
+      'single-net-select': () => import('/components/form/SingleNetSelect.vue')
     },
     data () {
       return {
+        mockData,
         formItemSpan: 12,
         headStyle: { 'font-weight': 'lighter' },
         list: [],
@@ -60,6 +77,7 @@ import { APITitle } from '@/common/components.js'
       fetch() {
         api.getInputAPIData().then((res) => {
           this.list = res.list
+          this.list = []
         }).catch((err) => {
           console.log(err)
         })
@@ -74,7 +92,7 @@ import { APITitle } from '@/common/components.js'
   margin: 12px 0;
   font-size: 18px; 
 }
-.cpn-card {
+/deep/ .cpn-card {
   margin-bottom: 24px;
   min-height: 180px;
   border-radius: @border-radius-base;

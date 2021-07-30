@@ -30,13 +30,15 @@
               </a-menu-item-group>
               <a-menu-item-group key="form" class="ant-menu-sub">
                 <template slot="title"><span>Form</span></template>
+                <a-menu-item key="captchaInput">
+                  <router-link :to="{ name: 'captchaInput'}">CaptchaInput</router-link>
+                </a-menu-item>
                 <a-menu-item key="input">
                   <router-link :to="{ name: 'input'}">Input</router-link>
                 </a-menu-item>
-                <a-menu-item key="captchaInput">
-                  <router-link :to="{ name: 'captchaInput'}">Captcha Input</router-link>
+                <a-menu-item key="singleNetSelect">
+                  <router-link :to="{ name: 'singleNetSelect'}">SingleNetSelect</router-link>
                 </a-menu-item>
-                
               </a-menu-item-group>
             </a-sub-menu>
         </a-menu>
