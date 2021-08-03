@@ -25,6 +25,21 @@ const list = [
   },
 ]
 
+const mockData = [
+  {
+    value: 'china',
+    label: 'China',
+  },
+  {
+    value: 'usa',
+    label: 'USA',
+  },
+  {
+    value: 'japan',
+    label: 'Japan',
+  }
+]
+
 Mock.get('/get/inputAPIData', () => {
   console.log('object');
   return Promise.resolve({
@@ -54,6 +69,16 @@ Mock.get('/get/captcha', () => {
     code: 1,
     data: {
       data: imgSrc,
+    }
+  })
+})
+
+Mock.get('/get/netSelectData', () => {
+  console.log('get netSelectData');
+  return Promise.resolve({
+    code: 1,
+    data: {
+      data: mockData,
     }
   })
 })

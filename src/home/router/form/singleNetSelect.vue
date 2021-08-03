@@ -4,7 +4,7 @@
     <a-row :gutter="24">
       <a-col class="ant-col-12">
         <a-card class="cpn-card">
-          <span class="cpn-title">title</span>
+          <span class="cpn-title">本地数据源</span>
           <br>
           <span>description</span>
           <a-divider dashed style="margin:12px 0"/>
@@ -16,7 +16,17 @@
         </a-card>
       </a-col>
       <a-col class="ant-col-12">
-        
+        <a-card class="cpn-card">
+          <span class="cpn-title">网络数据源</span>
+          <br>
+          <span>description</span>
+          <a-divider dashed style="margin:12px 0"/>
+          <single-net-select 
+          value-of="value"
+          label-of="label"
+          url="/get/netSelectData"
+          />
+        </a-card>
       </a-col>
     </a-row>
     <h1 class="part-title">API</h1>

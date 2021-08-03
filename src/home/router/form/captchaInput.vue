@@ -8,7 +8,6 @@
           <br>
           <span>description</span>
           <a-divider dashed style="margin:12px 0"/>
-          <single-net-select></single-net-select>
         </a-card>
       </a-col>
       <a-col class="ant-col-12">
